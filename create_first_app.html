@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Django Tailored</title>
+        <!-- Mobile Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <!-- Web Fonts  -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+        <!-- Vendor CSS -->
+        <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+        <link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+
+        <!-- Specific Page Vendor CSS -->
+        <link rel="stylesheet" href="assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css"/>
+        <link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
+        <link rel="stylesheet" href="assets/vendor/morris/morris.css" />
+
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="assets/css/theme.css" />
+
+        <!-- Skin CSS -->
+        <link rel="stylesheet" href="assets/css/skins/default.css" />
+
+        <!-- Theme Custom CSS -->
+        <link rel="stylesheet" href="assets/css/theme-custom.css">
+
+        <!-- Head Libs -->
+        <script src="assets/vendor/modernizr/modernizr.js"></script>
+    </head>
+    <body>
+        <section class="body">
+            <!-- start: header -->
+            <header class="header">
+                <div class="logo-container">
+                    <a href="index.html"  class="logo">
+                        <img src="assets/images/logo.png" height="35" alt="Django Tutorials" />
+                    </a>
+                    <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+                        <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                    </div>
+                </div>
+            </header>
+            <!-- end: header -->
+            <div class="inner-wrapper">
+                <!-- start: sidebar -->
+                <aside id="sidebar-left" class="sidebar-left">
+
+                    <div class="sidebar-header">
+                        <div class="sidebar-title">
+                            Django Tailored List
+                        </div>
+                        <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+                            <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                        </div>
+                    </div>
+
+                    <div class="nano">
+                        <div class="nano-content">
+                            <nav id="menu" class="nav-main" role="navigation">
+                                <ul class="nav nav-main">
+                                    <li>
+                                        <a href="index.html">
+                                            <span>Installing Django</span>
+                                        </a>
+                                        <a href="create_project.html">
+                                            <span>Create Project</span>
+                                        </a>
+                                        <a href="create_first_app.html">
+                                            <span>Create First App</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+
+                </aside>
+                <!-- end: sidebar -->
+                <section role="main" class="content-body">
+                    <header class="page-header">
+                        <h2>Create First App</h2>
+                    </header>
+                    <style>
+                        .highlight {
+                            font-size: 14px;
+                            font-size: 1.4rem;
+                            border: 1px solid #EAEAEA;
+                            background: #F4F4F4;
+                            background: #f8f8f8;
+                            overflow: auto;
+                            border-radius: 4px;
+                            margin: 25px 0;
+                        }
+                        p{
+                            font-size: 18px;
+                            padding-left: 40px;
+                            padding-right: 40px;
+                        }
+                    </style>
+                    <h1>Start a Django App</h1>
+                    <p>Every project you build with Django can contain multiple Django apps. When you ran the startproject command in
+                        the previous section, you created a management app that you’ll need for every default project that you’ll build.
+                        Now, you’ll create a Django app that’ll contain the specific functionality of your web application.</p>
+                    <p>You don’t need to use the django-admin command-line utility anymore, and you can execute the startapp command
+                        through the manage.py file instead:</p>
+                    <div class="highlight-default notranslate" style="padding: 0px 40px 0px 40px">
+                        <div class="highlight">
+                            <pre style="position: relative;">
+                                <span></span>
+                                <span class="n">python</span> <span class="mf">manage.py</span> <span class="n">startapp</span> <span class="o">&lt;appname&gt;</span>
+                            </pre>
+                        </div>
+                    </div>
+                    <p>The startapp command generates a default folder structure for a Django app. This tutorial uses polls as the
+                        name for the app:</p>
+                    <div class="highlight-default notranslate" style="padding: 0px 40px 0px 40px">
+                        <div class="highlight">
+                            <pre style="position: relative;">
+                                <span></span>
+                                <span class="n">python</span> <span class="mf">manage.py</span> <span class="n">startapp</span> <span class="o">polls</span>
+                            </pre>
+                        </div>
+                    </div>
+                    <p>Remember to replace example with your app name when you create the Django app for your personal web application.</p>
+                    <p>Once the startapp command has finished execution, you’ll see that Django has added another folder to your folder structure:</p>
+                    <pre style="position: relative;margin-right: 40px;margin-left: 40px"><span></span><code>
+                    mysite/
+                        │
+                        ├── polls/
+                        │   │
+                        │   ├── migrations/
+                        │   │   └── __init__.py
+                        │   │
+                        │   ├── __init__.py
+                        │   ├── admin.py
+                        │   ├── apps.py
+                        │   ├── models.py
+                        │   ├── tests.py
+                        │   └── views.py
+                        │
+                        ├── mysite/
+                        │   ├── __init__.py
+                        │   ├── asgi.py
+                        │   ├── settings.py
+                        │   ├── urls.py
+                        │   └── wsgi.py
+                        │
+                        └── manage.py
+                </code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+                    <p>The new folder has the name you gave it when running the command. In the case of this tutorial, that’s polls/.
+                        You can see that the folder contains a couple of Python files.</p>
+                    <p>This Django app folder is where you’ll spend most of your time when creating your web application. You’ll also
+                        need to make some changes in the management app, mysite/, but you’ll build most of your functionality inside
+                        the Django app, example/.</p>
+                    <p>Navigate into your polls/ folder and open up the newly generated Python files. Don’t worry if you don’t yet
+                        understand the code that Django generated for you, and keep in mind that you don’t need to understand it all
+                        to build a Django web application. Explore the code comments in each file and see if they can help clarify each
+                        file’s use case.</p>
+                    <p>
+                    You’ll get to know the generated Python files in more detail when working through a tutorial or building your own
+                        project. Here are three notable files that were created in the app folder:
+                    </p>
+                    <ol style="margin-left: 40px;margin-right: 40px; font-size: 18px">
+                        <li><strong><code>__init__.py</code></strong>: Python uses this file to declare a folder as a package, which
+                            allows Django to use code from different apps to compose the overall functionality of your web application.
+                            You probably won’t have to touch this file.</li>
+                        <li><strong><code>models.py</code></strong>: You’ll declare your app’s models in this file, which allows Django
+                            to interface with the database of your web application.</li>
+                        <li><strong><code>views.py</code></strong>: You’ll write most of the code logic of your app in this file.</li>
+                    </ol>
+                    <br>
+                    <p>
+                    At this point, you’ve finished setting up the scaffolding for your Django web application, and you can start
+                    implementing your ideas. From here on out, it’s up to you what you want to build to create your own unique project.
+                    </p>
+                    
+                </section>
+
+        <!-- Vendor -->
+        <script src="assets/vendor/jquery/jquery.js"></script>
+        <script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+        <script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+        <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+        <script src="assets/vendor/magnific-popup/magnific-popup.js"></script>
+        <script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+        <!-- Specific Page Vendor -->
+        <script src="assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+        <script src="assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
+        <script src="assets/vendor/jquery-appear/jquery.appear.js"></script>
+        <script src="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+        <script src="assets/vendor/jquery-easypiechart/jquery.easypiechart.js"></script>
+        <script src="assets/vendor/flot/jquery.flot.js"></script>
+        <script src="assets/vendor/flot-tooltip/jquery.flot.tooltip.js"></script>
+        <script src="assets/vendor/flot/jquery.flot.pie.js"></script>
+        <script src="assets/vendor/flot/jquery.flot.categories.js"></script>
+        <script src="assets/vendor/flot/jquery.flot.resize.js"></script>
+        <script src="assets/vendor/jquery-sparkline/jquery.sparkline.js"></script>
+        <script src="assets/vendor/raphael/raphael.js"></script>
+        <script src="assets/vendor/morris/morris.js"></script>
+        <script src="assets/vendor/gauge/gauge.js"></script>
+        <script src="assets/vendor/snap-svg/snap.svg.js"></script>
+        <script src="assets/vendor/liquid-meter/liquid.meter.js"></script>
+        <script src="assets/vendor/jqvmap/jquery.vmap.js"></script>
+        <script src="assets/vendor/jqvmap/data/jquery.vmap.sampledata.js"></script>
+        <script src="assets/vendor/jqvmap/maps/jquery.vmap.world.js"></script>
+        <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.africa.js"></script>
+        <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.asia.js"></script>
+        <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.australia.js"></script>
+        <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.europe.js"></script>
+        <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.north-america.js"></script>
+        <script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
+
+        <!-- Theme Base, Components and Settings -->
+        <script src="assets/js/theme.js"></script>
+
+        <!-- Theme Custom -->
+        <script src="assets/js/theme.custom.js"></script>
+
+        <!-- Theme Initialization Files -->
+        <script src="assets/js/theme.init.js"></script>
+        <script>
+            $('document').ready(function (){
+                $('#home-drop-down').addClass('nav-active nav-expanded');
+                $('#create-first-app').addClass('nav-active');
+            });
+        </script>
+    </body>
+</html>
