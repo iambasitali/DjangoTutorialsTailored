@@ -99,7 +99,7 @@
                 <!-- end: sidebar -->
                 <section role="main" class="content-body">
                     <header class="page-header">
-                        <h2>Create First App</h2>
+                        <h2>Connecting to Database</h2>
                     </header>
                     <style>
                         .highlight {
@@ -117,84 +117,85 @@
                             padding-left: 40px;
                             padding-right: 40px;
                         }
+                        .body-ul{
+                            margin-left: 80px;
+                            font-size: 16px;
+                        }
                     </style>
-                    <h1>Start a Django App</h1>
-                    <p>Every project you build with Django can contain multiple Django apps. When you ran the startproject command in
-                        the previous section, you created a management app that you’ll need for every default project that you’ll build.
-                        Now, you’ll create a Django app that’ll contain the specific functionality of your web application.</p>
-                    <p>You don’t need to use the django-admin command-line utility anymore, and you can execute the startapp command
-                        through the manage.py file instead:</p>
-                    <div class="highlight-default notranslate" style="padding: 0px 40px 0px 40px">
+                    <h1>Databases:-</h1>
+                    <p>Django officially supports the following databases:</p>
+                    <ul class="body-ul">
+                        <li>PostgreSQL</li>
+                        <li>MariaDB</li>
+                        <li>MySQL</li>
+                        <li>Oracle</li>
+                        <li>SQLite</li>
+                    </ul>
+                    <p>There are also a number of database backends provided by third parties.</p>
+                    <p>Django attempts to support as many features as possible on all database backends. However, not
+                        all database backends are alike, and we’ve had to make design decisions on which features to
+                        support and which assumptions we can make safely.</p>
+                    <p>This file describes some of the features that might be relevant to Django usage. It is not
+                        intended as a replacement for server-specific documentation or reference manuals.</p>
+                    <h1>Database setup:-</h1>
+                    <p>Now, open up todo/settings.py. It’s a normal Python module with module-level variables
+                        representing Django settings.</p>
+                    <p>By default, the configuration uses SQLite. If you’re new to databases, or you’re just interested
+                        in trying Django, this is the easiest choice. SQLite is included in Python, so you won’t need
+                        to install anything else to support your database. When starting your first real project,
+                        however, you may want to use a more scalable database like PostgreSQL, to avoid
+                        database-switching headaches down the road.</p>
+                    <p>If you wish to use another database, install the appropriate database bindings and change the
+                        following keys in the DATABASES 'default' item to match your database connection settings:</p>
+                    <ul class="body-ul">
+                        <li>ENGINE – Either 'django.db.backends.sqlite3', 'django.db.backends.postgresql',
+                            'django.db.backends.mysql', or 'django.db.backends.oracle'. </li>
+                        <li>NAME – The name of your database. If you’re using SQLite, the database will be a file on
+                            your computer; in that case, NAME should be the full absolute path, including filename, of
+                            that file. The default value, BASE_DIR / 'db.sqlite3', will store the file in your project
+                            directory.</li>
+                    </ul>
+                    <p>If you are not using SQLite as your database, additional settings such as USER, PASSWORD, and
+                        HOST must be added. </p>
+                    <p><span><strong>Note:</strong></span>If you’re using a database besides SQLite, make sure you’ve
+                        created a database by this point. Do that with “CREATE DATABASE database_name;” within your
+                        database’s interactive prompt.</p>
+
+                    <p><span><strong>Note:</strong></span>Also make sure that the database user provided in
+                        mysite/settings.py has “create database” privileges. This allows automatic creation of a test
+                        database which will be needed in a later tutorial.</p>
+
+                    <p><span><strong>Note:</strong></span>If you’re using SQLite, you don’t need to create anything
+                        beforehand - the database file will be created automatically when it is needed.</p>
+                    <p>Also, note the INSTALLED_APPS setting at the top of the file. That holds the names of all Django
+                        applications that are activated in this Django instance. Apps can be used in multiple projects,
+                        and you can package and distribute them for use by others in their projects.</p>
+                    <p>By default, INSTALLED_APPS contains the following apps, all of which come with Django:</p>
+                    <ul class="body-ul">
+                        <li>django.contrib.admin – The admin site. You’ll use it shortly.</li>
+                        <li>django.contrib.auth – An authentication system.</li>
+                        <li>django.contrib.contenttypes – A framework for content types.</li>
+                        <li>django.contrib.sessions – A session framework.</li>
+                        <li>django.contrib.messages – A messaging framework.</li>
+                        <li>django.contrib.staticfiles – A framework for managing static files.</li>
+                    </ul>
+                    <p>These applications are included by default as a convenience for the common case.</p>
+                    <p>Some of these applications make use of at least one database table, though, so we need to create
+                        the tables in the database before we can use them. To do that, run the following command:</p>
+                    <div class="highlight-default notranslate" style="padding: 0px 40px 40px 40px">
                         <div class="highlight">
                             <pre style="position: relative;">
                                 <span></span>
-                                <span class="n">python</span> <span class="mf">manage.py</span> <span class="n">startapp</span> <span class="o">&lt;appname&gt;</span>
+                                <span class="n">python</span> <span class="mf">manage.py</span> <span class="n">migrate</span>
                             </pre>
                         </div>
                     </div>
-                    <p>The startapp command generates a default folder structure for a Django app. This tutorial uses polls as the
-                        name for the app:</p>
-                    <div class="highlight-default notranslate" style="padding: 0px 40px 0px 40px">
-                        <div class="highlight">
-                            <pre style="position: relative;">
-                                <span></span>
-                                <span class="n">python</span> <span class="mf">manage.py</span> <span class="n">startapp</span> <span class="o">todo_app</span>
-                            </pre>
-                        </div>
-                    </div>
-                    <p>Remember to replace example with your app name when you create the Django app for your personal web application.</p>
-                    <p>Once the startapp command has finished execution, you’ll see that Django has added another folder to your folder structure:</p>
-                    <pre style="position: relative;margin-right: 40px;margin-left: 40px"><span></span><code>
-                    todo/
-                        │
-                        ├── todo_app/
-                        │   │
-                        │   ├── migrations/
-                        │   │   └── __init__.py
-                        │   │
-                        │   ├── __init__.py
-                        │   ├── admin.py
-                        │   ├── apps.py
-                        │   ├── models.py
-                        │   ├── tests.py
-                        │   └── views.py
-                        │
-                        ├── todo/
-                        │   ├── __init__.py
-                        │   ├── asgi.py
-                        │   ├── settings.py
-                        │   ├── urls.py
-                        │   └── wsgi.py
-                        │
-                        └── manage.py
-                </code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
-                    <p>The new folder has the name you gave it when running the command. In the case of this tutorial, that’s polls/.
-                        You can see that the folder contains a couple of Python files.</p>
-                    <p>This Django app folder is where you’ll spend most of your time when creating your web application. You’ll also
-                        need to make some changes in the management app, todo/, but you’ll build most of your functionality inside
-                        the Django app, todo_app/.</p>
-                    <p>Navigate into your polls/ folder and open up the newly generated Python files. Don’t worry if you don’t yet
-                        understand the code that Django generated for you, and keep in mind that you don’t need to understand it all
-                        to build a Django web application. Explore the code comments in each file and see if they can help clarify each
-                        file’s use case.</p>
-                    <p>
-                    You’ll get to know the generated Python files in more detail when working through a tutorial or building your own
-                        project. Here are three notable files that were created in the app folder:
-                    </p>
-                    <ol style="margin-left: 40px;margin-right: 40px; font-size: 18px">
-                        <li><strong><code>__init__.py</code></strong>: Python uses this file to declare a folder as a package, which
-                            allows Django to use code from different apps to compose the overall functionality of your web application.
-                            You probably won’t have to touch this file.</li>
-                        <li><strong><code>models.py</code></strong>: You’ll declare your app’s models in this file, which allows Django
-                            to interface with the database of your web application.</li>
-                        <li><strong><code>views.py</code></strong>: You’ll write most of the code logic of your app in this file.</li>
-                    </ol>
-                    <br>
-                    <p>
-                    At this point, you’ve finished setting up the scaffolding for your Django web application, and you can start
-                    implementing your ideas. From here on out, it’s up to you what you want to build to create your own unique project.
-                    </p>
-                    
+                    <p>The migrate command looks at the INSTALLED_APPS setting and creates any necessary database
+                        tables according to the database settings in your mysite/settings.py file and the database
+                        migrations shipped with the app (we’ll cover those later). You’ll see a message for each
+                        migration it applies. If you’re interested, run the command-line client for your database and
+                        type \dt (PostgreSQL), SHOW TABLES; (MariaDB, MySQL), .schema (SQLite), or SELECT TABLE_NAME
+                        FROM USER_TABLES; (Oracle) to display the tables Django created.</p>
                 </section>
 
         <!-- Vendor -->
@@ -241,6 +242,7 @@
 
         <!-- Theme Initialization Files -->
         <script src="assets/js/theme.init.js"></script>
+
         <script>
             $('document').ready(function (){
                 $('#home-drop-down').addClass('nav-active nav-expanded');

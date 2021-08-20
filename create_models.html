@@ -99,7 +99,7 @@
                 <!-- end: sidebar -->
                 <section role="main" class="content-body">
                     <header class="page-header">
-                        <h2>Create First App</h2>
+                        <h2>Creating Model</h2>
                     </header>
                     <style>
                         .highlight {
@@ -117,84 +117,72 @@
                             padding-left: 40px;
                             padding-right: 40px;
                         }
+                        .body-ul{
+                            margin-left: 80px;
+                            font-size: 16px;
+                        }
+                        .code-block-caption {
+                            background: #34495e;
+                            color: white;
+                            font-family: "Fira Mono", Consolas, Menlo, Monaco, "Courier New", Courier, monospace;
+                            font-variant-ligatures: no-common-ligatures;
+                            text-rendering: optimizeSpeed;
+                            font-size: 1em;
+                            padding: 5px 20px;
+                            border-radius: 4px 4px 0 0;
+                        }
                     </style>
-                    <h1>Start a Django App</h1>
-                    <p>Every project you build with Django can contain multiple Django apps. When you ran the startproject command in
-                        the previous section, you created a management app that you’ll need for every default project that you’ll build.
-                        Now, you’ll create a Django app that’ll contain the specific functionality of your web application.</p>
-                    <p>You don’t need to use the django-admin command-line utility anymore, and you can execute the startapp command
-                        through the manage.py file instead:</p>
-                    <div class="highlight-default notranslate" style="padding: 0px 40px 0px 40px">
-                        <div class="highlight">
-                            <pre style="position: relative;">
-                                <span></span>
-                                <span class="n">python</span> <span class="mf">manage.py</span> <span class="n">startapp</span> <span class="o">&lt;appname&gt;</span>
-                            </pre>
+                    <h1>Creating Models:-</h1>
+                    <p>Now we’ll define your models – essentially, your database layout, with additional metadata.</p>
+                    <p><span><strong>Philosophy: </strong></span>A model is the single, definitive source of truth about
+                        your data. It contains the essential fields and behaviors of the data you’re storing. Django
+                        follows the DRY Principle. The goal is to define your data model in one place and automatically
+                        derive things from it.</p>
+                    <p>In our todo app, we’ll create two models: Categories and Items. A Category has a name and a
+                        publication date. An item has two fields: the text and the category an item belongs to. Each
+                        Item is associated with a Category.</p>
+                    <p>These concepts are represented by Python classes. Edit the todo_app/models.py file, so it looks
+                        like this:</p>
+                    <div class="literal-block-wrapper docutils container" id="id2">
+                        <div class="code-block-caption">
+                            <span class="caption-text">todo_app/models.py</span>
+                        </div>
+                        <div class="highlight-python notranslate">
+                            <div class="highlight" style="margin-top: 0px"><pre style="position: relative;">
+                        <span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+
+                        <span class="k">class</span> <span class="nc">Category</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+                            <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+                            <span class="n">pub_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="s1">'date published'</span><span class="p">)</span>
+
+
+                        <span class="k">class</span> <span class="nc">Item</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+                            <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Category</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+                            <span class="n">text</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+                        </pre></div>
                         </div>
                     </div>
-                    <p>The startapp command generates a default folder structure for a Django app. This tutorial uses polls as the
-                        name for the app:</p>
-                    <div class="highlight-default notranslate" style="padding: 0px 40px 0px 40px">
-                        <div class="highlight">
-                            <pre style="position: relative;">
-                                <span></span>
-                                <span class="n">python</span> <span class="mf">manage.py</span> <span class="n">startapp</span> <span class="o">todo_app</span>
-                            </pre>
-                        </div>
-                    </div>
-                    <p>Remember to replace example with your app name when you create the Django app for your personal web application.</p>
-                    <p>Once the startapp command has finished execution, you’ll see that Django has added another folder to your folder structure:</p>
-                    <pre style="position: relative;margin-right: 40px;margin-left: 40px"><span></span><code>
-                    todo/
-                        │
-                        ├── todo_app/
-                        │   │
-                        │   ├── migrations/
-                        │   │   └── __init__.py
-                        │   │
-                        │   ├── __init__.py
-                        │   ├── admin.py
-                        │   ├── apps.py
-                        │   ├── models.py
-                        │   ├── tests.py
-                        │   └── views.py
-                        │
-                        ├── todo/
-                        │   ├── __init__.py
-                        │   ├── asgi.py
-                        │   ├── settings.py
-                        │   ├── urls.py
-                        │   └── wsgi.py
-                        │
-                        └── manage.py
-                </code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
-                    <p>The new folder has the name you gave it when running the command. In the case of this tutorial, that’s polls/.
-                        You can see that the folder contains a couple of Python files.</p>
-                    <p>This Django app folder is where you’ll spend most of your time when creating your web application. You’ll also
-                        need to make some changes in the management app, todo/, but you’ll build most of your functionality inside
-                        the Django app, todo_app/.</p>
-                    <p>Navigate into your polls/ folder and open up the newly generated Python files. Don’t worry if you don’t yet
-                        understand the code that Django generated for you, and keep in mind that you don’t need to understand it all
-                        to build a Django web application. Explore the code comments in each file and see if they can help clarify each
-                        file’s use case.</p>
-                    <p>
-                    You’ll get to know the generated Python files in more detail when working through a tutorial or building your own
-                        project. Here are three notable files that were created in the app folder:
+                    <p>Here, each model is represented by a class that subclasses django.db.models.Model. Each model
+                        has a number of class variables, each of which represents a database field in the model.</p>
+                    <p>Each field is represented by an instance of a Field class – e.g., CharField for character fields
+                        and DateTimeField for datetimes. This tells Django what type of data each field holds.</p>
+                    <p>The name of each Field instance (e.g. text or pub_date) is the field’s name, in machine-friendly
+                        format. You’ll use this value in your Python code, and your database will use it as the column
+                        name.</p>
+                    <p>You can use an optional first positional argument to a Field to designate a human-readable name.
+                        That’s used in a couple of introspective parts of Django, and it doubles as documentation. If
+                        this field isn’t provided, Django will use the machine-readable name. In this example, we’ve
+                        only defined a human-readable name for Category.pub_date. For all other fields in this model,
+                        the field’s machine-readable name will suffice as its human-readable name.</p>
+                    <p>Some Field classes have required arguments. CharField, for example, requires that you give it a
+                        max_length. That’s used not only in the database schema, but in validation, as we’ll soon see.
                     </p>
-                    <ol style="margin-left: 40px;margin-right: 40px; font-size: 18px">
-                        <li><strong><code>__init__.py</code></strong>: Python uses this file to declare a folder as a package, which
-                            allows Django to use code from different apps to compose the overall functionality of your web application.
-                            You probably won’t have to touch this file.</li>
-                        <li><strong><code>models.py</code></strong>: You’ll declare your app’s models in this file, which allows Django
-                            to interface with the database of your web application.</li>
-                        <li><strong><code>views.py</code></strong>: You’ll write most of the code logic of your app in this file.</li>
-                    </ol>
-                    <br>
-                    <p>
-                    At this point, you’ve finished setting up the scaffolding for your Django web application, and you can start
-                    implementing your ideas. From here on out, it’s up to you what you want to build to create your own unique project.
-                    </p>
-                    
+                    <p>A Field can also have various optional arguments; in this case, we’ve set the default value of
+                        votes to 0.</p>
+                    <p>Finally, note a relationship is defined, using ForeignKey. That tells Django each Item is
+                        related to a single Category. Django supports all the common database relationships: many-to-one
+                        , many-to-many, and one-to-one.</p>
                 </section>
 
         <!-- Vendor -->
@@ -241,6 +229,7 @@
 
         <!-- Theme Initialization Files -->
         <script src="assets/js/theme.init.js"></script>
+
         <script>
             $('document').ready(function (){
                 $('#home-drop-down').addClass('nav-active nav-expanded');

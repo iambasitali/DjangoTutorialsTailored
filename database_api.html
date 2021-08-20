@@ -99,7 +99,7 @@
                 <!-- end: sidebar -->
                 <section role="main" class="content-body">
                     <header class="page-header">
-                        <h2>Create First App</h2>
+                        <h2>Database API</h2>
                     </header>
                     <style>
                         .highlight {
@@ -117,84 +117,112 @@
                             padding-left: 40px;
                             padding-right: 40px;
                         }
+                        .body-ul{
+                            margin-left: 80px;
+                            font-size: 16px;
+                        }
+                        .code-block-caption {
+                            background: #34495e;
+                            color: white;
+                            font-family: "Fira Mono", Consolas, Menlo, Monaco, "Courier New", Courier, monospace;
+                            font-variant-ligatures: no-common-ligatures;
+                            text-rendering: optimizeSpeed;
+                            font-size: 1em;
+                            padding: 5px 20px;
+                            border-radius: 4px 4px 0 0;
+                        }
                     </style>
-                    <h1>Start a Django App</h1>
-                    <p>Every project you build with Django can contain multiple Django apps. When you ran the startproject command in
-                        the previous section, you created a management app that you’ll need for every default project that you’ll build.
-                        Now, you’ll create a Django app that’ll contain the specific functionality of your web application.</p>
-                    <p>You don’t need to use the django-admin command-line utility anymore, and you can execute the startapp command
-                        through the manage.py file instead:</p>
-                    <div class="highlight-default notranslate" style="padding: 0px 40px 0px 40px">
+                    <h1>Database API:-</h1>
+                    <p>Now let us interact with Django shell and try to understand different Database APIs provided
+                            by django. To start django shell use following command:</p>
+                    <div class="highlight-default notranslate" style="padding: 0px 40px 40px 40px">
                         <div class="highlight">
                             <pre style="position: relative;">
                                 <span></span>
-                                <span class="n">python</span> <span class="mf">manage.py</span> <span class="n">startapp</span> <span class="o">&lt;appname&gt;</span>
+                                <span class="n">python manage.py shell</span>
                             </pre>
                         </div>
                     </div>
-                    <p>The startapp command generates a default folder structure for a Django app. This tutorial uses polls as the
-                        name for the app:</p>
-                    <div class="highlight-default notranslate" style="padding: 0px 40px 0px 40px">
+                    <p>We’re using this instead of simply typing “python”, because manage.py sets the
+                        DJANGO_SETTINGS_MODULE environment variable, which gives Django the Python import path to
+                        your todo/settings.py file.</p>
+                    <p>Once you’re in the shell, explore the database API:</p>
+                    <div class="highlight-default notranslate" style="padding: 0px 40px 40px 40px">
                         <div class="highlight">
                             <pre style="position: relative;">
                                 <span></span>
-                                <span class="n">python</span> <span class="mf">manage.py</span> <span class="n">startapp</span> <span class="o">todo_app</span>
+                                <span class="n">>>> from todo_app.models import Category, Item # import the model classes that we created in Creating Model Lesson</span>
+                                <span class="n"># Till now we haven't created any Categories yet so,</span>
+                                <span class="n">>>> Category.objects.all()</span>
+                                <span class="n">&ltQuerySet []&gt</span>
+                                <span></span>
+                                <span class="n"># Create a new Category</span>
+                                <span class="n"># To do so we need to provide datetime in pub_date field.</span>
+                                <span class="n"># For that we need to import timezone.</span>
+                                <span class="n"># With timezone.now() we can provide datetime object for the pub_date field.</span>
+                                <span class="n">>>> from django.utils import timezone</span>
+                                <span class="n">>>> c = Category(name="Shopping", pub_date=timezone.now())</span>
+                                <span></span>
+                                <span class="n"># To save the python QuerySet object into the database we need to expicitly call .save() method on the object. Like:</span>
+                                <span>c.save()</span>
+                                <span></span>
+                                <span># Now it has id that is assigned to this object in database</span>
+                                <span>c.id</span>
+                                <span>1</span>
+                                <span></span>
+                                <span># You can also access the other field values like we accessed the id:</span>
+                                <span>c.name</span>
+                                <span>'Shopping'</span>
+                                <span>c.pub_date</span>
+                                <span>datetime.datetime(2021, 8, 19, 20, 58, 18, 108288, tzinfo=&ltUTC&gt)</span>
+                                <span></span>
+                                <span># You can also change the field value saved in database. But after that you need to explicitly call .save() method on the object again.</span>
+                                <span>c.name = 'Grocery'</span>
+                                <span>c.save()</span>
+                                <span></span>
+                                <span># Now to get all the Category objects present in database we can use .object.all() on Category class</span>
+                                <span>Category.object.all()</span>
+                                <span>&ltQuerySet [&ltCategory&gt: Category object (1)&gt]&gt</span>
                             </pre>
                         </div>
                     </div>
-                    <p>Remember to replace example with your app name when you create the Django app for your personal web application.</p>
-                    <p>Once the startapp command has finished execution, you’ll see that Django has added another folder to your folder structure:</p>
-                    <pre style="position: relative;margin-right: 40px;margin-left: 40px"><span></span><code>
-                    todo/
-                        │
-                        ├── todo_app/
-                        │   │
-                        │   ├── migrations/
-                        │   │   └── __init__.py
-                        │   │
-                        │   ├── __init__.py
-                        │   ├── admin.py
-                        │   ├── apps.py
-                        │   ├── models.py
-                        │   ├── tests.py
-                        │   └── views.py
-                        │
-                        ├── todo/
-                        │   ├── __init__.py
-                        │   ├── asgi.py
-                        │   ├── settings.py
-                        │   ├── urls.py
-                        │   └── wsgi.py
-                        │
-                        └── manage.py
-                </code><div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
-                    <p>The new folder has the name you gave it when running the command. In the case of this tutorial, that’s polls/.
-                        You can see that the folder contains a couple of Python files.</p>
-                    <p>This Django app folder is where you’ll spend most of your time when creating your web application. You’ll also
-                        need to make some changes in the management app, todo/, but you’ll build most of your functionality inside
-                        the Django app, todo_app/.</p>
-                    <p>Navigate into your polls/ folder and open up the newly generated Python files. Don’t worry if you don’t yet
-                        understand the code that Django generated for you, and keep in mind that you don’t need to understand it all
-                        to build a Django web application. Explore the code comments in each file and see if they can help clarify each
-                        file’s use case.</p>
-                    <p>
-                    You’ll get to know the generated Python files in more detail when working through a tutorial or building your own
-                        project. Here are three notable files that were created in the app folder:
+                    <p>As you can see &ltCategory&gt: Category object (1)&gt is not readable and also doesn't look
+                        quite nice to present like this way. So to solve this problem we need to define __str__()
+                        function in our model classes.
                     </p>
-                    <ol style="margin-left: 40px;margin-right: 40px; font-size: 18px">
-                        <li><strong><code>__init__.py</code></strong>: Python uses this file to declare a folder as a package, which
-                            allows Django to use code from different apps to compose the overall functionality of your web application.
-                            You probably won’t have to touch this file.</li>
-                        <li><strong><code>models.py</code></strong>: You’ll declare your app’s models in this file, which allows Django
-                            to interface with the database of your web application.</li>
-                        <li><strong><code>views.py</code></strong>: You’ll write most of the code logic of your app in this file.</li>
-                    </ol>
-                    <br>
-                    <p>
-                    At this point, you’ve finished setting up the scaffolding for your Django web application, and you can start
-                    implementing your ideas. From here on out, it’s up to you what you want to build to create your own unique project.
-                    </p>
-                    
+                    <div class="literal-block-wrapper docutils container" id="id2">
+                    <div class="code-block-caption">
+                        <span class="caption-text">todo_app/models.py</span>
+                    </div>
+                    <div class="highlight-python notranslate">
+                        <div class="highlight" style="margin-top: 0px">
+                            <pre style="position: relative;">
+                                <span>from django.db import models</span>
+                                <span></span>
+                                <span>class Category(models.Model):</span>
+                                    <span># Previous Code</span>
+                                    <span>def __str__(self):</span>
+                                        <span>return self.name</span>
+                                <span></span>
+                                <span>class Item(models.Model):</span>
+                                    <span># Previous Code</span>
+                                    <span>def __str__(self):</span>
+                                        <span>return self.text</span>
+                            </pre>
+                        </div>
+                    </div>
+                    </div>
+                    <p>Now if you start shell and get all Category objects you will see something like below:</p>
+                    <div class="highlight-default notranslate" style="padding: 0px 40px 40px 40px">
+                        <div class="highlight">
+                            <pre style="position: relative;">
+                                <span></span>
+                                <span class="n">>>> from todo_app.models import Category, Item # import the model classes that we created in Creating Model Lesson</span>
+                                <span class="n">>>> Category.objects.all()</span>
+                                <span class="n">&ltQuerySet [&ltCategory: Shopping&gt]&gt</span>
+                            </pre>
+                        </div>
+                    </div>
                 </section>
 
         <!-- Vendor -->
@@ -241,6 +269,7 @@
 
         <!-- Theme Initialization Files -->
         <script src="assets/js/theme.init.js"></script>
+
         <script>
             $('document').ready(function (){
                 $('#home-drop-down').addClass('nav-active nav-expanded');

@@ -73,6 +73,21 @@
                                         <a href="create_first_app.html">
                                             <span>Create First App</span>
                                         </a>
+                                        <a href="database_connectivity.html">
+                                            <span>Connectivity to Database</span>
+                                        </a>
+                                        <a href="create_models.html">
+                                            <span>Creating Models</span>
+                                        </a>
+                                        <a href="activating_models.html">
+                                          <span>Activating Models</span>
+                                        </a>
+                                        <a href="database_api.html">
+                                          <span>Database API</span>
+                                        </a>
+                                        <a href="django_admin.html">
+                                          <span>Django Admin</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </nav>
@@ -106,13 +121,13 @@
                     <h1>Create Django Project:-</h1>
                     <p>Let’s learn by example.</p>
                     <p>Throughout this tutorial, we’ll walk you through the creation of a basic
-                    poll application.</p>
+                    ToDo application.</p>
                     <p>It’ll consist of two parts:</p>
                     <ul class="simple" style="padding-left: 80px">
-                    <li>A public site that lets people view polls and vote in them.</li>
+                    <li>A public site that lets people view ToDo categories and add items to those categories.</li>
                     <li>An admin site that lets you add, change, and delete polls.</li>
                     </ul>
-                    <p>We’ll assume you have <a class="reference internal" href="{% url 'home_view' %}"><span class="doc">Django installed</span></a> already. You can
+                    <p>We’ll assume you have Django installed already. You can
                     tell Django is installed and which version by running the following command
                     in a shell prompt:</p>
                     <div class="console-block" id="console-block-0">
@@ -136,19 +151,19 @@
                     application-specific settings.</p>
                     <div class="console-block" id="console-block-1">
                     <section class="c-content-unix" id="c-content-1-unix" style="display: block;padding-right: 40px;padding-left: 40px;">
-                    <div class="highlight-console notranslate"><div class="highlight"><pre style="position: relative;"><span></span><span class="gp">$ </span>django-admin startproject mysite
+                    <div class="highlight-console notranslate"><div class="highlight"><pre style="position: relative;"><span></span><span class="gp">$ </span>django-admin startproject todo
                     <div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre></div>
                     </div>
                     </section>
                     <section class="c-content-win" id="c-content-1-win" style="display: none;">
-                    <div class="highlight"><pre style="position: relative;"><span></span><span class="gp">...\&gt;</span> django-admin startproject mysite
+                    <div class="highlight"><pre style="position: relative;"><span></span><span class="gp">...\&gt;</span> django-admin startproject todo
                     </pre></div>
                     </section>
                     </div>
                     <p>This will create a mysite directory in your current directory.</p>
                     <br>
                     <p>Let’s look at what startproject created:</p>
-                    <div class="highlight-default notranslate" style="padding-right: 40px;padding-left: 40px;"><div class="highlight"><pre style="position: relative;"><span></span><span class="n">mysite</span><span class="o">/</span>
+                    <div class="highlight-default notranslate" style="padding-right: 40px;padding-left: 40px;"><div class="highlight"><pre style="position: relative;"><span></span><span class="n">todo</span><span class="o">/</span>
                         <span class="n">manage</span><span class="o">.</span><span class="n">py</span>
                         <span class="n">mysite</span><span class="o">/</span>
                         <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
