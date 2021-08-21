@@ -105,7 +105,7 @@
                 <!-- end: sidebar -->
                 <section role="main" class="content-body">
                     <header class="page-header">
-                        <h2>Creating Model</h2>
+                        <h2>Django View</h2>
                     </header>
                     <style>
                         .highlight {
@@ -138,58 +138,107 @@
                             border-radius: 4px 4px 0 0;
                         }
                     </style>
-                    <h1>Creating Models:-</h1>
-                    <p>Now we’ll define your models – essentially, your database layout, with additional metadata.</p>
-                    <p><span><strong>Philosophy: </strong></span>A model is the single, definitive source of truth about
-                        your data. It contains the essential fields and behaviors of the data you’re storing. Django
-                        follows the DRY Principle. The goal is to define your data model in one place and automatically
-                        derive things from it.</p>
-                    <p>In our todo app, we’ll create two models: Categories and Items. A Category has a name and a
-                        publication date. An item has two fields: the text and the category an item belongs to. Each
-                        Item is associated with a Category.</p>
-                    <p>These concepts are represented by Python classes. Edit the todo_app/models.py file, so it looks
-                        like this:</p>
+                    <h1>Django View:-</h1>
+                    <p>In the Django framework, views are Python functions or classes that receive a web request and
+                        return a web response. The response can be a simple HTTP response, an HTML template response,
+                        or an HTTP redirect response that redirects a user to another page.</p>
+                    <h1>Let's write our first view</h1>
+                    <p>Open todo_app/views.py and write the following code in it:</p>
                     <div class="literal-block-wrapper docutils container" id="id2">
-                        <div class="code-block-caption">
-                            <span class="caption-text">todo_app/models.py</span>
-                        </div>
-                        <div class="highlight-python notranslate">
-                            <div class="highlight" style="margin-top: 0px"><pre style="position: relative;">
-                        <span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
-
-
-                        <span class="k">class</span> <span class="nc">Category</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-                            <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-                            <span class="n">pub_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="s1">'date published'</span><span class="p">)</span>
-
-
-                        <span class="k">class</span> <span class="nc">Item</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-                            <span class="n">category</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Category</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
-                            <span class="n">text</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-                        </pre></div>
+                    <div class="code-block-caption">
+                        <span class="caption-text">todo_app/views.py</span>
+                    </div>
+                    <div class="highlight-python notranslate">
+                        <div class="highlight" style="margin-top: 0px">
+                            <pre style="position: relative;">
+                                <span>from django.http import HttpResponse</span>
+                                <span></span>
+                                <span>def index(request):</span>
+                                    <span>return HttpResponse("Hello, Django. You're at the Todo index.")</span>
+                            </pre>
                         </div>
                     </div>
-                    <p>Here, each model is represented by a class that subclasses django.db.models.Model. Each model
-                        has a number of class variables, each of which represents a database field in the model.</p>
-                    <p>Each field is represented by an instance of a Field class – e.g., CharField for character fields
-                        and DateTimeField for datetimes. This tells Django what type of data each field holds.</p>
-                    <p>The name of each Field instance (e.g. text or pub_date) is the field’s name, in machine-friendly
-                        format. You’ll use this value in your Python code, and your database will use it as the column
-                        name.</p>
-                    <p>You can use an optional first positional argument to a Field to designate a human-readable name.
-                        That’s used in a couple of introspective parts of Django, and it doubles as documentation. If
-                        this field isn’t provided, Django will use the machine-readable name. In this example, we’ve
-                        only defined a human-readable name for Category.pub_date. For all other fields in this model,
-                        the field’s machine-readable name will suffice as its human-readable name.</p>
-                    <p>Some Field classes have required arguments. CharField, for example, requires that you give it a
-                        max_length. That’s used not only in the database schema, but in validation, as we’ll soon see.
+                    </div>
+                    <p>Now that we have written our view we need to call that. To do so we will map this view with a
+                        URL route.</p>
+                    <p>To create a URLconf you have to create a file urls.py inside todo_app directory.</p>
+                    <p>After that put following code init:</p>
+                    <div class="literal-block-wrapper docutils container" id="id2">
+                    <div class="code-block-caption">
+                        <span class="caption-text">todo_app/urls.py</span>
+                    </div>
+                    <div class="highlight-python notranslate">
+                        <div class="highlight" style="margin-top: 0px">
+                            <pre style="position: relative;">
+                                <span>from django.urls import path</span>
+                                <span></span>
+                                <span>from . import views</span>
+                                <span></span>
+                                <span>urlpatterns = [</span>
+                                    <span>path('', views.index, name='index'),</span>
+                                <span>]</span>
+                            </pre>
+                        </div>
+                    </div>
+                    </div>
+                    <p>This URLconf is App level URLconf. We need to add these URLconf into our project level URLconf.
+                        Todo so, we need to include a path to these configurations in our project urls.py. Open
+                        todo/urls.py and add following code in it:
                     </p>
-                    <p>A Field can also have various optional arguments; in this case, we’ve set the default value of
-                        votes to 0.</p>
-                    <p>Finally, note a relationship is defined, using ForeignKey. That tells Django each Item is
-                        related to a single Category. Django supports all the common database relationships: many-to-one
-                        , many-to-many, and one-to-one.</p>
+                    <div class="literal-block-wrapper docutils container" id="id2">
+                    <div class="code-block-caption">
+                        <span class="caption-text">todo/urls.py</span>
+                    </div>
+                    <div class="highlight-python notranslate">
+                        <div class="highlight" style="margin-top: 0px">
+                            <pre style="position: relative;">
+                                <span>from django.contrib import admin</span>
+                                <span>from django.urls import include, path</span>
+                                <span></span>
+                                <span>urlpatterns = [</span>
+                                    <span>path('todo_app/', include('todo_app.urls')),</span>
+                                    <span>path('admin/', admin.site.urls),</span>
+                                <span>]</span>
+                            </pre>
+                        </div>
+                    </div>
+                    </div>
+                    <p>The include() function allow us to refer to other URLconfs.</p>
+                    <p>The idea behind include() is to make it easy to plug-and-play URLs. Since todo_app are in their
+                        own URLconf (todo_app/urls.py), they can be placed under “/todo_app/”, or any other path root,
+                        and the app will still work.</p>
+                    <p>We are complete here adding a view now to verify the working run server with following command:
+                    </p>
+                    <div class="highlight-default notranslate" style="padding: 0px 40px 40px 40px">
+                        <div class="highlight">
+                            <pre style="position: relative;">
+                                <span class="n">python manage.py runserver</span>
+                            </pre>
+                        </div>
+                    </div>
+                    <p>Once the server starts open your browser and goto localhost:8000/todo_app/ , and you should see
+                        the text “Hello, Django. You’re at the Todo index.”, which you defined in the index view.</p>
+                    <p>The path() function in our URLconf is passed four argument two of which are required and two are
+                        optional. All four arguments are explained below:</p>
+                    <h1>path() argument: route</h1>
+                    <p>route is a string that contains URL pattern. When a request comes django start matching the
+                        pattern of the request with the patterns defined in our URLconf both project level and app
+                        level. For example in our case localhost:8000/todo_app/ the django server will only look for
+                        todo_app/. It will omit the server name.
+                    </p>
+                    <h1>path() argument: view</h1>
+                    <p>When django finds a matching pattern it will call the specified view function with an HTTPRequest
+                        parameter and also all the keyword arguments which are captured with the request. These
+                        arguments are explained below.
+                    </p>
+                    <h1>path() argument: kwargs</h1>
+                    <p>In simple words this is the extra information passed to the view. It is in the form of python
+                        dictionary with key:value pairs.</p>
+                    <h1>path() argument: name</h1>
+                    <p>The name argument of the url lets you access the url unambiguously from anywhere in django.
+                    We will see example of this in details in templates.</p>
                 </section>
+
 
         <!-- Vendor -->
         <script src="assets/vendor/jquery/jquery.js"></script>
