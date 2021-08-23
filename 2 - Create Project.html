@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+
+            <!-- **** COURSE TITLE AND DESCRIPTION **** -->
+            <h4 class="text-muted"><u>Create Django Project</u></h4>
+            <p></p>
+            <div>
+                <p><strong>TO-DO Project</strong></p>
+                <p>During this tutorial, we’ll guide you on the creation of a basic ToDo application.</p>
+
+                <p>We will cover this in two phases:</p>
+                <ul>
+                    <li>A public site that lets people view TO-DO categories and add items to those categories.</li>
+                    <li>An admin site that lets you ADD, UPDATE, and DELETE todo_app.</li>
+                </ul>
+                <p>First thing to make sure that you have Django installed on your system. By running the following command in a shell prompt, you can confirm either Django installed or not along with version specified.</p>
+                <div class="highlight">
+                    <pre class="prettyprint">$ python -m django --version</pre>
+                </div>
+                <p>If Django is installed, an output of the installed version will be displayed. If it isn’t, an error message will occur on screen stating  “No module named django”.</p>
+                <p>If you are using Django for the first time, you’ll have to pay attention on some initial setup. Specifically, you’ll need to auto-generate some code that initiate a Django project – a collection of settings for an instance of Django, including database configuration, initial migrations, Django-specific options and apps related settings. 
+                </p>
+                <div class="highlight">
+                    <pre class="prettyprint">$ django-admin startproject todo</pre>
+                </div>
+                <p>The above-mentioned command will create a folder named "todo" in your current directory.</p>
+                <p>Let’s look at the tree structure of todo directory:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">todo/<br>  manage.py<br>  todo/<br>    __init__.py<br>    settings.py<br>    urls.py<br>    asgi.py<br>    wsgi.py</pre>
+                </div>
+                <p>These files are:</p>
+                <ul>
+                    <li>The outer <code>todo/</code> is the parent directory that holds project like container. You can rename it to anything you like as its name doesn’t matter to Django.</li>
+                    <li><code>manage.py</code> A command-line utility that is most frequently used to interact with this Django project in various ways. You can have a deep look related to <code>manage.py</code> in django-admin and <code>manage.py</code>.</li>
+                    <li>The inner <code>todo/</code> directory is the actual Python package for your project. Its name is the Python package name you’ll need to use to import anything inside it (e.g. <code>todo.urls</code>).</li>
+                    <li><code>todo/__init__.py</code>: An blank file that explain Python that this directory should be considered a Python package. If you stands new to Python, read more about packages in the official Python docs.</li>
+                    <li><code>todo/settings.py</code>: This file contains completed configuration for this Django project. Django settings will display a complete guidance how the variable set in settings.py work at the time of execution.</li>
+                    <li><code>todo/urls.py</code>: The URL declarations for this Django project; a “Complete Route List” of your Django-powered site.</li>
+                    <li><code>todo/asgi.py</code>: An entry-point for ASGI-compatible web servers to serve your project. </li>
+                    <li><code>todo/wsgi.py</code>: An entry-point for WSGI-compatible web servers to serve your project. </li>
+                </ul>
+                <p><strong>The development server</strong></p>
+                <p>Let’s verify your Django project works. To start the server move to parent directory(todo) and run the following commands:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">$ python manage.py runservers</pre>
+                </div>
+                <p>You’ll see the following output on the command line:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">Performing system checks...<br><br>System check identified no issues (0 silenced).<br><br>You have unapplied migrations; your app may not work properly until they are applied.<br>Run 'python manage.py migrate' to apply them.<br><br>August 13, 2021 - 15:50:53<br>Django version 3.2, using settings 'todo.settings'<br>Starting development server at http://127.0.0.1:8000/<br>Quit the server with CONTROL-C.</pre>
+                </div>
+                <p>You’ve started the Django development server, a lightweight Web server written purely in Python. We’ve included this with Django so you can develop things rapidly, without having to deal with configuring a production server – such as Apache – until you’re ready for production.</p>
+
+                <p>Now’s a good time to note: don’t use this server in anything resembling a production environment. It’s intended only for use while developing. (We’re in the business of making Web frameworks, not Web servers.)</p>
+
+                <p>Now that the server’s running, visit http://127.0.0.1:8000/ with your Web browser. You’ll see a “Congratulations!” page, with a rocket taking off. It worked!</p>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

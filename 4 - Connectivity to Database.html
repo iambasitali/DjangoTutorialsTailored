@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+
+            <!-- **** COURSE TITLE AND DESCRIPTION **** -->
+            <h4 class="text-muted"><u>Connecting to Database</u></h4>
+            <p></p>
+            <div>
+                <p><strong>Databases:</strong></p>
+                <p>Django offer a variety of Database for connectivity. Django officially supports the below databases:</p>
+                <ul>
+                    <li>PostgreSQL</li>
+                    <li>MariaDB</li>
+                    <li>MySQL</li>
+                    <li>Oracle</li>
+                    <li>SQLite<em> (default)</em></li>
+                </ul>
+                <p>There are also a number of other database backends provided by third parties.</p>
+                <p>Django offers as many features as possible on all database backends. However, all database backeneds are not similar, and we’ve had to make changes in design decisions on which functionality to adapt and which assumptions we can make safely.</p>
+
+                <p><strong>Databases Setup:</strong></p>
+                <p>Now, open up todo/settings.py. This is a Django module which serves with variables representing settings for whole application.</p>
+                <p>By default, the configuration uses <strong>SQLite</strong>>. If you’re beginner to databases, this is the best option. For <strong>SQLite</strong> connectivity, you won’t need to install anything as it is already included in Python. At your early stages of python Django, you may want to use a more scalable database like PostgreSQL, to avoid hurdles of switching database in future.</p>
+                <p>If you like to use another database, install the appropriate database and consider to update the following keys in the DATABASES 'default' item to match your database connection settings:</p>
+                <ul>
+                    <li><strong>ENGINE</strong> – Either <code>'django.db.backends.sqlite3'</code>, <code>'django.db.backends.postgresql'</code>, <code>'django.db.backends.mysql'</code>, or <code>'django.db.backends.oracle'</code>.</li>
+                    <li><strong>NAME</strong> – The name of your database. In case of using SQLite, a file will be created as  database on your PC; in that case, NAME should be the full absolute path, including filename, of that file. The default value, <strong>BASE_DIR / <code>'db.sqlite3'</code></strong>, will store the file in your project directory.</li>
+                </ul>
+                <p>If you are not using SQLite as your database, additional settings such as <strong>USER, PASSWORD</strong>, and <strong>HOST</strong> are mandatory to add.</p>
+
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />If you’re using a database besides SQLite, then create a new database in your intended database server. Do that with <strong>“CREATE DATABASE database_name;”</strong> within your database’s interactive prompt.</div>
+                <p></p>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />Also make sure that the database user provided in <code>mysite/settings.py</code> has <em>“create database”</em> privileges.</div>
+                <p></p>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />If you’re using SQLite, you don’t need to create anything beforehand - the database file will be created automatically when it is needed.</div>
+                <p></p>
+                <p>By default, INSTALLED_APPS contains the following apps, all of which come with Django:</p>
+                <ul>
+                    <li><code>django.contrib.admin</code> – The admin site. You’ll use it shortly.</li>
+                    <li><code>django.contrib.auth</code> – An authentication system.</li>
+                    <li><code>django.contrib.contenttypes</code> – A framework for content types.</li>
+                    <li><code>django.contrib.sessions</code> – A session framework.</li>
+                    <li><code>django.contrib.messages</code> – A messaging framework.</li>
+                    <li><code>django.contrib.staticfiles</code> – A framework for managing static files.</li>
+                </ul>
+                <p>These applications are included by default as a convenience for the common case.</p>
+                <p>Some of these applications make use of at least one database table, though, so we need to create the tables in the database before we can use them. To do that, run the following command:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">$ python manage.py migrate </pre>
+                </div>
+                <p>The migrate command looks at the INSTALLED_APPS setting and creates any necessary database tables according to the database settings in your mysite/settings.py file and the database migrations shipped with the app (we’ll cover those later). You’ll see a message for each migration it applies. If you’re interested, run the command-line client for your database and type \dt <strong>(PostgreSQL)</strong>, SHOW TABLES; <strong>(MariaDB, MySQL)</strong>, .schema <stron>(SQLite)</stron>, or SELECT TABLE_NAME FROM USER_TABLES; <strong>(Oracle)</strong> to display the tables Django created.</p>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

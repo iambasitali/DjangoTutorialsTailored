@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+
+            <!-- **** COURSE TITLE AND DESCRIPTION **** -->
+            <h4 class="text-muted"><u>Installing Django</u></h4>
+            <p>Django is a python framework which is used to do rapid development, developers can build apps with in very short time Moreover Its free and open source. At that time Django is very modern and most used web development framework, It provides maximum supports to the third party libraries.</p>
+            <div>
+                <p><strong>Quick install Django</strong></p>
+                <p>Before you can use Django, you’ll need to get it installed. We have a complete installation guide that covers all the possibilities; this guide will guide you to a minimal installation that’ll work while you walk through the introduction.</p>
+
+                <p><strong>Python:</strong></p>
+                <p>Before starting work we needs to install Python in our system, we can download the python from the below link
+                <a href="https://www.python.org/downloads/">https://www.py thon.org/downloads/</a>
+                After installing the Python, we need to check whether the Python is installed or not with the below command.
+                </p>
+
+                <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">python --version</pre></pre>
+                </div>
+                <p><strong>Install Django:</strong></p>
+                <p>You've got two ways to install django on your system.</p>
+                <p>1: Install the latest release. For that run the following command:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">pip install django</pre>
+                </div>
+                <p>2: Install specific version of django. For example if you want to install release version 2.2.0 run the following command:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">pip install django==2.2.0</pre>
+                </div>
+                <p><strong>Verify:</strong></p>
+                <p>To verify that Django can be seen by Python, type python from your shell. Then at the Python prompt, try to import Django:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">django --version</pre>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

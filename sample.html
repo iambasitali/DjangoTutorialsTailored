@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Courses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+
+            <!-- **** COURSE TITLE AND DESCRIPTION **** -->
+            <h4 class="text-muted"><u>Py4 Data Structures</u></h4>
+            <h6 class="course_desc">In this course, you will learn about Python data structures which includes List, Tuple, Set, and Dictionary. You will also learn about the different methods of each.</h6>
+            
+
+
+
+
+            <!-- **** SECTION TITLE **** -->
+            <div>
+                <h5>List in Python</h5>
+            </div>
+
+
+
+            <!-- **** SECTION CONTENT **** -->
+            <div>
+                <p>Basically, there are four different <strong><a data-toggle="popover" data-title="What is a Collection?" data-trigger="focus" data-content="A collection is a group of things. For example, like collection of coins." tabindex="0">collections <i class="icon icon-question-1"></i></a></strong>&nbsp; of data types in Python: <code>list</code>, <code>set</code>, <code>tuple</code> and <code>dictionary</code>.</p>
+                <p><strong>List:</strong><strong></strong></p>
+                <ul>
+                    <li><code>list</code> in Python is written as comma-separated values inside square brackets.</li>
+                    <li>It's ordered (by index) and changeable. It can also have <strong>duplicate</strong> values.</li>
+                </ul>
+                <p>Let's see an example<strong>,</strong></p>
+                <div class="highlight">
+                    <pre class="prettyprint">list_one = [1, 2, 3, 4, 5]<br />list_two = ['a', 'b', 'c', 'd']<br />list_three = [1, 2, 3, 'a','b']<br />list_four = [1, 1, 1, 'a','a']</pre>
+                </div>
+                <p>In the above example you see different list examples, now take a deep dive into the list.&nbsp;</p>
+                <p><strong>Create a List</strong></p>
+                <p>For creating a list just see above example, we need to define different comma-separated items or values in square brackets.</p>
+                <p>Let's take an example of creating a list of 1 to 5 numbers</p>
+                <div class="highlight">
+                    <pre class="prettyprint">number_list = [1, 2, 3, 4, 5]<br />print(number_list)<br />[1, 2, 3, 4, 5]</pre>
+                </div>
+                <p>Let's take an example of creating a list of&nbsp; 4 different colors:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">colors = ['orange', 'white', 'green', 'blue']<br />print(colors)<br />['orange', 'white', 'green', 'blue']</pre>
+                </div>
+                <p><strong>Accessing Items or Values from the List</strong></p>
+                <p>The list can be accessible by its <code>index</code> or position. For a better understanding of this just see below diagram of the list.</p>
+                <p style="text-align: center;"><img src="list_index.png" width="855" height="246" class="img-fluid" alt="" /></p>
+                <p style="text-align: left;">In this above diagram, you can see that a list has two types of index. First one is a <em>positive</em> index and the second is a <em>negative</em> index.</p>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />When using a positive index, the first item in a list starts at 0, NOT 1. This is common in most programming languages.</div>
+                <p></p>
+                <p style="text-align: left;">Let's access above diagram list in example by both positive and negative index.</p>
+                <div class="highlight">
+                    <pre class="prettyprint">z = [3, 7, 4, 2]<br />print(z[0])<br />3<br />print(z[2])<br />4<br />print(z[-1])<br />2<br />print(z[-4])<br />3</pre>
+                </div>
+                <p><strong>Exercise #1:</strong></p>
+                <ul>
+                    <li>Create some lists of your own.</li>
+                    <li>Print each list, then try printing some items from the lists using the index.</li>
+                    <li><strong>Do not delete these lists</strong>, you will need them later for other exercises.&nbsp;</li>
+                </ul>
+                <p><strong>Change Value or Item in List.</strong></p>
+                <p>In a previous topic, we learned about the index and with the help of that, we will change the item of a list.</p>
+                <p>Let's understand how to change an item in the list using an example.</p>
+                <div class="highlight">
+                    <pre class="prettyprint">colors = ['red', 'green', 'yellow', 'blue']<br />#Here we want to change yellow color to white in list so index of yellow color is 2<br />#access the index and set new value<br />colors[2] = 'white'<br />print(colors)<br />['red', 'green', 'white', 'blue']<br /><br />list_of_number = [1, 2, 3, 4, 5, 6]<br />#Now we want to change numbers 4 and 5 and replace them with 1 and 1<br />#number 4 index is 3 and number 5 index is 4<br />list_of_number[3] = 1<br />list_of_number[4] = 1<br />print(list_of_number)<br />[1, 2, 3, 1, 1, 6]</pre>
+                </div>
+                <p><strong>Exercise:</strong>&nbsp;</p>
+                <ul>
+                    <li>Using the lists you created in exercise 1, try changing some of the items using the index.</li>
+                </ul>
+                <p></p>
+                <p>We just covered the basics about a list. It's time to learn about the different <strong>methods</strong> (operations) of a list.</p>
+                <p>Different inbuilt methods of a list are:</p>
+                <ul>
+                    <li><code>append()</code> - it adds an item to the list at the end</li>
+                    <li><code>insert()</code> - add item in the list based on the specified index</li>
+                    <li><code>remove()</code> - remove the item from the list</li>
+                    <li><code>pop()</code> - remove</li>
+                    <li><code>clear()</code> - clear all items from the list</li>
+                    <li><code>len()</code> - find the <code>length</code> of the list. In other words, the number of items in the list.</li>
+                    <li><code>sort()</code> - sorts the list</li>
+                    <li><code>reverse()</code> - reverses the list</li>
+                    <li><code>index()</code> - returns the index of an item</li>
+                </ul>
+                <p><strong>append() </strong>method of list:</p>
+                <p>Append method of the list adds an item at the end of the list. Let's understand by example:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">colors = ['red', 'green']<br />print(colors)<br />['red', 'green']<br />colors.append('blue')<br />print(colors)<br />['red', 'green', 'blue']<br />number_list = [1, 2, 3, 4]<br />print(number_list)<br />[1, 2, 3, 4]<br />number_list.append(5)<br />print(number_list)<br />[1, 2, 3, 4, 5]</pre>
+                </div>
+                <p><strong>insert()&nbsp;</strong>method of list:</p>
+                <p>It inserts the item in the list based on a specified index of the list.</p>
+                <p>Let's see an example for a better understanding of <code>insert()</code> method of the list.</p>
+                <div class="highlight">
+                    <pre class="prettyprint">colors = ['red', 'blue', 'green']<br />#Now we want to add 'white' color at index 2 (The third position; first item starts at 0, remember?)<strong><br /></strong>colors.insert(2, "white")<br />print(colors)<br />['red', 'blue', 'white', 'green']</pre>
+                </div>
+                <p>It's very simple, we just need to specify where we want to add the new item in the list.</p>
+                <p><strong>remove()&nbsp;</strong>method of list:</p>
+                <p>It removes the specified item from a given list (using the <strong>name</strong> of the item, not the index). Let's see it by example:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">animal = ['cat', 'dog', 'horse', 'lion']<br />print(animal)<br />['cat', 'dog', 'horse', 'lion']<br />#Now we want to remove 'horse' from list<br />animal.remove('horse')<br />print(animal)<br />['cat', 'dog', 'lion']</pre>
+                </div>
+                <p>If the item is not in the list, you will get an <strong>error</strong>!:</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">animal = ['cat', 'dog', 'horse', 'lion']<br />print(animal)<br />['cat', 'dog', 'horse', 'lion']<br />#Now we want to remove 'zebra' from list<br />animal.remove('zebra')<br />Traceback (most recent call last):<br />  File "main.py", line 3, in &lt;module&gt;<br />    animal.remove('zebra')<br />ValueError: list.remove(x): x not in list</pre>
+                </div>
+                <p><strong>Exercise:</strong></p>
+                <ul>
+                    <li><code class="hg code-highlight-grey">create a list: colors = ['red','green','red','blue','yellow']</code><strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 1rem;"></strong><strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 1rem;"></strong><strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 1rem;"></strong></li>
+                    <li>Remove 'red' using the <code>remove()</code> method.</li>
+                    <li>Print the list. What did you notice? How many 'red' are in the list?</li>
+                    <li>Using your lists from exercise 1, practice using the append, insert, and remove methods.</li>
+                </ul>
+                <p><strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 1rem;">pop()</strong><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 1rem;"> method of list:</span></p>
+                <p>The pop method of the list removes the specified index (or the last item from the list if no index is given). Let's take the same above list and see an example of the pop method:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">animal = ['cat', 'dog', 'horse', 'lion']<br />print(animal)<br />['cat', 'dog', 'horse', 'lion']<br />animal.pop()<br />print(animal)<br />['cat', 'dog', 'horse']<br />people = ['Jim', 'Kim','Jon','Ken']<br />people.pop(1)<br />print(people)<br />['Jim','Jon','Ken']</pre>
+                </div>
+                <p><strong>del </strong><em>keyword</em> of Python:</p>
+                <p>The <code>del</code> keyword is not specific to lists only, it can be used on <em>any</em> object. Since everything in Python is an object, it can be used to delete lists and parts of a list also.</p>
+                <p>Basically, two different uses of <code>del</code><strong>:</strong></p>
+                <ul>
+                    <li>delete item based on the specified index</li>
+                    <li>delete <em>entire</em> list</li>
+                </ul>
+                <p>Let's take an example of both to understand <code>del</code> in terms of List:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">animal = ['cat', 'dog', 'horse', 'lion']<br />print(animal)<br />['cat', 'dog', 'horse', 'lion']<br />#Now we want to remove the 1st item - at index 0 <br />del animal[0]<br />print(animal)<br />['dog', 'horse', 'lion']<br />#Now want to delete the list itself<br />del animal<br />print(animal)<br />Traceback (most recent call last):<br />  File "&lt;stdin&gt;", line 1, in &lt;module&gt;<br />NameError: name 'animal' is not defined</pre>
+                </div>
+                <p>Here you can see the Error shows that the animal list is not defined. This confirms that it was deleted.</p>
+                <p><strong>clear()</strong> method of list:</p>
+                <p>The clear method of a list doesn't delete the complete list. It removes all the items from the list so the list will become empty. Let's take the same above list and see an example:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">animal = ['cat', 'dog', 'horse', 'lion']<br />print(animal)<br />['cat', 'dog', 'horse', 'lion']<br />animal.clear()<br />print(animal)<br />[]</pre>
+                </div>
+                <p>As you can see in the above example, the list is empty.</p>
+                <p><strong>Exercise:</strong>&nbsp;</p>
+                <ul>
+                    <li>Practice with pop, del, and clear using the lists created in exercise 1.</li>
+                </ul>
+                <p></p>
+                <p><strong>Find the length of the list and check if the list exists or not.</strong></p>
+                <p>To find the length of the list in Python use the <code>len()</code> method, which shows the how many items available in the list.&nbsp;</p>
+                <p>Let's see with the help of an example:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">number_list = [1, 2, 3, 4, 5]<br />#Now find the length of list<br />print(len(number_list))<br />5<br />#store length in a variable<br />total_items = len(number_list)<br />print(total_items)<br />5<br />#Now find list is exist or not<br />if number_list:<br />     print("List exist")<br />else:<br />     print("List not exist")<br /><br />List exist<br />#Now we delete the list again check<br />del number_list<br />if number_list:<br />   print("List exist")<br />else:<br />   print("List not exist")<br /><br />List not exist</pre>
+                </div>
+                <p>In the above example, you have seen how to find the length of the list and how to check a list exists or not.</p>
+                <p><strong>Using the&nbsp;</strong><code>in</code>&nbsp;<strong>keyword:</strong></p>
+                <p>The <code>in</code> keyword is used for checking if an element exists in a list or not:</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">mylist = ['batman','spiderman','flash','barbie','gi joe','superwomen']<br />print('superman' in mylist)<br />False<br />print('batman' in mylist)<br />True</pre>
+                </div>
+                <p><strong>Exercise:</strong>&nbsp;</p>
+                <ul>
+                    <li><code class="hg code-highlight-grey">create a list: colors = ['red','green','red','blue','yellow']</code>&nbsp;</li>
+                    <li>Print the length of the list.</li>
+                    <li>Check if the list exists or not.</li>
+                    <li>Check for the following items in the list and print the results: 'indigo', 'blue', 'violet', 'pink', 'red'.</li>
+                </ul>
+                <p><strong>index()</strong> method of list:</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">mylist = ['Ben','Mike','Jon','Stacey']<br />print(mylist.index('Jon'))<br />2<br />print(mylist.index('Mike'))<br />2</pre>
+                </div>
+                <p></p>
+                <p><strong>Creating a list from a <em>string</em> using <code>split()</code> and <code>list()</code> methods.</strong></p>
+                <p>Syntax: <em>string.split(separator, maxsplit)</em></p>
+                <p>The <code>split()</code> method is a <code>string</code> method used for turning a string into a list. It takes two optional parameters: <code>separator</code>, <code>maxsplit</code>.</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">name = "Ben Davis"<br />#no separator: the string will be split anywhere that there is a space<br />name_list = name.split()<br />prit(name_list)<br />['Ben', 'Davis']<br /><br />sent = "how are you?"<br />print(sent.split())<br />['how', 'are', 'you?']<br /><br />#using a separator<br />sent = "how-are-you?"<br />print(sent.split("-"))<br />['how', 'are', 'you?']</pre>
+                </div>
+                <p>Using <code>list()</code>. Let's see some examples of using list():</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">name = "Brian"<br />letters = list(name)<br />print(letters)<br />['B', 'r', 'i', 'a', 'n']</pre>
+                </div>
+                <p><strong><strong>Exercise:</strong>&nbsp;</strong></p>
+                <ul>
+                    <li>Using the following string: <code class="hg code-highlight-grey">Please% can #you, %so #me #rando#m strin%g her%e..., how %old *are you, *some random string here!</code>&nbsp;</li>
+                    <li>Split the string using the separator: <strong>%</strong></li>
+                    <li>Split the string using the separator: <strong>,</strong></li>
+                    <li>Split the string using the separator: <strong>#</strong></li>
+                    <li>Split the string using the separator: <strong>*</strong></li>
+                    <li>Split the string using no separator.</li>
+                    <li>Use list() on the string.</li>
+                </ul>
+                <p><strong>sort()</strong> method of list:&nbsp;</p>
+                <p>Syntax:&nbsp;<em>list.sort(reverse=True|False, key=myFunc)</em></p>
+                <p>Let's see and example:</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">nums = [1,4,7,2,5,9,8]<br />nums.sort()<br />print(nums)<br />[1, 2, 4, 5, 7, 8, 9]<br /><br />animals = ['dog', 'cat', 'zebra', 'horse']<br />animals.sort()<br />print(animals)<br />['cat', 'dog', 'horse', 'zebra']<br /><br />nums = [1,4,7,2,5,9,8]<br />nums.sort(reverse=True) #passing in True for reverse parameter sorts the list in reverse order<br />print(nums)<br />[9, 8, 7, 5, 4, 2, 1]</pre>
+                </div>
+                <p><strong>reverse()</strong> method of list:&nbsp;</p>
+                <p>Let's see and example:</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">nums = [1,2,3,4,5,6,7]<br />nums.reverse()<br />print(nums)<br />[7, 6, 5, 4, 3, 2, 1]</pre>
+                </div>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />Don't confuse <code>reverse()</code> with <code>sort(reverse=True)</code>. They are not the same! <code>reverse()</code> only <strong>reverses</strong> the order, it does not sort the list. See example below:</div>
+                <p></p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">nums = [1,4,3,8,2,6,7]<br />nums.reverse()<br />print(nums)<br />[7, 6, 2, 8, 3, 4, 1] #no sorting was done, only reversing of the list</pre>
+                </div>
+                <p></p>
+                <p><strong>Looping through a List - access list members using a loop:</strong></p>
+                <p>It' very easy to access list members using a loop. You learned about the loops in the previous course.</p>
+                <p>Let's print the list members using a loop in the example:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">number_list = [1, 2, 3, 4, 5, 6, 7, 8]<br />for item in number_list:<br />    print(item)<br /><br />1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /><br />colors = ['red', 'green', 'yellow', 'blue']<br />for color in colors:<br />    print(color)<br /><br />red<br />green<br />yellow<br />blue</pre>
+                </div>
+                <p>Another way to loop through a list is by using the <code>range()</code> function combined with the <code>len()</code> function:</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">colors = ['red', 'green', 'yellow', 'blue']<br />count = len(colors) #get the number of iterations for the range() function<br />for index in range(count):<br />    print(index,colors[index])<br />0 red<br />1 green<br />2 yellow<br />3 blue</pre>
+                </div>
+                <p>You see in the above examples it's very easy to loop through a list.</p>
+                <p><strong>Slicing in List:</strong></p>
+                <p>Python has amazing features which let us slice the list as per desire requirement. Let's see an example of different slicing.</p>
+                <p style="text-align: center;"><strong>list_name[start_index : end_index]</strong></p>
+                <div class="highlight">
+                    <pre class="prettyprint">number_list = [1, 2, 3, 4, 5, 6, 7, 8]<br />#Now let's say that we really want the sub-elements 2, 3, and 4 returned in a new list.<br />print(number_list[1:4])<br />[2, 3, 4]<br />print(number_list[2:])<br />[3, 4, 5, 6, 7, 8]<br />my_list = ['p','r','o','g','r','a','m']<br />print(my_list[2:5])<br />['o', 'g', 'r']<br /># elements from the beginning to 4th element<br />print(my_list[:-3])<br />['p', 'r', 'o', 'g']</pre>
+                </div>
+                <p><strong>Exercise:</strong>&nbsp;</p>
+                <ul>
+                    <li>Practice sort, reverse, and looping through the lists created in exercise 1.</li>
+                </ul>
+                <p><strong>Extending list in Python:</strong></p>
+                <p>We can extend the list with the help of&nbsp;<strong>+&nbsp;</strong>in python.</p>
+                <div class="highlight">
+                    <pre class="prettyprint">a = [1, 2, 3, 5]<br />b = [7, 8, 9]<br />print(a+b)<br />[1, 2, 3, 5, 7, 8, 9]<br />extending same list with one or more time<br />print(a * 2)<br />[1, 2, 3, 5, 1, 2, 3, 5]</pre>
+                </div>
+                <p></p>
+                <p>Let's look at some additional useful methods provided by the <code>random</code> module:</p>
+                <ul>
+                    <li><code>random.choice(sequence)</code> - picks a random item from a sequence or string <strong>(it does not change the original sequence)</strong></li>
+                    <li><code>random.sample(sequence, size)</code> - picks a random sample of items from a sequence based on size given <strong>(it does not change the original sequence)</strong></li>
+                    <li><code>random.shuffle(sequence)</code> - shuffles a sequence <strong>(it changes the original sequence)</strong></li>
+                </ul>
+                <p>Now some examples of each. (Make sure to <em>import random</em> at the top of your script)</p>
+                <p><strong>choice():</strong></p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">import random<br />number_list = [1, 2, 3, 4, 5, 6, 7, 8]<br />print(random.choice(number_list))<br />print(random.choice(number_list))<br />7<br />2</pre>
+                </div>
+                <p><strong>sample():</strong></p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">import random<br />number_list = [1, 2, 3, 4, 5, 6, 7, 8]<br />print(random.sample(number_list, 1))<br />print(random.sample(number_list, 4))<br />[6]<br />[5, 2, 1, 7]</pre>
+                </div>
+                <p><strong>shuffle():</strong></p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">import random<br /><br />number_list = [1, 2, 3, 4, 5, 6, 7, 8]<br />random.shuffle(number_list)<br />print(number_list)<br />[6, 8, 4, 2, 3, 5, 7, 1]<br /><br />random.shuffle(number_list)<br />print(number_list)<br />[3, 6, 1, 2, 7, 4, 5, 8]</pre>
+                </div>
+                <p><strong>Exercises:</strong>&nbsp;</p>
+                <ul>
+                    <li>Print the "second item" from <strong>colors = ['red',&nbsp; 'green', 'yellow']</strong></li>
+                    <li>Change the value <strong>from "blue" to "white",</strong> in the colors list. <strong>colors = ['red', 'green', 'pink', 'blue']</strong></li>
+                    <li>Use the insert method to <strong>add "dog" as the second item</strong> in the animal list. <strong>animal = ['cat', 'cow', 'buffalo', 'rat']</strong></li>
+                    <li>Make a list of your favorite hobbies and call it <strong>games</strong>. Now make a list of your favorite foods and call it <strong>foods</strong>. Join the two lists into a new list called <strong>favorites</strong> . Finally, print the list <strong>favorites</strong>.</li>
+                </ul>
+                <p><strong>Multi-Dimensional Lists</strong></p>
+                <p>Multi-Dimensional list means list inside another list. Multi-Dimensional lists can be many levels deep. Lets see some examples:</p>
+                <ul>
+                    <li><strong>Two Dimensional (two levels deep):</strong><br />
+                        <ul>
+                            <li><strong><span style="color: #ff0000;">[ </span><span style="color: #3366ff;">[1,2,3], ['a','b','c'], ['red','blue','green'] </span><span style="color: #ff0000;">]</span></strong></li>
+                        </ul>
+                    </li>
+                    <li><strong>Three Dimensional (three levels deep):</strong>
+                        <ul>
+                            <li><strong><span style="color: #ff0000;">[ </span><span style="color: #3366ff;">[ </span><span style="color: #339966;">[1,2,3], ['a','b','c'] </span><span style="color: #3366ff;">]</span>, <span style="color: #3366ff;">[ </span><span style="color: #339966;">['red','blue','green'] </span><span style="color: #3366ff;">] </span><span style="color: #ff0000;">]</span></strong></li>
+                        </ul>
+                    </li>
+                    <li><strong>Four Dimensional (four levels deep):</strong>
+                        <ul>
+                            <li><strong><span style="color: #ff0000;">[</span> <span style="color: #3366ff;">[</span> <span style="color: #339966;">[</span> <span style="color: #cc99ff;">[1,2],[3]</span> <span style="color: #339966;">]</span>, <span style="color: #339966;">[ <span style="color: #cc99ff;">[</span></span><span style="color: #cc99ff;">'a','b'], ['c']</span> <span style="color: #339966;">]</span> <span style="color: #3366ff;">]</span>, <span style="color: #3366ff;">[</span> <span style="color: #339966;">[ <span style="color: #cc99ff;">[</span></span><span style="color: #cc99ff;">'red'], ['blue','green']</span> <span style="color: #339966;">], [ <span style="color: #cc99ff;">['orange', 'yellow'], ['indigo', 'violet'] </span>]</span> <span style="color: #3366ff;">]</span> <span style="color: #ff0000;">]</span></strong></li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>The different colors from above indicate the number of levels deep. Too much nesting can get very confusing, making it difficult to access the items. For that reason, we will stick to two dimensional lists for now. Let's create a two dimensional list:</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">two_d = []<br />first_one = [1,2,3]<br />second_one = [4,5,6]<br />two_d.append(first_one)<br />print(two_d)<br />[[1, 2, 3]]<br />two_d.append(second_one)<br />print(two_d)<br />[[1, 2, 3], [4, 5, 6]]</pre>
+                </div>
+                <p><strong>Accessing items in a two dimensional list:</strong></p>
+                <p></p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">two_d = [[1, 2, 3], [4, 5, 6]]<br />#access the first inner list: [1,2,3]<br />print(two_d[0])<br />[1,2,3]<br />#access the first number in the first inner list: [<span style="text-decoration: underline; color: #ff0000;"><strong>1</strong></span>,2,3]<br />print(two_d[0][0])<br />1</pre>
+                </div>
+                <p><strong>Explanation: <span style="color: #ff0000;">[ </span><span style="color: #3366ff;">[1,2,3] <span style="color: #ff0000;">,</span> ['a','b','c'] <span style="color: #ff0000;">,</span> ['red','blue','green'] </span><span style="color: #ff0000;">]</span></strong></p>
+                <p>The inner lists (blue) are elements of the outer list (red). You can access these element just like you would in a one dimensional list. For example, you can access the first inner list with index 0: <code>two_d[0]</code>. Then, to get the first element in this list you would do: <code>two_d[0]<strong>[0]</strong></code>.&nbsp;</p>
+                <p><strong>Exercise:</strong>&nbsp;</p>
+                <ul>
+                    <li>Print out the colors <strong>red</strong>, <strong>blue</strong>, and <strong>green</strong> one at a time.</li>
+                    <li>Print out the <em>last</em> element in the <code>two_d</code> list.</li>
+                    <li>Print out <strong>'a'</strong> and then <strong>'c'</strong>.</li>
+                </ul>
+                <div class="alert-warning p-2 challenge"><span class="note_icon"><i class="icon icon-bolt-4"></i></span> <strong>Mini Challenge</strong><br />Loop through the two_d list and print out each inner list, and it's elements.
+                    <div class="alert-success p-2"><span class="note_icon"><i class="icon icon-lightbulb"></i></span> <strong>Tip. </strong>Use nested loops!</div>
+                </div>
+                <p></p>
+                <div class="alert-warning p-2 challenge"><span class="note_icon"><i class="icon icon-bolt-4"></i></span> <strong>Challenge</strong><br />
+                    <ul>
+                        <li>Create a list of ten words.</li>
+                        <li>Write a program to do the following:
+                            <ul>
+                                <li>Pick a random word from the list and create a new list of characters. e.g. ['c', 'a', 'r']. Print this list.</li>
+                                <li>Take the list of characters and create a new list with the same amount of * (asterisks) as characters. e.g. ['*', '*', '*']. Print this list.</li>
+                                <li>Slice the random word from the list using slicing.</li>
+                            </ul>
+                        </li>
+                        <li>Repeat the above steps until only one word remains in the list. You will need to use a while loop. Add a <code>time.sleep(1)</code></li>
+                        <li>Multiply this word times 10 and again create a list of characters from this word.</li>
+                        <li>Convert all the characters in the list to # (hash tags), except every 5th character. Convert every 5th character to a dash. Tip: use <code>modulo %</code></li>
+                        <li>Join the list and print the new word.</li>
+                    </ul>
+                </div>
+                <p></p>
+            </div>
+
+
+
+
+            <!-- **** SECTION SEPERATOR **** -->
+            <br><hr><br>
+
+
+
+            <!-- **** SECTION TITLE **** -->
+            <div>
+                <h5>Tuple in Python</h5>
+            </div>
+
+
+
+
+            <!-- **** SECTION CONTENT **** -->
+            <div>
+                <p><strong>Tuple:</strong></p>
+                <ul>
+                    <li>A tuple is same like as a list but the main difference is it's unchangeable.</li>
+                    <li>A tuple is written in parenthesis and comma-separated same as a list.</li>
+                </ul>
+                <p>Let see an example:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">tuple_one = (1, 2, 3, 4)<br />tuple_two = ("a", "b", "c", "d")<br />tuple_three = (112, 2223, "asad", "bcss") </pre>
+                </div>
+                <p>In the above example you see different tuple examples, now let's take a deeper dive into the tuple.&nbsp;</p>
+                <p><strong>Create a Tuple</strong></p>
+                <p>For creating a tuple just see above example. We just define different comma-separated values in parenthesis and make sure once it's declared it can't be changed.</p>
+                <p>Let's take an example of creating a tuple of 1 to 4 numbers</p>
+                <div class="highlight">
+                    <pre class="prettyprint">tupe_example = (1, 2, 3, 4)<br />print(tupe_example)<br />(1, 2, 3, 4)</pre>
+                </div>
+                <p>Let's see another example of the different animal as an item in the tuple.</p>
+                <div class="highlight">
+                    <pre class="prettyprint">animal = ('dog', 'cat', 'cow', 'lion', 'goat')<br />print(animal)<br />('dog', 'cat', 'cow', 'lion', 'goat')</pre>
+                </div>
+                <p></p>
+                <p><strong>Accessing Items or Values in Tuple</strong>&nbsp;</p>
+                <p>A tuple can be accessible by its index or its position. For a better understanding of this just see the diagram below:</p>
+                <p style="text-align: center;"><img src="tuple_index.png" width="521" height="145" class="img-fluid" alt="" /></p>
+                <p style="text-align: left;">Now let's take an example of accessing tuple items by Positive Index:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">t = ('red', 'green', 'blue', 'yellow', 'black')<br />print(t[0])<br />red<br />print(t[2])<br />blue</pre>
+                </div>
+                <p style="text-align: left;"></p>
+                <p style="text-align: left;"><strong>Add or Append or Change Tuple :</strong></p>
+                <p style="text-align: left;">Tuples are unchangeable. Once a tuple is created, it cannot be changed. Let's try to change the element of a tuple and see what happens.</p>
+                <div class="highlight">
+                    <pre class="prettyprint">colors = ('red', 'white', 'blue')<br />colors[0] = 'black'<br />Traceback (most recent call last):<br />  File "&lt;stdin&gt;", line 1, in &lt;module&gt;<br />TypeError: 'tuple' object does not support item assignment</pre>
+                </div>
+                <p style="text-align: left;">Now you can see in the above example it's shown an error because it's <strong><a data-toggle="popover" data-title="Immutable" data-trigger="focus" data-content="When a data type is immutable, it cannot be mutated - meaning that it cannot be changed." tabindex="0">immutable&nbsp;<i class="icon icon-question-1"></i></a></strong> .</p>
+                <p style="text-align: left;"><strong>Delete or Pop tuple elements:</strong></p>
+                <p style="text-align: left;">We can only perform deletion operation on the entire tuple, but we can't delete a separate item from it because it's unchangeable.</p>
+                <p>&nbsp;Let's see an example of deleting a tuple:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">colors = ('red', 'white', 'blue')<br />del colors<br />print(colors)<br />Traceback (most recent call last):<br />  File "&lt;stdin&gt;", line 1, in &lt;module&gt;<br />NameError: name 'colors' is not defined<br /><br /></pre>
+                </div>
+                <p>Here in the error, you can see there is no <code>colors</code> tuple because it's already deleted.</p>
+                <p><strong>Concatenation &amp; Repetition of Tuples:</strong></p>
+                <p>One or more tuples can be joined using the concatenation operator <strong>+</strong> and repetition using replication operator <strong>*&nbsp;</strong></p>
+                <div class="highlight">
+                    <pre class="prettyprint">#concatenate<br />tup = ('red', 'green', 'blue') + (1, 2, 3)<br />print(tup)<br />('red', 'green', 'blue', 1, 2, 3)<br />#repetition<br />t = ('blue',) * 4<br />print(t)<br />('blue', 'blue', 'blue', 'blue')</pre>
+                </div>
+                <p></p>
+                <p><strong>Slicing of Tuple in Python:</strong></p>
+                <p>In the previous section, you saw the slicing of a list. Tuples also perform slicing same as a list.</p>
+                <p>Let's understand with the help of an example of tuple slicing:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">colors = ('red', 'yellow', 'purple', 'black', 'green', 'blue')<br />#slice index 2 to 5<br />print(colors[2:5])<br />('purple', 'black', 'green')<br /><br />#slicing in depth -<strong> tuple[start_index : end_index : steps]</strong><br />#returns every 2nd item<br />print(colors[0:6:2])<br />('red', 'purple', 'green')<br /># reversing a tuple<br />print(colors[::-1])<br />('blue', 'green', 'black', 'purple', 'yellow', 'red')</pre>
+                </div>
+                <p>&nbsp;</p>
+                <p><strong>Finding the length of Tuple</strong></p>
+                <p>To find the length of tuple there use the function <strong>len().</strong></p>
+                <p>Let's take an example of finding the length:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">colors = ('red', 'yellow', 'purple', 'black', 'green', 'blue')<br />print(len(colors))<br />6</pre>
+                </div>
+                <p><strong></strong></p>
+                <p><strong>Check if an item exists in a tuple</strong></p>
+                <p>To check an item is available or not in tuple you can use <code>in</code> or <code>not in</code> operator with the help of <code>if condition</code>.</p>
+                <p>Let's do it with the help of an example:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">colors = ('red', 'yellow', 'purple', 'black', 'green', 'blue')<br />if 'red' in colors:<br />    print('Available')<br /><br />Available<br /><br />if 'white' not in colors:<br />    print('Not available')<br /><br />Not available</pre>
+                </div>
+                <p></p>
+                <p><strong>Iterate tuple using a loop:</strong></p>
+                <p>To iterate over the items of a tuple, use a normal for loop same as we did in the list.</p>
+                <p>Let's take an example of looping of a tuple:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">colors = ('red', 'yellow', 'purple', 'black', 'green', 'blue')<br />for color in colors:<br />   print(color)<br /><br />red<br />yellow<br />purple<br />black<br />green<br />blue</pre>
+                </div>
+                <div class=""><strong>Exercise</strong>
+                    <ul>
+                        <li>print the "second item" from<strong> animal = ('cat', 'cow', 'buffalo', 'rat')</strong></li>
+                        <li>Print how many numbers of items in the animal's tuple.<strong> animals = ('cat', 'cow', 'buffalo', 'rat')&nbsp;</strong><strong></strong></li>
+                        <li>Try changing 'buffalo' to 'lion'</li>
+                        <li>Try deleting 'cow' using <code>remove()</code>, <code>pop()</code>, <code>del</code> methods. (Refer to previous section)</li>
+                        <li>Write a program to get the 4th element from the beginning and 4th element from the end of a tuple.</li>
+                    </ul>
+                </div>
+                <p></p>
+            </div>
+
+
+
+            <!-- **** SECTION SEPERATOR **** -->
+            <br><hr><br>
+
+
+
+
+
+            <!-- **** SECTION TITLE **** -->
+            <div>
+                <h5>Keyboard Events</h5>
+            </div>
+
+
+
+
+
+
+            <!-- **** SECTION CONTENT **** -->
+            <div>
+                <p><strong>Detecting Key Press:</strong></p>
+                <p>In this section, you will learn about detecting keyboard events &ndash; which key the user pressed. We will do this by looping through the <code>EventList</code> using: <code>pygame.event.get()</code>. The <code>event.get()</code> method returns a list of all the events that are currently in the <em>event queue</em>. This method can take optional arguments, but calling this method without the arguments automatically clears out the event queue. It's good to clear out the event queue, otherwise it will keep filling up an slow down our game. We have already been using this method to quit our game by checking if the <code>event.type == pygame.QUIT</code> when needed.</p>
+                <p>Inside the event loop we want to check for 2 keyboard events: <code>KEYDOWN</code> and <code>KEYUP</code>. The <code>KEYDOWN</code> event detects when a key is pressed down, and the <code>KEYUP</code> detects when the key is released. Once any of these events is detected, we need to find out which key was pressed or released. We do that by checking <code>event.key</code> attribute. It will make sense when we start writing some code.</p>
+                <p>Let's create a simple square and make it move using the arrow keys. We will start the square at the center of the screen:</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">...<br />x = display_width/2 - 30
+y = display_height/2 - 30
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        if event.type == pygame.KEYDOWN:<br />            if event.key == pygame.K_UP:<br />                y -= 3<br />            elif event.key == pygame.K_DOWN:<br />                y += 3<br />            elif event.key == pygame.K_RIGHT:<br />                x += 3<br />            elif event.key == pygame.K_LEFT:<br />                x -= 3<br />
+    game_surface.fill(black)
+
+    pygame.draw.rect(game_surface,green,(x,y,60,60))
+
+    pygame.display.update()
+    clock.tick(60)<br /><br /></pre>
+                </div>
+                <p>Ok, let's see what we got going on above:</p>
+                <ul>
+                    <li><strong>if event.type == pygame.KEYDOWN: </strong>Here we are checking for the <code>KEYDOWN</code> event.</li>
+                    <li>Then we have a bunch of <code>if, elif</code> checks to determine which key was pressed:
+                        <ul>
+                            <li><strong>if event.key == pygame.K_UP: </strong>Move the square up by decrementing the y value</li>
+                            <li><strong>elif event.key == pygame.K_DOWN:</strong>&nbsp;Move the square down by incrementing the y value</li>
+                            <li><strong>elif event.key == pygame.K_RIGHT:</strong>&nbsp;Move the square right by incrementing the x value</li>
+                            <li><strong>elif event.key == pygame.K_LEFT:</strong>&nbsp;Move the square left by decrementing the x value</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>Here is a partial list of other keyboard keys that can be can be retrieved using the syntax &ndash; <code>pygame.name_of_key</code>:</p>
+                <table border="1" style="height: 189px; width: 22.8201%; border-collapse: collapse; background-color: #efefef;">
+                    <tbody>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">Pygame Constant</td>
+                            <td style="width: 33.3333%; height: 24px;">Key</td>
+                        </tr>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">K_SPACE</td>
+                            <td style="width: 33.3333%; height: 24px;">Space bar</td>
+                        </tr>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">K_a</td>
+                            <td style="width: 33.3333%; height: 24px;">a</td>
+                        </tr>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">K_b</td>
+                            <td style="width: 33.3333%; height: 24px;">b</td>
+                        </tr>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">K_c</td>
+                            <td style="width: 33.3333%; height: 24px;">c</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333%;">K_d</td>
+                            <td style="width: 33.3333%;">d</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333%;">K_e</td>
+                            <td style="width: 33.3333%;">e</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 33.3333%;">...</td>
+                            <td style="width: 33.3333%;">...</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p></p>
+                <p>Most of the keys are self explanatory, for example: <strong>K_a</strong> represents "a". A complete list can be found on the pygame website at <a href="http://www.pygame.org/docs/ref/key.html">http://www.pygame.org/docs/ref/key.html</a>.</p>
+                <p>Run the program and try pressing the arrow keys to make the square move. You will have to repeatedly press the keys. Hold down any of the arrow keys, and you will notice that the square doesn't keep moving. This is because the keyboard event is only detected once for each keydown or keyup. In order to keep the square moving, we will have to add a <code>change</code> variable, just like we did in the animations section. This variable will control the movement of the square when we add this variable to our x and y coordinates:</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">...<br />xchange = 0<br />ychange = 0<br />x = display_width/2 - 30
+y = display_height/2 - 30
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        if event.type == pygame.KEYDOWN:<br />            if event.key == pygame.K_UP:<br />                <strong>ychange</strong> = -3<br />            elif event.key == pygame.K_DOWN:<br />                <strong>ychange</strong> = 3<br />            elif event.key == pygame.K_RIGHT:<br />                <strong>xchange</strong> = 3<br />            elif event.key == pygame.K_LEFT:<br />                <strong>xchange</strong> = -3</pre>
+                    <pre class="prettyprint pre-highlight">        if event.type == pygame.KEYUP:<br />             if event.key == pygame.K_UP:<br />                 ychange = 0<br />             elif event.key == pygame.K_DOWN:<br />                 ychange = 0<br />             elif event.key == pygame.K_RIGHT:<br />                 xchange = 0<br />             elif event.key == pygame.K_LEFT:<br />                 xchange = 0</pre>
+                    <pre class="prettyprint lang-sh"><br />    game_surface.fill(black)</pre>
+                    <pre class="prettyprint pre-highlight">    x += xchange<br />    y += ychange</pre>
+                    <pre class="prettyprint lang-sh">    pygame.draw.rect(game_surface,green,(x,y,60,60))<br />    pygame.display.update()<br />    clock.tick(60)<br /><br /></pre>
+                </div>
+                <p>Ok, we have a lot going on above. Here is what we did:</p>
+                <ul>
+                    <li>We added two new variables called <code>xchange</code> and <code>ychange</code> and set them to 0.</li>
+                    <li>Then inside the KEYDOWN event check, we replaced x and y with xchange and ychange.</li>
+                    <li>We added a KEYUP event check and set the xchange and ychange values to 0 depending on which key was pressed.
+                        <ul>
+                            <li>Setting <strong>xchange = 0</strong> will stop the square from moving left and right.</li>
+                            <li>Setting <strong>ychange = 0</strong> will stop the square from moving up and down.</li>
+                        </ul>
+                    </li>
+                    <li><strong>x += xchange, y += ychange: </strong>Then we add xchange to x and ychange to y. This is what actually makes the square move.</li>
+                </ul>
+                <p>Now run the code and try holding down the arrow keys.</p>
+                <p><strong>Exercise:</strong>&nbsp;</p>
+                <ul>
+                    <li>Make the square move using the following keys instead of the arrows:
+                        <ul>
+                            <li>i for up</li>
+                            <li>k for down</li>
+                            <li>l for right</li>
+                            <li>j for left</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p></p>
+                <div class="alert-warning p-2 challenge"><span class="note_icon"><i class="icon icon-bolt-4"></i></span> <strong>Challenge</strong><br />When the square goes off the edge, make it re-appear on the opposite edge. Similar to the animations you did in the previous section.</div>
+                <p></p>
+                <p>Ok, let's see another example. Using the same square, we will make it move up when the space bar is pressed and move down automatically when the space bar is released. This will create a jumping effect:</p>
+                <div class="highlight">
+                    <pre class="prettyprint lang-sh">y = 420 # start the square at the bottom
+x = 0
+xchange = 0
+ychange = 0
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                ychange = -3
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_SPACE:
+                ychange = 3
+    if y &gt;= 420: #if the square hits the bottom keep it from moving down further
+        y -= 3
+    x += xchange
+    y += ychange  
+    game_surface.fill(black)
+
+    pygame.draw.rect(game_surface,green,(x,y,60,60))
+
+    pygame.display.update()
+    clock.tick(60)</pre>
+                </div>
+                <p>As you can see above, we start the square at the bottom of the screen. In the KEYDOWN event, we check if the space bar is pressed: <code>if event.key == pygame.K_SPACE:</code>. If it's pressed, then we decrement the y value which makes the square move up. In the KEYUP event, we check if the space bar is released, and increment y value which makes the square move down. Run your program to see the effect.</p>
+                <div class="alert-warning p-2 challenge"><span class="note_icon"><i class="icon icon-bolt-4"></i></span> <strong>Challenge</strong><br />Currently the square only moves up and down. Make the square move right and left using the arrow keys.&nbsp;</div>
+                <p></p>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

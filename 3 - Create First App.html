@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+
+            <!-- **** COURSE TITLE AND DESCRIPTION **** -->
+            <h4 class="text-muted"><u>Create First Django App</u></h4>
+            <p></p>
+            <div>
+                <p><strong>TO-DO App</strong></p>
+                <p>Every Django project can have more than one Django apps. By executing the startproject command in
+                    the previous section, an project container is build that is compulsory for every Django project.
+                    After creating project, next-step is to create one or more Django app that’ll contain the specific functionality of your web application.</p>
+                <p>You can execute the startapp command through the manage.py file for creating an app:</p>
+
+                <div class="highlight">
+                    <pre class="prettyprint">$ python manage.py startapp <span class="o">&lt;appname&gt;</span></pre>
+                </div>
+                <p>The startapp command create a default folder structure for a Django app. This tutorial uses todo_app as the
+                    name for the app:</p>
+                <div class="highlight">
+                    <pre class="prettyprint">$ python manage.py startapp <em>todo_app</em></pre>
+                </div>
+
+                <p>Once the app is created using startapp command, you’ll see that another folder is added to your Django folder structure.</p>    
+                <div class="highlight">
+                    <pre class="prettyprint">todo/</pre><pre class="prettyprint pre-highlight">  -todo_app/<br>     migrations/<br>         __init__.py<br>     __init__.py<br>     admin.py<br>     apps.py<br>     models.py<br>     tests.py<br>     views.py<br></pre><pre class="prettyprint">  -todo/<br>     __init__.py<br>     settings.py<br>     urls.py<br>     asgi.py<br>     wsgi.py<br>  -manage.py</pre>
+                </div>
+                <p>In this tutorial, the newly created folder is named as <em>"todo_app"</em> used when running the command. You can see there are a number of .py files resides in the app direcotry.</p>
+                <p>This Django app folder is the main folder which act as working directory when creating your web application. You’ll also need to make some changes in the management app, todo/, but you’ll build most of your functionality inside the Django app, <em>todo_app</em>.</p>
+                <p>Move to your todo_app/ folder and open up the newly generated Python files. Go through the code comments in each file and see if they can help you to create a clear picture of each use case.</p>
+
+                <p>Here are the 3 most notable files that were created in the app directory:</p>
+                <ul>
+                    <li><code>__init__.py</code>: Python uses this file to declare a folder as a package, which allows Django to use code from different apps to use the overall features of your web application.</li>
+                    <li><code>models.py</code>: As Django follows ORM approach so <code>models.py</code> is used to declare app's models, which allow web application to interact with the database.</li>
+                    <li><code>views.py</code>: Most of the code logic need to be write in this File as it act like controller of whole application.</li>
+                </ul>
+                <div class="alert-warning p-2 challenge"><span class="note_icon"><i class="icon icon-bolt-4"></i></span> <strong>Important!</strong><br />If Django is not aware about todo_app, these steps we do later won’t work. So add <code>'todo_app'</code> to INSTALLED_APPS. The settings module will be in <code>todo/settings.py</code>.<br>
+                    <br><pre class="prettyprint"><strong>INSTALLED_APPS = [</strong><br>'myapi.apps.MyapiConfig',</pre>
+                    <p>... # Leave all the other INSTALLED_APPS</p>
+                    <pre class="prettyprint"><strong>]</strong></pre>
+                </div>
+                <p></p>
+
+                <p>At this point, you have done setting up an Django application and you can start implementing your ideas. From here on out, it’s up to you what you want to build to create your own unique project.</p>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
