@@ -44,17 +44,7 @@
                 <p><strong>Databases Setup:</strong></p>
                 <p>Now, open up todo/settings.py. This is a Django module which serves with variables representing settings for whole application.</p>
                 <p>By default, the configuration uses <strong>SQLite</strong>>. If you’re beginner to databases, this is the best option. For <strong>SQLite</strong> connectivity, you won’t need to install anything as it is already included in Python. At your early stages of python Django, you may want to use a more scalable database like PostgreSQL, to avoid hurdles of switching database in future.</p>
-                <p>If you like to use another database, install the appropriate database and consider to update the following keys in the DATABASES 'default' item to match your database connection settings:</p>
-                <ul>
-                    <li><strong>ENGINE</strong> – Either <code>'django.db.backends.sqlite3'</code>, <code>'django.db.backends.postgresql'</code>, <code>'django.db.backends.mysql'</code>, or <code>'django.db.backends.oracle'</code>.</li>
-                    <li><strong>NAME</strong> – The name of your database. In case of using SQLite, a file will be created as  database on your PC; in that case, NAME should be the full absolute path, including filename, of that file. The default value, <strong>BASE_DIR / <code>'db.sqlite3'</code></strong>, will store the file in your project directory.</li>
-                </ul>
-                <p>If you are not using SQLite as your database, additional settings such as <strong>USER, PASSWORD</strong>, and <strong>HOST</strong> are mandatory to add.</p>
-
-                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />If you’re using a database besides SQLite, then create a new database in your intended database server. Do that with <strong>“CREATE DATABASE database_name;”</strong> within your database’s interactive prompt.</div>
-                <p></p>
-                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />Also make sure that the database user provided in <code>mysite/settings.py</code> has <em>“create database”</em> privileges.</div>
-                <p></p>
+                
                 <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />If you’re using SQLite, you don’t need to create anything beforehand - the database file will be created automatically when it is needed.</div>
                 <p></p>
                 <p>By default, INSTALLED_APPS contains the following apps, all of which come with Django:</p>
@@ -71,7 +61,60 @@
                 <div class="highlight">
                     <pre class="prettyprint">$ python manage.py migrate </pre>
                 </div>
-                <p>The migrate command looks at the INSTALLED_APPS setting and creates any necessary database tables according to the database settings in your mysite/settings.py file and the database migrations shipped with the app (we’ll cover those later). You’ll see a message for each migration it applies. If you’re interested, run the command-line client for your database and type \dt <strong>(PostgreSQL)</strong>, SHOW TABLES; <strong>(MariaDB, MySQL)</strong>, .schema <stron>(SQLite)</stron>, or SELECT TABLE_NAME FROM USER_TABLES; <strong>(Oracle)</strong> to display the tables Django created.</p>
+                <p>The migrate command looks at the INSTALLED_APPS setting and creates any necessary database tables according to the database settings in your mysite/settings.py file and the database migrations shipped with the app (we’ll cover those later). You’ll see a message for each migration it applies. If you’re interested.</p>
+                <p><strong>What is Database?</strong></p>
+                <p>A database is a collection of information(like Student information) that is organized so that it can be easily accessed, managed and updated. Computer databases typically contain aggregations of data records, containing information about sales transactions or interactions with specific customers.</p>
+                <p>Type of Databases</p>
+                <ul>
+                    <li>Relational database.</li>
+                    <li>Distributed database.</li>
+                    <li>Cloud database.</li>
+                    <li>NoSQL database.</li>
+                    <li>Object-oriented database.</li>
+                    <li>Graph database.</li>
+                </ul>
+                <p><strong>What is Database Table?</strong></p>
+                <p>A database consists of one or more tables and each table is made up of rows and columns.  If you think of a table as a grid, the column go from left to right across the grid and each entry of data is listed down as a row.</p>
+                <p>Below is the structure of a simple <b>Student Table</b></p>
+                <table border="1">
+                    <thead>
+                        <th>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Student Class</th>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Student 1</td>
+                            <td>Class 1</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>Student 2</td>
+                            <td>Class 2</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>Student 3</td>
+                            <td>Class 3</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p></p>
+                <p><strong>What is Database Relations?</strong></p>
+                <p>A relationship is established between two tables with the help of Forign Key and Primary key. This is the basic concept behind the term relational database.</p>
+                <p><strong>Types of Relations?</strong></p>
+                <ul>
+                    <li>One to One.</li>
+                    <li>One to Many.</li>
+                    <li>Many to Many.</li>
+                </ul>
+                <p>We will create two tables <b>Category</b> and <b>Item</b> with realtion <b>One to Many</b> in the next lecture.</p>
             </div>
         </main>
     </div>
