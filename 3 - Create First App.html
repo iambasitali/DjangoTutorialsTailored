@@ -36,12 +36,12 @@
                 <p>You can execute the startapp command through the manage.py file for creating an app:</p>
 
                 <div class="highlight">
-                    <pre class="prettyprint">$ python manage.py startapp <span class="o">&lt;appname&gt;</span></pre>
+                    <pre class="prettyprint">(venv) $ python manage.py startapp <span class="o">&lt;appname&gt;</span></pre>
                 </div>
                 <p>The startapp command create a default folder structure for a Django app. This tutorial uses todo_app as the
                     name for the app:</p>
                 <div class="highlight">
-                    <pre class="prettyprint">$ python manage.py startapp <em>todo_app</em></pre>
+                    <pre class="prettyprint">(venv) $ python manage.py startapp <em>todo_app</em></pre>
                 </div>
 
                 <p>Once the app is created using startapp command, you’ll see that another folder is added to your Django folder structure.</p>    
@@ -59,7 +59,7 @@
                     <li><code>views.py</code>: Most of the code logic need to be write in this File as it act like controller of whole application.</li>
                 </ul>
                 <div class="alert-primary p-2 challenge"><span class="note_icon"><i class="icon icon-bolt-4"></i></span> <strong>Important!</strong><br />If Django is not aware about todo_app, these steps we do later won’t work. So add <code>'todo_app'</code> to INSTALLED_APPS. The settings module will be in <code>todo/settings.py</code>.<br>
-                    <br><pre class="prettyprint"><strong>INSTALLED_APPS = [</strong><br>'myapi.apps.MyapiConfig',</pre>
+                    <br><pre class="prettyprint"><strong>INSTALLED_APPS = [</strong><br>'todo_app',</pre>
                     <p>... # Leave all the other INSTALLED_APPS</p>
                     <pre class="prettyprint"><strong>]</strong></pre>
                 </div>

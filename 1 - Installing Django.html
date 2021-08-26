@@ -45,6 +45,8 @@
                     <pre class="prettyprint"><pre class="prettyprint">C:\> python --version<br>Python 3.9.6</pre></pre>
                 </div>
                 <p>This is the version which I am currently using in my local PC.</p>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />On Mac or Linux you have to use python3 --version.</div>
+                <p></p>
                 <p><strong>Python2 or Python3?</strong></p>
                 <p>Currently python is upto 3+ and I will prefer to use Python 3.7 because it is very latest version of python.</p>
                 <p><strong>Virtual Envirnment:</strong></p>
@@ -57,30 +59,48 @@
                 <div class="highlight">
                     <pre class="prettyprint"><pre class="prettyprint">/venv<br>  Include<br>  Lib<br>  Scripts<br>  pyvenv.cfg</pre></pre>
                 </div>
+                <p>You can navigate to folders with the below commands, below is the command to switch to the child folder.</p>
+                <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">$ cd venv</pre></pre>
+                </div>
+                <p>Below is the command to switch back to parent folder.</p>
+                <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">$ cd ..</pre></pre>
+                </div>
                 <p>Below is the command to activate the virtual envirnment before installing Django. We have to just go to Script folder and run the below command.</p>
                 
                 <div class="highlight">
                     <pre class="prettyprint"><pre class="prettyprint">$ \venv\Scripts> activate</pre></pre>
                 </div>
+                <p>When you will activate venv it will look like as mentioned below</p>
+                <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">(venv) $ \venv\Scripts></pre></pre>
+                </div>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />On Mac or Linux you have to use "source venv/bin/activate" to activate virtual environment.</div>
+                <p></p>
                 <p><strong>Install Django:</strong></p>
                 <p>You've got two ways to install django on your system.</p>
                 <p>1: Install the latest release. For that run the following command:</p>
                 <div class="highlight">
-                    <pre class="prettyprint">$ pip install django</pre>
+                    <pre class="prettyprint">(venv) $ pip install django</pre>
                 </div>
                 <p>2: Install specific version of django. For example if you want to install release version 2.2.0 run the following command:</p>
                 <div class="highlight">
-                    <pre class="prettyprint">$ pip install django==2.2.0</pre>
+                    <pre class="prettyprint">(venv) $ pip install django==2.2.0</pre>
                 </div>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />On Mac or Linux instead of pip you have to use pip3.</div>
+                <p></p>
                 <p><strong>Verify Django Installation:</strong></p>
                 <p>To verify that Django can be seen by Python, type python from your shell. Then at the Python prompt, try to import Django:</p>
                 <div class="highlight">
-                    <pre class="prettyprint">$ python -m django --version</pre>
+                    <pre class="prettyprint">(venv) $ python -m django --version</pre>
                 </div>
                 <p>If it will show the Django version as mentioned below, it means Django is installed successfully otherwise Djanog is not installed.</p>
                 <div class="highlight">
-                    <pre class="prettyprint">C:\> python -m django --version<br>3.2.6</pre>
+                    <pre class="prettyprint">(venv) python -m django --version<br>3.2.6</pre>
                 </div>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />On Mac or Linux instead of python you have to use python3.</div>
+                <p></p>
             </div>
         </main>
     </div>

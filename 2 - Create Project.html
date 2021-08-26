@@ -39,13 +39,15 @@
                 </ul>
                 <p>First thing to make sure that you have Django installed on your system. By running the following command in a shell prompt, you can confirm either Django installed or not along with version specified.</p>
                 <div class="highlight">
-                    <pre class="prettyprint">$ python -m django --version</pre>
+                    <pre class="prettyprint">(venv) $ python -m django --version</pre>
                 </div>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />In all of our lesson we will be giving examples of windows. So, on Mac and Linux instead of pip you have to use pip3 and instead of python you have to use python3.</div>
+                <p></p>
                 <p>If Django is installed, an output of the installed version will be displayed. If it isn’t, an error message will occur on screen stating  “No module named django”.</p>
                 <p>If you are using Django for the first time, you’ll have to pay attention on some initial setup. Specifically, you’ll need to auto-generate some code that initiate a Django project – a collection of settings for an instance of Django, including database configuration, initial migrations, Django-specific options and apps related settings. 
                 </p>
                 <div class="highlight">
-                    <pre class="prettyprint">$ django-admin startproject todo</pre>
+                    <pre class="prettyprint">(venv) $ django-admin startproject todo</pre>
                 </div>
                 <p>The above-mentioned command will create a folder named "todo" in your current directory.</p>
                 <p>Let’s look at the tree structure of todo directory:</p>
@@ -66,7 +68,7 @@
                 <p><strong>The development server</strong></p>
                 <p>Let’s verify your Django project works. To start the server move to parent directory(todo) and run the following commands:</p>
                 <div class="highlight">
-                    <pre class="prettyprint">$ python manage.py runservers</pre>
+                    <pre class="prettyprint">(venv) $ python manage.py runservers</pre>
                 </div>
                 <p>You’ll see the following output on the command line:</p>
                 <div class="highlight">
