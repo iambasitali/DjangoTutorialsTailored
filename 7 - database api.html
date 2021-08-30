@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+    <body>
+         <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+
+        <h4 class="text-muted"><u>Database API:</u></h4>
+            <p>Now let us interact with Django shell and try to understand different Database APIs provided
+                            by django. To start django shell use following command</p>
+                             <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">python manage.py shell</pre></pre>
+                </div>
+                 <p>We’re using this instead of simply typing “python”, because manage.py sets the
+                        DJANGO_SETTINGS_MODULE environment variable, which gives Django the Python import path to
+                        your todo/settings.py file.</p>
+                    <p>Once you’re in the shell, explore the database API:</p>
+                          <div class="highlight">
+                    <pre class="prettyprint">>>> from todo_app.models import Category, Item # import the model classes that we created in Creating Model Lesson<br/># Till now we haven't created any Categories yet so,<br/>>>> Category.objects.all()<br/>&ltQuerySet []&gt<br/><br/># Create a new Category<br/># To do so we need to provide datetime in pub_date field.<br/># For that we need to import timezone.<br/># With timezone.now() we can provide datetime object for the pub_date field.<br/>>>> from django.utils import timezone<br/>>>> c = Category(name="Shopping", pub_date=timezone.now()<br/><br/># To save the python QuerySet object into the database we need to expicitly call .save() method on the object. Like:<br/>c.save()<br/><br/># Now it has id that is assigned to this object in database<br/>c.id<br/>1<br/><br/># You can also access the other field values like we accessed the id:<br/>c.name<br/>'Shopping'<br/>c.pub_date<br/>datetime.datetime(2021, 8, 19, 20, 58, 18, 108288, tzinfo=&ltUTC&gt)<br/><br/># You can also change the field value saved in database. But after that you need to explicitly call .save() method on the object again.<br/>c.name = 'Grocery'<br/>c.save()<br/><br/># Now to get all the Category objects present in database we can use .object.all() on Category class<br/>Category.object.all()<br/>&ltQuerySet [&ltCategory&gt: Category object (1)&gt]&gt<br/>
+                    </pre>
+                </div>
+                   <p>As you can see &ltCategory&gt: Category object (1)&gt is not readable and also doesn't look
+                        quite nice to present like this way. So to solve this problem we need to define __str__()
+                        function in our model classes.
+                    </p>
+                     <div class="highlight">
+                    <pre class="prettyprint  pre-highlight ">todo_app/models.py</pre>
+                    <pre class="prettyprint">from django.db import models<br/><br/>class Category(models.Model):<br/># Previous Code<br/>def __str__(self):<br/>return self.name<br/><br/>class Item(models.Model):<br/># Previous Code<br/>def __str__(self)<br/>return self.text<br/>
+                    </pre>
+                </div>
+                <p>Now if you start shell and get all Category objects you will see something like below:</p>
+                 <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">$>>> from todo_app.models import Category, Item # import the model classes that we created in Creating Model Lesson<br/>>>> Category.objects.all()<br/>&ltQuerySet [&ltCategory: Shopping&gt]&gt
+                    </pre></pre>
+                </div>
+
+    </main>
+</div>
+
+
+    </body>
+    </html>

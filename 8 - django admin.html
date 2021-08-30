@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+ <h4 class="text-muted"><u>Django Admin:</u></h4>
+  <p>Django provide free builtin Administration module which can be used to perform CRUD(Create,
+                        Retrieve, Update and Delete) operation on all the models in our project. Django admin uses
+                        auth_user model by default to perform authentication of users and uses auth_permissions model to
+                        check logged users permission.</p>
+                        <p>To have a look at the admin site run the web server by running the following command in terminal:
+                    </p>
+                       <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">python manage.py runserver</pre></pre>
+                </div>
+                      <p>After the command is executed successfully hit localhost:8000/admin/ in your favorite browser.
+                        After that you'll see the following interface:</p>
+                         <div style="text-align: center">
+                        <img src="./assets/images/admin_login_page.png">
+                    </div>
+                     <p>Here you have to provide the login credentials. To create those credentials we have to run
+                        following command in terminal:</p>
+                           <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">python manage.py createsuperuser</pre></pre>
+                </div>
+                <p>Then the terminal will ask you to enter username of the superuser:</p>
+                   <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">Username: &ltYour superuser name&gt</pre></pre>
+                </div>
+               <p>Then the terminal will ask you to enter email for the superuser:</p>
+                   <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">Email address: &ltYour superuser Email&gt</pre></pre>
+                </div>
+                <p>Then finally the terminal will ask you to enter password and would need you to confirm the
+                        password of the superuser:</p>
+                           <div class="highlight">
+                    <pre class="prettyprint"><pre class="prettyprint">Password: ********<br/>Password (again): ********<br/>Superuser created successfully.<br/>
+                    </pre></pre>
+                </div>
+                <p>Now log in using the credentials you just created. After logging in you will see django admin 
+                        index page.</p>
+                          <div style="text-align: center">
+                        <img src="./assets/images/dajngo_admin_index_page.png">
+                    </div>
+                      <p>Now, here you can see and play with different default models provided by django you cna click on
+                        any model and see all the objects in that model. By click on Users you can see the superuser you
+                        just created is also listed there.</p>
+                    <p>But wait a minute we are unable to see the models that we created in our todo_app. To list those
+                        models in admin as well we need to register and tell the django admin that there are some custom
+                        models too for you to list in admin. Todo that we need to edit the admin.py file in our todo_app
+                        folder like below:</p>
+                           <div class="highlight">
+                            <pre class="prettyprint pre-highlight">todo_app/admin.py</pre>
+                    <pre class="prettyprint">from django.contrib import admin<br/><br/>from .models import Category, Item<br/><br/>admin.site.register(Category)<br/>admin.site.register(Item)<br/>
+                    </pre>
+                </div>
+                <p>Then you'll be able to see the models you created listed under TODO_APP like below:</p>
+                 <div style="text-align: center">
+                        <img src="./assets/images/django_admin_todo_app_models.png">
+                    </div>
+                     <p>Now as you can see the models we created are list. Click on Categorys you will see the list of
+                        all the objects of this model. Currenlty you will be seeing only one object that we create in
+                        our last lesson.</p>
+                         <div style="text-align: center">
+                        <img src="./assets/images/django_admin_model_objects_listing.png">
+                    </div>
+                     <p>Click on Shopping and you will get a form that can be used to save/edit all the fields in that
+                        model.</p>
+                        <div style="text-align: center">
+                        <img src="./assets/images/django_object_edit_form.png">
+                    </div>
+                    <p>Things worth noticing here:</p>
+                     <ul class="body-ul">
+                        <li>The form is automatically generated from the Category model.</li>
+                        <li>The different model field types (DateTimeField, CharField) correspond to the appropriate
+                            HTML input widget. Each type of field knows how to display itself in the Django admin.</li>
+                        <li>Each DateTimeField gets free JavaScript shortcuts. Dates get a “Today” shortcut and calendar
+                            popup, and times get a “Now” shortcut and a convenient popup that lists commonly entered
+                            times.</li>
+                    </ul>
+                     <p>The bottom part of the page gives you a couple of options:</p>
+                       <ul class="body-ul">
+                        <li>Save – Saves changes and returns to the change-list page for this type of object.</li>
+                        <li>Save and continue editing – Saves changes and reloads the admin page for this object.</li>
+                        <li>Save and add another – Saves changes and loads a new, blank form for this type of object.
+                        </li>
+                        <li>Delete – Displays a delete confirmation page.</li>
+                    </ul>
+                    <div style="text-align: center">
+                        <img src="./assets/images/django_object_save_buttons.png">
+                    </div>
+        </main>
+    </div>
+</body>
+</html>

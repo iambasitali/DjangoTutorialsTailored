@@ -31,12 +31,10 @@
             <div>
                 <p><strong>Models:</strong></p>
                 <p>Now let's have a look at models – essentially, your database structuer, with additional metadata.</p>
-                <p><strong>Philosophy:</strong> A model is the single, architecture of your data. It contains the necessary fields and built-in functions of the data you’re storing. The goal of Django model is to have all you database structure at one place and used it through application.</p>
-                <p>In our todo app, we’ll create two models: Categories and Items. A Category has a name and a publication date. An item has two fields: the text and the category an item belongs to. Each Item is associated with a Category.</p>
-                <p>These concepts are represented by Python classes. Edit the todo_app/models.py file, so it looks like this:</p>
-
-
-                <p>Django offer a variety of Database for connectivity. Django officially supports the below databases:</p>
+                <p><strong>Philosophy:</strong></p>
+                <p>A model is the single architecture of your data (This is basically structure of a database table). It contains the necessary fields and built-in functions of the data you’re storing. The goal of Django model is to have all you database structure at one place and used it through application.</p>
+                <p>In our TODO app, we will create two models <code>Categories</code> and <code>Items</code>. A Category has a name and a pub_date columns and Item has text and category columns. Each Item is associated with a Category.</p>
+                <p>These concepts are represented by Python Classes, edit the todo_app/models.py file, so it looks like this:</p>
                 <div class="highlight">
                     <pre class="prettyprint">from django.db import models<br><br>class Category(models.Model):<br>      name = models.CharField(max_length=200)<br>      pub_date = models.DateTimeField('date published')<br><br>class Item(models.Model):<br>      category = models.ForeignKey(Category, on_delete=models.CASCADE)<br>      text = models.CharField(max_length=200) </pre>
                 </div>
