@@ -29,29 +29,64 @@
             <h4 class="text-muted"><u>Creating Models</u></h4>
             <p></p>
             <div>
-                <p><strong>Models:</strong></p>
-                <p>Now let's have a look at models – essentially, your database structuer, with additional metadata.</p>
-                <p><strong>Philosophy:</strong></p>
-                <p>A model is the single architecture of your data (This is basically structure of a database table). It contains the necessary fields and built-in functions of the data you’re storing. The goal of Django model is to have all you database structure at one place and used it through application.</p>
-                <p>In our TODO app, we will create two models <code>Categories</code> and <code>Items</code>. A Category has a name and a pub_date columns and Item has text and category columns. Each Item is associated with a Category.</p>
+                <p>In this tutorial, we will create the Django models that define the fields and behaviors of the TODO application data that we will be storing. These models map the data from your Django application to the database. It is what Django uses to generate the database tables via their object relational mapping ORM API.</p>
+                <p>In our TODO app, we will create two models <code>Category</code> and <code>Item</code>.
+                <p>First we need to open and edit the models.py file so that it contains the code for generating a Category model. A Category model contains the following database fields:</p>
+                <ul>
+                    <li><code>name</code> - The name of the Category.</li>
+                    <li><code>pub_date</code> - The publish date of Category. </li>
+                </ul>
+                <p>Second we need to add a <code>Item</code> model in the models.py file so that it contains the code for generating a Item model. A Item model contains the following database fields:</p>
+                <ul>
+                    <li><code>category</code> - ForeignKey to link with parent table.</li>
+                    <li><code>text</code> - The name of Item. </li>
+                </ul>
+
                 <p>These concepts are represented by Python Classes, edit the todo_app/models.py file, so it looks like this:</p>
+                
                 <div class="highlight">
                     <pre class="prettyprint">from django.db import models<br><br>class Category(models.Model):<br>      name = models.CharField(max_length=200)<br>      pub_date = models.DateTimeField('date published')<br><br>class Item(models.Model):<br>      category = models.ForeignKey(Category, on_delete=models.CASCADE)<br>      text = models.CharField(max_length=200) </pre>
                 </div>
 
-                <p>Here, each model is represented by a class that subclasses <code>django.db.models.Model</code>. Each model has a number of class variables, each of which represents a database field in the model.</p>
-
-                <p>Each field is represented by an instance of a Field class <strong>– e.g., CharField for character fields and DateTimeField for datetimes</strong>. This tells Django what type of data each field holds.</p>
-
-                <p>The name of each Field instance <strong>(e.g. text or pub_date)</strong> is the field’s name, in machine-friendly format. You’ll use this value in your Python code, and your database will use it as the column name</p>
-
-                <p>You can use an optional first positional argument to a Field to designate a human-readable name. That’s used in a couple of introspective parts of Django, and it doubles as documentation. If this field isn’t provided, Django will use the machine-readable name. In this example, we’ve only defined a human-readable name for <code>Category.pub_date</code>. For all other fields in this model, the field’s machine-readable name will suffice as its human-readable name.</p>
-
-                <p>Some Field classes have required arguments. CharField, for example, requires that you give it a max_length. That’s used not only in the database schema, but in validation, as we’ll soon see.</p>
-
-                <p>A Field can also have various optional arguments; in this case, we’ve set the default value of votes to 0.</p>
-
-                <p>Finally, note a relationship is defined, using ForeignKey. That tells Django each Item is related to a single Category. Django supports all the common database relationships: <strong>many-to-one</strong>, <strong>many-to-many</strong>, and <strong>one-to-one</strong>.</p>
+                <p>Here are some famous data types of Models </p>
+                <table border="1" style="height: 189px; width: 70.8201%; border-collapse: collapse; background-color: #efefef;">
+                    <thead>
+                        <th>Data Type</th>
+                        <th>Django model type</th>
+                    </thead>
+                    <tbody>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">Binary</td>
+                            <td style="width: 33.3333%; height: 24px;">models.BinaryField()</td>
+                        </tr>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">Boolean</td>
+                            <td style="width: 33.3333%; height: 24px;">models.BooleanField()</td>
+                        </tr>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">Date/time</td>
+                            <td style="width: 33.3333%; height: 24px;">models.DateTimeField()</td>
+                        </tr>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">Number</td>
+                            <td style="width: 33.3333%; height: 24px;">models.AutoField()</td>
+                        </tr>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">Number</td>
+                            <td style="width: 33.3333%; height: 24px;">models.IntegerField()</td>
+                        </tr>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">Text</td>
+                            <td style="width: 33.3333%; height: 24px;">models.TextField()</td>
+                        </tr>
+                        <tr style="height: 24px;">
+                            <td style="width: 33.3333%; height: 24px;">Char</td>
+                            <td style="width: 33.3333%; height: 24px;">models.CharField()</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <p>Finally a relationship is defined using ForeignKey. That tells Django each Item is related to a single Category. Django supports all the common database relationships: <strong>many-to-one</strong>, <strong>many-to-many</strong>, and <strong>one-to-one</strong>.</p>
             </div>
         </main>
     </div>

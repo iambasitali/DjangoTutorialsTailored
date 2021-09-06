@@ -23,96 +23,59 @@
 <body onload="PR.prettyPrint()" cz-shortcut-listen="true">
     <div class="container">
         <main class="col-12 p-3 bd-content" role="main">
-        <h4 class="text-muted"><u>Activating Models</u></h4>
-        <p>The small model code that we wrote in last lesson gives Django a lot of information, Django can do the following by this code.</p>
-            <ul>
-                <li>Create a database schema (CREATE TABLE statements) for this app.</li>
-                <li>Create a Python database-access API for accessing Category and Item objects.</li>
-            </ul>
-            <p>But first we need to tell our project that the todo_app app is installed.</p>
-            <p>To include the app in our project, we need to add a reference to its configuration Class in the INSTALLED_APPS setting. The TodoAppConfig class is in the todo_app/apps.py file, so its dotted path is 'todo_app.apps.TodoAppConfig'. Edit the todo/settings.py file and add that dotted path to the INSTALLED_APPS setting. It’ll look like this:</p>
+            <h4 class="text-muted"><u>Activating Models</u></h4>
+            <p>The two models that we created in last lecture will create two tables in the Database having the columns which I mentioned in the previous lecture.</p>
+            <p>But first we need to install the app <code>todo_app</code> and then we have to include the app in our project. Edit the todo/settings.py file and add that dotted path <code>'todo_app.apps.TodoAppConfig'</code> to the INSTALLED_APPS setting. It will look like this:</p>
             <div class="highlight">
                 <pre class="prettyprint pre-highlight">todo/settings.py</pre>
                 <pre class="prettyprint">INSTALLED_APPS [<br/>'todo_app.apps.TodoAppConfig'<br />'django.contrib.admin'<br />'django.contrib.auth'<br />'django.contrib.contenttypes'<br/>'django.contrib.sessions'<br/>'django.contrib.messages'<br/>'django.contrib.staticfiles'<br/>]
                 </pre>
             </div>
-            <p>Now we have have included the TODO app in setting.py.</p>
             <p>Let’s run another command to create migrations.</p>
             <div class="highlight">
                 <pre class="prettyprint">(venv) $ python manage.py makemigrations todo_app</pre>
             </div>
             <p>You should see something similar to the following:</p>
             <div class="highlight">
-                <pre class="prettyprint">migrations for 'todo_app' <br/>todo_app/migrations/0001_initial.py <br/>- Create model Categorys <br/>- Create model Items <br/>
+                <pre class="prettyprint">migrations for 'todo_app' <br/>todo_app/migrations/0001_initial.py <br/>- Create model Category <br/>- Create model Item <br/>
                     </pre>
             </div>
-                <p>By running makemigrations, you’re telling Django that you’ve made some changes to your models
-                        (in this case, you’ve made new ones) and that you’d like the changes to be stored as a
-                        migration.</p>
-                    <p>Migrations are how Django stores changes to your models (and thus your database schema) - they’re
-                        files on disk. You can read the migration for your new model if you like; it’s the file
-                        todo_app/migrations/0001_initial.py. Don’t worry, you’re not expected to read them every time
-                        Django makes one, but they’re designed to be human-editable in case you want to manually tweak
-                        how Django changes things.</p>
-                    <p>There’s a command that will run the migrations for you and manage your database schema
-                        automatically - that’s called migrate, and we’ll come to it in a moment - but first, let’s see
-                        what SQL that migration would run. The sqlmigrate command takes migration names and returns
-                        their SQL:</p>
+            <p>By running this command Django will create migration as shown in the above command.</p>
+            <p>Migrations are Django way of track the changes you have made in your models (Add/Edit a field, Deleting a model) into your database schema. The file will create in the specific location todo_app/migrations/0001_initial.py. These files are editable so we can also edit these files manuly but this is not good approac, so we have to follow with command line.</p>
+            <p>There is a command that will run the migrations and manage your database schema automatically.</p>
 
-  <div class="highlight">
-                    <pre class="prettyprint">python manage.py sqlmigrate todo_app 0001
-                       </pre>
-                </div>
-                 <p>You should see something similar to the following (we’ve reformatted it for readability):</p>
+            <div class="highlight">
+                <pre class="prettyprint">(venv) $ python manage.py sqlmigrate todo_app 0001</pre>
+            </div>
+            <p>This command will return a SQL query which function it has performed with DB. In our case its creating two tables so it will return the SQL code to create a tables.</p>
 
-<div class="highlight">
-                    <pre class="prettyprint">BEGIN<br/>--<br/>--<br/>--<br/>CREATE TABLE "todo_app_category"<br>"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,<br/>"name" varchar(200) NOT NULL,<br/>"pub_date" datetime NOT NULL<br/>);<br/>CREATE INDEX "todo_app_item_category_id_1e571fc3" ON "todo_app_item" ("category_id");<br/>COMMIT;
-                       </pre>
-                </div>
+            <div class="highlight">
+                <pre class="prettyprint">BEGIN<br/>--<br/>--<br/>--<br/>CREATE TABLE "todo_app_category"<br>"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,<br/>"name" varchar(200) NOT NULL,<br/>"pub_date" datetime NOT NULL<br/>);<br/>CREATE INDEX "todo_app_item_category_id_1e571fc3" ON "todo_app_item" ("category_id");<br/>COMMIT;</pre>
+            </div>
                  <p>Note the following:</p>
                     <ul class="body-ul">
-                        <li>The exact output will vary depending on the database you are using. The example above is generated for SQLite.</li>
-                        <li>Table names are automatically generated by combining the name of the app (todo_app) and the
-                            lowercase name of the model – category and item. (You can override this behavior.)</li>
-                        <li>Primary keys (IDs) are added automatically. (You can override this, too.)</li>
-                        <li>By convention, Django appends "_id" to the foreign key field name. (Yes, you can override
-                            this, as well.)</li>
-                        <li>The foreign key relationship is made explicit by a FOREIGN KEY constraint. Don’t worry about
-                            the DEFERRABLE parts; it’s telling SQLite to not enforce the foreign key until the end of
-                            the transaction.</li>
-                        <li>It’s tailored to the database you’re using, so database-specific field types such as
-                            auto_increment (MySQL), serial (PostgreSQL), or integer primary key autoincrement (SQLite)
-                            are handled for you automatically. Same goes for the quoting of field names – e.g.,
-                            using double quotes or single quotes.</li>
-                        <li>The sqlmigrate command doesn’t actually run the migration on your database - instead, it
-                            prints it to the screen so that you can see what SQL Django thinks is required. It’s useful
-                            for checking what Django is going to do or if you have database administrators who require
-                            SQL scripts for changes.</li>
+                        <li>The exact output will vary and depends on the models. The example above is generated for SQLite.</li>
+                        <li>Table names are automatically generated by combining the name of the app and the name of the model (We can overwrite this behaviour).</li>
+                        <li>Primary key is added automatically. (We can overwrite this behaviour)</li>
+                        <li>By convention, Django appends <code>_id</code> to the foreign key field name. (We can overwrite this functionality as well)</li>
+                        <li>The foreign key relationship is made by a FOREIGN KEY constraint as we used in the above <code>Item</code> Model.</li>
+                        <li>Database specific field types like integer primary key auto-increment (SQLite) are handled automatically.</li>
+                        <li>The migrate command does not actually run the migrations on your database - instead, it prints SQL to the cmd screen so that you can see SQL and will make if needs any changes.</li>
                     </ul>
-                    <p>If you’re interested, you can also run python manage.py check; this checks for any problems in
-                        your project without making migrations or touching the database.</p>
+                    <p>If you are interested to check whether the project is error free or not, then type the below command in cmd. This check will be without making migrations or touching the database.</p>
                     <p>Now, run migrate again to create those model tables in your database:</p>
 
-<div class="highlight">
-                    <pre class="prettyprint">python manage.py migrate<br/>Operations to perform:<br/>Apply all migrations: admin, auth, contenttypes, todo_app, sessions<br/>Running migrations:<br/>Rendering model states... DONE<br>Applying todo_app.0001_initial... OK
-                       </pre>
+                <div class="highlight">
+                    <pre class="prettyprint">(venv) $ python manage.py migrate<br/>Operations to perform:<br/>Apply all migrations: admin, auth, contenttypes, todo_app, sessions<br/>Running migrations:<br/>Rendering model states... DONE<br>Applying todo_app.0001_initial... OK</pre>
                 </div>
-                   <p>The migrate command takes all the migrations that haven’t been applied (Django tracks which ones
-                        are applied using a special table in your database called django_migrations) and runs them
-                        against your database - essentially, synchronizing the changes you made to your models with the
-                        schema in the database.</p>
-                    <p>Migrations are very powerful and let you change your models over time, as you develop your
-                        project, without the need to delete your database or tables and make new ones - it specializes
-                        in upgrading your database live, without losing data. We’ll cover them in more depth in a later
-                        part of the tutorial, but for now, remember the three-step guide to making model changes:</p>
+                   <p>The migrate command takes all the migrations that haven’t been applied and will touch the DB schema.</p>
+                    <p>Migrations are very powerful and let you change your models as per your requirements, for example we lost our DB but in Models we have DB schema we can recreate DB with in few seconds.</p>
+                    <p>For now just remember these three steps of Migrations:</p>
                     <ul class="body-ul">
-                        <li>Change your models (in models.py).</li>
+                        <li>Add/Edit your models (in models.py).</li>
                         <li>Run python manage.py makemigrations to create migrations for those changes</li>
                         <li>Run python manage.py migrate to apply those changes to the database.</li>
                     </ul>
-                    <p>The reason that there are separate commands to make and apply migrations is because you’ll commit
-                        migrations to your version control system and ship them with your app; they not only make your
-                        development easier, they’re also usable by other developers and in production.</p>
 </main>
 </div>
 
