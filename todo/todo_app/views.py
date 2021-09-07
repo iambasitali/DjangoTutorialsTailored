@@ -8,7 +8,7 @@ from .models import Category
 
 
 def index(request):
-    list_of_category_objects = Category.objects.all()
+    list_of_category_objects = Category.objects.filter()
     return render(request, 'index.html', {'categories': list_of_category_objects})
 
 

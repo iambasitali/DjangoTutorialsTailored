@@ -33,7 +33,7 @@
         <p>Once you are in the shell, explore the database API:</p>
         <p>Import the model classes that we created in Creating Model Lesson, till now we have not created any Categories yet so below screen will work as mentioned.</p>
         <div class="highlight">
-            <pre class="prettyprint">>>> from todo_app.models import Category, Item<br/>>>> Category.objects.all()<br/>&ltQuerySet []&gt<br/><br/></pre>
+            <pre class="prettyprint">>>> from todo_app.models import Category, Item<br/>>>> Category.objects.filter()<br/>&ltQuerySet []&gt<br/><br/></pre>
         </div>
         <p>Create a new Category so we need to provide datetime in created_at field.</p>
         <div class="highlight">
@@ -41,7 +41,11 @@
         </div>
         <p>Now it has id that is assigned to this object in database and you can get all columns one by one.</p>
         <div class="highlight">
-            <pre class="prettyprint"><br/>>>> c.id<br/>1<br/>>>> c.name<br/>'Shopping'<br/>>>> c.created_at<br/>datetime.datetime(2021, 8, 19, 20, 58, 18, 108288, tzinfo=&ltUTC&gt)<br/>>>> c.name = 'Grocery'<br/>>>> c.save()<br/>>>> Category.object.all()<br/>&ltQuerySet [&ltCategory&gt: Category object (1)&gt]&gt<br/></pre>
+            <pre class="prettyprint"><br/>>>> c.id<br/>1<br/>>>> c.name<br/>'Shopping'<br/>>>> c.created_at = datetime.datetime(2021, 8, 19, 20, 58, 18, 108288, tzinfo=&ltUTC&gt)<br/>>>> c.name = 'Grocery'<br/>>>> c.save()<br/>>>> Category.object.filter()<br/>&ltQuerySet [&ltCategory&gt: Category object (1)&gt]&gt<br/></pre>
+        </div>
+        <p>There is an example to add a item which is depening on the Category where category_id is primary key of Category table which we are using in Item table as foregin key and it will show error if we will add such key which is not created yet in parent table.</p>
+        <div class="highlight">
+            <pre class="prettyprint">>>> from django.utils import timezone<br/>>>> item = Item(category_id = 1 ,name = "Test Item 1", is_completed = True, priority = 3, due_date = datetime.datetime(2021, 8, 19, 20, 58, 18, 108288, tzinfo=<UTC>), is_delete = False,  created_at=timezone.now())<br/>>>> item.save()</pre>
         </div>
         <p>As you can see &ltCategory&gt: Category object (1)&gt is not readable and also doesn't look
             quite nice to present like this way. So to solve this problem we need to define __str__()
@@ -54,7 +58,7 @@
                 </div>
                 <p>Now if you start shell and get all Category objects you will see something like below:</p>
                  <div class="highlight">
-                    <pre class="prettyprint"><pre class="prettyprint">>>> from todo_app.models import Category, Item <br/>>>> Category.objects.all()<br/>&ltQuerySet [&ltCategory: Shopping&gt]&gt
+                    <pre class="prettyprint"><pre class="prettyprint">>>> from todo_app.models import Category, Item <br/>>>> Category.objects.filter()<br/>&ltQuerySet [&ltCategory: Shopping&gt]&gt
                     </pre></pre>
                 </div>
 

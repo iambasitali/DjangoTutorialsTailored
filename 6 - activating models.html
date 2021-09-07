@@ -50,7 +50,7 @@
             <p>This command will return a SQL query which function it has performed with DB. In our case its creating two tables so it will return the SQL code to create a tables.</p>
 
             <div class="highlight">
-                <pre class="prettyprint">BEGIN<br/>--<br/>--<br/>--<br/>CREATE TABLE "todo_app_category"<br>"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,<br/>"name" varchar(200) NOT NULL,<br/>"created_at" datetime NOT NULL<br/>);<br/>CREATE INDEX "todo_app_item_category_id_1e571fc3" ON "todo_app_item" ("category_id");<br/>COMMIT;</pre>
+                <pre class="prettyprint">BEGIN<br/>--<br/>--<br/>--<br/>CREATE TABLE "todo_app_category"<br>"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,<br/>"name" varchar(200) NOT NULL,<br/>"is_delete" bit NOT NULL,<br/>"created_at" datetime NOT NULL,<br/>"updated_at" datetime NOT NULL<br/>);<br/>CREATE INDEX "todo_app_item_category_id_1e571fc3" ON "todo_app_item" ("category_id");<br/>COMMIT;</pre>
             </div>
                  <p>Note the following:</p>
                     <ul class="body-ul">

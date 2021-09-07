@@ -43,7 +43,8 @@
                     <li><code>category</code> - This will be ForeignKey to link with Category table</li>
                     <li><code>name</code> - This will be CharField </li>
                     <li><code>is_completed</code> - This will be BooleanField </li>
-                    <li><code>priority</code> - This will be CharField </li>
+                    <li><code>priority</code> - This will be IntegerField (This will be a number from 1-5 e.g 1 for very high priority and 5 for very low priority) </li>
+                    <li><code>due_date</code> - This will be DateTimeField </li>
                     <li><code>is_delete</code> - This will be BooleanField </li>
                     <li><code>created_at</code> - This will be DateTimeField </li>
                     <li><code>modified_at</code> - This will be DateTimeField </li>
@@ -52,9 +53,9 @@
                 <p>These concepts are represented by Python Classes, edit the todo_app/models.py file, so it looks like this:</p>
                 
                 <div class="highlight">
-                    <pre class="prettyprint">from django.db import models<br><br>class Category(models.Model):<br>    name = models.CharField(max_length=200)<br>    is_delete = models.BooleanField(default=False)<br>    created_at = models.DateTimeField(auto_now_add=True,null=True)<br>    modified_at = models.DateTimeField(auto_now_add=True,null=True)<br><br>class Item(models.Model):<br>    category = models.ForeignKey(Category, on_delete=models.CASCADE)<br>    name = models.CharField(max_length=200)<br>    is_completed = models.BooleanField(default=False)<br>    priority = models.CharField(max_length=50)<br>    is_delete = models.BooleanField(default=False)<br>    created_at = models.DateTimeField(auto_now_add=True,null=True)<br>    modified_at = models.DateTimeField(auto_now_add=True,null=True) </pre>
+                    <pre class="prettyprint">from django.db import models<br><br>class Category(models.Model):<br>    name = models.CharField(max_length=200)<br>    is_delete = models.BooleanField(default=False)<br>    created_at = models.DateTimeField(auto_now_add=True,null=True)<br>    modified_at = models.DateTimeField(auto_now_add=True,null=True)<br><br>class Item(models.Model):<br>    category = models.ForeignKey(Category, on_delete=models.CASCADE)<br>    name = models.CharField(max_length=200)<br>    is_completed = models.BooleanField(default=False)<br>    priority = models.IntegerField(max_length=50)<br>    due_date = models.DateTimeField(auto_now_add=True,null=True)<br>    is_delete = models.BooleanField(default=False)<br>    created_at = models.DateTimeField(auto_now_add=True,null=True)<br>    modified_at = models.DateTimeField(auto_now_add=True,null=True) </pre>
                 </div>
-                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />The <b>on_delete=models.CASCADE</b> tells Django what to do with the model which has relationship with this model. The meaning of this statement is to delete all the dependent data in other tables which has relationship with that table.</div>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />The <b>on_delete=models.CASCADE</b> means to delete all dependent data in other tables .e.g we have added a category entry "Category: Assignments" in Category table, and further we have added two entries in Item table which are dependent on Category which we recently added "Item 1: Math Assignment", "Item 2: Programming Assignment", when we will delete entry from Category that we have recently added then items will also deleted becasue these items have some dependent data in Category table.</div>
 
                 <p>Here are some famous data types of Models </p>
                 <table border="1" style="height: 189px; width: 70.8201%; border-collapse: collapse; background-color: #efefef;">
