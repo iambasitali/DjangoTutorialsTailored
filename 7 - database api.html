@@ -41,7 +41,7 @@
         </div>
         <p>Now it has id that is assigned to this object in database and you can get all columns one by one.</p>
         <div class="highlight">
-            <pre class="prettyprint"><br/>>>> c.id<br/>1<br/>>>> c.name<br/>'Shopping'<br/>>>> c.created_at = datetime.datetime(2021, 8, 19, 20, 58, 18, 108288, tzinfo=&ltUTC&gt)<br/>>>> c.name = 'Grocery'<br/>>>> c.save()<br/>>>> Category.object.filter()<br/>&ltQuerySet [&ltCategory&gt: Category object (1)&gt]&gt<br/></pre>
+            <pre class="prettyprint"><br/>>>> c.id<br/>1<br/>>>> c.name<br/>'Shopping'<br/>>>> c.created_at = datetime.datetime(2021, 8, 19, 20, 58, 18, 108288, tzinfo=&ltUTC&gt)<br/>>>> c.name = 'Grocery'<br/>>>> c.save()<br/>>>> Category.objects.filter()<br/>&ltQuerySet [&ltCategory&gt: Category object (1)&gt]&gt<br/></pre>
         </div>
         <p>There is an example to add a item which is depening on the Category where category_id is primary key of Category table which we are using in Item table as foregin key and it will show error if we will add such key which is not created yet in parent table.</p>
         <div class="highlight">
