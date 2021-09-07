@@ -1,0 +1,10 @@
+
+*.pyc
+*.idea\*
+todo_app/migrations
+*.xml
+*venv*
+*media
+*web.config
+wfastcgi.py
+
