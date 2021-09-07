@@ -27,7 +27,7 @@
         <h4 class="text-muted"><u>Database API:</u></h4>
         <p>Now let us interact with Django by using shell and try to understand different Database API functions provided by django. To start django shell use following command.</p>
         <div class="highlight">
-            <pre class="prettyprint"><pre class="prettyprint">python manage.py shell</pre></pre>
+            <pre class="prettyprint"><pre class="prettyprint">(venv) $ python manage.py shell</pre></pre>
         </div>
         <p>We are using this instead of simply typing “python”, because manage.py sets the DJANGO_SETTINGS_MODULE environment variable, which gives Django the Python import path to your app todo/settings.py file.</p>
         <p>Once you are in the shell, explore the database API:</p>
@@ -35,13 +35,13 @@
         <div class="highlight">
             <pre class="prettyprint">>>> from todo_app.models import Category, Item<br/>>>> Category.objects.all()<br/>&ltQuerySet []&gt<br/><br/></pre>
         </div>
-        <p>Create a new Category so we need to provide datetime in pub_date field.</p>
+        <p>Create a new Category so we need to provide datetime in created_at field.</p>
         <div class="highlight">
-            <pre class="prettyprint">>>> from django.utils import timezone<br/>>>> c = Category(name="Shopping", pub_date=timezone.now()<br/>>>> c.save()</pre>
+            <pre class="prettyprint">>>> from django.utils import timezone<br/>>>> c = Category(name="Shopping", created_at=timezone.now()<br/>>>> c.save()</pre>
         </div>
         <p>Now it has id that is assigned to this object in database and you can get all columns one by one.</p>
         <div class="highlight">
-            <pre class="prettyprint"><br/>>>> c.id<br/>1<br/>>>> c.name<br/>'Shopping'<br/>>>> c.pub_date<br/>datetime.datetime(2021, 8, 19, 20, 58, 18, 108288, tzinfo=&ltUTC&gt)<br/>>>> c.name = 'Grocery'<br/>>>> c.save()<br/>>>> Category.object.all()<br/>&ltQuerySet [&ltCategory&gt: Category object (1)&gt]&gt<br/></pre>
+            <pre class="prettyprint"><br/>>>> c.id<br/>1<br/>>>> c.name<br/>'Shopping'<br/>>>> c.created_at<br/>datetime.datetime(2021, 8, 19, 20, 58, 18, 108288, tzinfo=&ltUTC&gt)<br/>>>> c.name = 'Grocery'<br/>>>> c.save()<br/>>>> Category.object.all()<br/>&ltQuerySet [&ltCategory&gt: Category object (1)&gt]&gt<br/></pre>
         </div>
         <p>As you can see &ltCategory&gt: Category object (1)&gt is not readable and also doesn't look
             quite nice to present like this way. So to solve this problem we need to define __str__()
@@ -49,12 +49,12 @@
         </p>
                      <div class="highlight">
                     <pre class="prettyprint  pre-highlight ">todo_app/models.py</pre>
-                    <pre class="prettyprint">from django.db import models<br/><br/>class Category(models.Model):<br/># Previous Code<br/>def __str__(self):<br/>return self.name<br/><br/>class Item(models.Model):<br/># Previous Code<br/>def __str__(self)<br/>return self.text<br/>
+                    <pre class="prettyprint">from django.db import models<br/><br/>class Category(models.Model):<br/>    # Previous Code<br/>    def __str__(self):<br/>        return self.name<br/><br/>class Item(models.Model):<br/>    # Previous Code<br/>    def __str__(self)<br/>        return self.text<br/>
                     </pre>
                 </div>
                 <p>Now if you start shell and get all Category objects you will see something like below:</p>
                  <div class="highlight">
-                    <pre class="prettyprint"><pre class="prettyprint">$>>> from todo_app.models import Category, Item # import the model classes that we created in Creating Model Lesson<br/>>>> Category.objects.all()<br/>&ltQuerySet [&ltCategory: Shopping&gt]&gt
+                    <pre class="prettyprint"><pre class="prettyprint">>>> from todo_app.models import Category, Item <br/>>>> Category.objects.all()<br/>&ltQuerySet [&ltCategory: Shopping&gt]&gt
                     </pre></pre>
                 </div>
 

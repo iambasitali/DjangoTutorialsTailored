@@ -33,20 +33,28 @@
                 <p>In our TODO app, we will create two models <code>Category</code> and <code>Item</code>.
                 <p>First we need to open and edit the models.py file so that it contains the code for generating a Category model. A Category model contains the following database fields:</p>
                 <ul>
-                    <li><code>name</code> - The name of the Category.</li>
-                    <li><code>pub_date</code> - The publish date of Category. </li>
+                    <li><code>name</code> - This will be CharField</li>
+                    <li><code>is_delete</code> - This will be BooleanField </li>
+                    <li><code>created_at</code> - This will be DateTimeField </li>
+                    <li><code>modified_at</code> - This will be DateTimeField </li>
                 </ul>
                 <p>Second we need to add a <code>Item</code> model in the models.py file so that it contains the code for generating a Item model. A Item model contains the following database fields:</p>
                 <ul>
-                    <li><code>category</code> - ForeignKey to link with parent table.</li>
-                    <li><code>text</code> - The name of Item. </li>
+                    <li><code>category</code> - This will be ForeignKey to link with Category table</li>
+                    <li><code>name</code> - This will be CharField </li>
+                    <li><code>is_completed</code> - This will be BooleanField </li>
+                    <li><code>priority</code> - This will be CharField </li>
+                    <li><code>is_delete</code> - This will be BooleanField </li>
+                    <li><code>created_at</code> - This will be DateTimeField </li>
+                    <li><code>modified_at</code> - This will be DateTimeField </li>
                 </ul>
 
                 <p>These concepts are represented by Python Classes, edit the todo_app/models.py file, so it looks like this:</p>
                 
                 <div class="highlight">
-                    <pre class="prettyprint">from django.db import models<br><br>class Category(models.Model):<br>      name = models.CharField(max_length=200)<br>      pub_date = models.DateTimeField('date published')<br><br>class Item(models.Model):<br>      category = models.ForeignKey(Category, on_delete=models.CASCADE)<br>      text = models.CharField(max_length=200) </pre>
+                    <pre class="prettyprint">from django.db import models<br><br>class Category(models.Model):<br>    name = models.CharField(max_length=200)<br>    is_delete = models.BooleanField(default=False)<br>    created_at = models.DateTimeField(auto_now_add=True,null=True)<br>    modified_at = models.DateTimeField(auto_now_add=True,null=True)<br><br>class Item(models.Model):<br>    category = models.ForeignKey(Category, on_delete=models.CASCADE)<br>    name = models.CharField(max_length=200)<br>    is_completed = models.BooleanField(default=False)<br>    priority = models.CharField(max_length=50)<br>    is_delete = models.BooleanField(default=False)<br>    created_at = models.DateTimeField(auto_now_add=True,null=True)<br>    modified_at = models.DateTimeField(auto_now_add=True,null=True) </pre>
                 </div>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />The <b>on_delete=models.CASCADE</b> tells Django what to do with the model which has relationship with this model. The meaning of this statement is to delete all the dependent data in other tables which has relationship with that table.</div>
 
                 <p>Here are some famous data types of Models </p>
                 <table border="1" style="height: 189px; width: 70.8201%; border-collapse: collapse; background-color: #efefef;">

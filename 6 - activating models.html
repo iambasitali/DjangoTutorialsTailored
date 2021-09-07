@@ -50,7 +50,7 @@
             <p>This command will return a SQL query which function it has performed with DB. In our case its creating two tables so it will return the SQL code to create a tables.</p>
 
             <div class="highlight">
-                <pre class="prettyprint">BEGIN<br/>--<br/>--<br/>--<br/>CREATE TABLE "todo_app_category"<br>"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,<br/>"name" varchar(200) NOT NULL,<br/>"pub_date" datetime NOT NULL<br/>);<br/>CREATE INDEX "todo_app_item_category_id_1e571fc3" ON "todo_app_item" ("category_id");<br/>COMMIT;</pre>
+                <pre class="prettyprint">BEGIN<br/>--<br/>--<br/>--<br/>CREATE TABLE "todo_app_category"<br>"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,<br/>"name" varchar(200) NOT NULL,<br/>"created_at" datetime NOT NULL<br/>);<br/>CREATE INDEX "todo_app_item_category_id_1e571fc3" ON "todo_app_item" ("category_id");<br/>COMMIT;</pre>
             </div>
                  <p>Note the following:</p>
                     <ul class="body-ul">
@@ -63,6 +63,9 @@
                         <li>The migrate command does not actually run the migrations on your database - instead, it prints SQL to the cmd screen so that you can see SQL and will make if needs any changes.</li>
                     </ul>
                     <p>If you are interested to check whether the project is error free or not, then type the below command in cmd. This check will be without making migrations or touching the database.</p>
+                    <div class="highlight">
+                        <pre class="prettyprint">(venv) $ python manage.py check</pre>
+                    </div>
                     <p>Now, run migrate again to create those model tables in your database:</p>
 
                 <div class="highlight">
