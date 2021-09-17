@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+               <h4 class="text-muted"><u>Django View:</u></h4>
+                <p>In the Django framework, views are Python endpoint when a request hits on browser. It can be class based or function based. When Django server receives a web request it executes the code reside in intended view and
+                    return a web response. The response can be a simple HTTP response, an HTML template response,
+                    or an HTTP redirect response that redirects a user to another page.</p>
+                <h4 class="text-muted"><u>Let's write our first view</u></h4>
+                <p>Open todo_app/views.py and write the following code in it:</p>
+                <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
+                    <pre class="prettyprint">from django.http import HttpResponse<br/><br/>def index(request)<br/>     return HttpResponse("Hello, Django. You're at the Todo index.")<br/>
+                    </pre>
+                </div>
+                <p>Now we are done with code of our view we need to call that. For that purpose we will map this view with a URL route.</p>
+                <p>To create a URLconf we first need to create a file urls.py inside <em>todo_app</em> folder.</p>
+                <p>After that put following code init:</p>
+                <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo_app/urls.py</pre>
+                    <pre class="prettyprint">from django.urls import path<br/><br/>from . import views<br/><br/>urlpatterns = [<br/>path('', views.index, name='index'),<br/>]
+                    </pre>
+                </div>
+                 <p>This <code>urls.py</code> file is App level URLconf. We need to include these url routes into our project level <code>urls.py</code> file.
+                    For that, we need to include a path to these configurations in our project urls.py. Open
+                        <code>todo/urls.py</code> and add following code in it:
+                </p>
+                <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo/urls.py</pre>
+                    <pre class="prettyprint">from django.contrib import admin<br/>from django.urls import include, path<br/><br/>urlpatterns = [<br>     path('todo_app/', include('todo_app.urls')),<br/>     path('admin/', include('admin.site.urls)')),<br/>]          
+                    </pre>
+                </div>
+                <p>The include() function allows us to refer to other URL configuration.</p>
+                    <p>The reason behind include() function is to make it simple to plug-and-play URLs. Since todo_app contains their
+                        own URLconf <code>(todo_app/urls.py)</code>, they can be placed under <em>“/todo_app/”</em>, or any other path root,
+                        and the app results the same while execution.</p>
+                    <p>We are complete here adding a view now to verify the working run server with following command:
+                    </p>
+                    <div class="highlight">
+                    <pre class="prettyprint">python manage.py runserver</pre>
+                </div>
+                    <p>Once the server starts open your browser and goto <code>http://127.0.0.1:8000/todo_app/</code>, and you should see
+                        the text <pre>Hello, Django. You’re at the Todo index.</pre><br> The same statement you defined in the index view.</p>
+                    <p>The path() function in our URLconf is passed four argument two of which are mandatory while the remaining two are
+                        optional. All four arguments are explained below:</p>
+                    <p><strong> path() argument: </strong><em>route</em></p>
+                    <p>URL pattern is defined in route string. When user make a request django server start matching the
+                        pattern of the request with the patterns defined in our <code>urls.py</code> both <em>project level</em> and <em>app
+                            level</em>. Like in our scenario <code>http://127.0.0.1:8000/todo_app/</code> the django server will only look for
+                        <em>todo_app/</em>. It will ignore the server name.
+                    </p>
+                    <p><strong> path() argument: </strong><em>View</em></p>
+                    <p>As soon django got a matching pattern it will generate call to the specified view function with an <code>HTTPRequest</code>
+                        parameter and all the keyword arguments which are captured with the request. These
+                        arguments are explained in detail below.
+                    </p>
+                    <p><strong> path() argument: </strong><em>kwargs</em></p>
+                    <p>In simple words this is the additional information provided to the view. It represent form of python
+                        dictionary with <code>key:value</code> pairs.</p>
+                    <p><strong> path() argument: </strong><em>name</em></p>
+                    <p>The name argument of the url lets you access the url unambiguously from anywhere in django.
+                    We will have a deep look of this in templates section.</p>
+        </main>
+    </div>
+</body>
+</html>

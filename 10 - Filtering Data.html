@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+        </main>
+          <h4 class="text-muted"><u>Filtering Database Results:</u></h4>
+                    <p>Once you have created the database models. You can perform database basic functionalities <code>Create, Update, Retrieve and Delete</code> using django provided database-abstract API.
+                        On the top of that django also provide other APIs to get data as per our need, in desired format and much more, which is explained
+                        below:</p>
+                    <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />All the queries are executed using the model we created in
+                    lesson 5. Also, the queries will be executed on shell. To start shell execute
+                    <strong>python manage.py shell</strong> on terminal.</div>
+                    <p><strong>Creating Data</strong></p>
+                    <p>Django model classes are used to represent database tables and to represent a record in database table
+                        python use the object of that model class.</p>
+                    <p>To create a record initiate the model class object with required arguments and then call <code>.save()</code>
+                        method on it to save that object of a specified class in database.
+                    </p>
+                    <div class="highlight">
+                    <pre class="prettyprint"><br/>>>> from todo_app.models import Category, Item<br/>>>> from django.utils import timezone<br/>>>> c = Category(name="Bills")<br/>>>> c.save()
+                    </pre>
+                </div>
+                 <p>The above code will perform an <strong>INSERT</strong> on database table <code>category</code>. A new category with name <strong>Bills</strong> will be instered.
+                     Django will hold the newly created object until we explicitly call the <code>.save()</code> method on the object.</p>
+                    <p><strong>Changing the Data</strong></p>
+                    <p>To change data in the saved object we have to access the model attribute with a <strong>dot(.)</strong> and assign updated
+                    value and then again call <code>.save()</code> method.</p>
+                    <div class="highlight">
+                    <pre class="prettyprint">>>> c.name = {New-Name}<br/>>>> c.save()
+                    </pre>
+                </div>
+                 <p><strong>Adding foreign key</strong></p>
+                    <p>Adding <em>foreign key</em> reference is similar to adding another field data. Except here we
+                        need to pass an object of right type i.e. to assign a foreign key reference in <strong>Item</strong> object we
+                        need to pass an object of Item type.
+                    </p>
+                     <div class="highlight">
+                    <pre class="prettyprint"><br/>>>> i = Item(name='Electricity Bill')<br/>>>> i.category = c<br/>>>> i.save()
+                    </pre>
+                </div>
+                 <p><strong>Retrieving all objects</strong></p>
+                    <p>To retrieve all data of an model class from the database django provide <code>.all()</code> method that can be used on any django
+                        model through the manager:</p>
+                     <div class="highlight">
+                    <pre class="prettyprint"><br/>>>> all = Category.objects.all()
+                    </pre>
+                </div>
+                   <p>The all() method will return all the Category objects exist in the database in the form of QuerySet.</p>
+                 <p><strong>Filter Specific Objects</strong></p>
+                    <p>To get specific objects django provide <code>.filter()</code> method to which we can pass field and
+                        value upon which we want to filter data.</p>
+                     <div class="highlight">
+                    <pre class="prettyprint"><br/>>>> filtered = Category.objects.filter(name='Bills')
+                    </pre>
+                </div>
+                <div class="highlight">
+                    <pre class="prettyprint"><br/>>>> filtered_upon_relation = Category.objects.filter(category__name='Grocery')
+                    </pre>
+                </div>
+                   <p><strong>Filter Single Object</strong></p>
+                 <p>To filter a single object from database django provide .get() method</p>
+                     <div class="highlight">
+                    <pre class="prettyprint"><br/>>>> single_object = Category.objects.get(name='Bills')
+                    </pre>
+                </div>
+                  <p><strong>Limiting QuerySets</strong></p>
+                 <p>If you want a subset of Query set you can limit the data using python index slicing:</p>
+                     <div class="highlight">
+                    <pre class="prettyprint"><br/>>>> sliced_objects = Category.objects.all()[:5]
+                    </pre>
+                </div>
+                 <p>The above query will get starting <strong>5</strong> objects.</p>
+                 <p><strong>Ordering</strong></p>
+                <p>Sometime you need to access data in specified order. For example if you want Category data in
+                        ascending order of pub_date you can use:
+                    </p>
+                     <div class="highlight">
+                    <pre class="prettyprint"><br/>>>> sliced_objects = Item.objects.all().order_by('priority')
+                    </pre>
+                </div>
+                 <p>To get data in descending order of pub_date add a hyphen like:</p>
+                     <div class="highlight">
+                    <pre class="prettyprint"><br/>>>> sliced_objects = Item.objects.all().order_by('-priority')
+                    </pre>
+                </div>
+    </div>
+</body>
+</html>

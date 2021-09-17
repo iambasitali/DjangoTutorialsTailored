@@ -22,7 +22,7 @@ class Item(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     is_completed = models.BooleanField(default=False)
-    priority = models.IntegerField(max_length=50)
+    priority = models.IntegerField()
     due_date = models.DateTimeField(auto_now_add=True,null=True)
     is_delete = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True,null=True)

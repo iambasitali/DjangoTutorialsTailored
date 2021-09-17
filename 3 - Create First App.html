@@ -59,7 +59,7 @@
                     <li><code>views.py</code>: Most of the code logic need to be write in this File as it act like controller of whole application.</li>
                 </ul>
                 <div class="alert-primary p-2 challenge"><span class="note_icon"><i class="icon icon-bolt-4"></i></span> <strong>Important!</strong><br />If Django is not aware about todo_app, these steps we do later won’t work. So add <code>'todo_app'</code> to INSTALLED_APPS. The settings module will be in <code>todo/settings.py</code>.<br>
-                    <br><pre class="prettyprint"><strong>INSTALLED_APPS = [</strong><br>'todo_app',</pre>
+                    <br><pre class="prettyprint"><strong>INSTALLED_APPS = [</strong><br>'todo_app.apps.TodoAppConfig',</pre>
                     <p>... # Leave all the other INSTALLED_APPS</p>
                     <pre class="prettyprint"><strong>]</strong></pre>
                 </div>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+                <h4 class="text-muted"><u>Django Templates:</u></h4>
+                    <p>Django provides multiple ways to render our data in templates. It allow us to load <strong>Static templates</strong> and provides us with a way to load
+                        <strong>Dynamic template</strong>. To load Dynamic templates django use default templating engine called <em>Django
+                            Template Language <strong>(DTL)</strong></em>. There are some other templating engines like <code>Jinja2</code> and some third
+                        party packages, but we won't be discussing them here feel free to explore them on your own.
+                        <br>Also, you can define your own templating engine.
+                    </p>
+                    <p><strong>Variables</strong></p>
+                    <p>A context is dictionary object passed to template consisting of key <em>(variable name)</em> and value <em>(variable value)</em>. Variable outputs the value that is passed to the template inside the context. 
+                        Django track any string as variable if it is surrounded by <strong>{{ }}</strong>. Like in example below:</p>
+                    <div class="highlight">
+                        <pre class="prettyprint"><br/>My first name is '{{ first_name }}'. My last name is '{{ last_name }}'</pre>
+                    </div>
+                    <p>With a context of <code>{'first_name': 'John', 'last_name': 'Doe'}</code>, this template renders to:</p>
+                    <div class="highlight">
+                    <pre class="prettyprint"><br/>My first name is John. My last name is Doe.</pre>
+                </div>
+                <br>
+                <p><strong>Tags</strong></p>
+                <p>Tags provide logics in rendering process. <br>Like in rending to use <code>LOOPS, IF-ELSE</code> statements 
+                    we use tags that provide controlled structures, and enable other templates logics with template as well.</p>
+                <div class="highlight">
+                    <pre class="prettyprint"><br/>{% csrf_token %}</pre>
+                </div>
+               <p>Some tags require beginning and ending tags:</p>
+                      <div class="highlight">
+                    <pre class="prettyprint"><br/>{% if user.is_authenticated %}Hello, '{{ User }}'{% endif %}</pre>
+                </div>
+                <p>Here user could be any data passed in context.</p>
+                <br>
+                <p><strong>Filters</strong></p>
+                <p>Filters transform the values of variables and tag arguments.</p>
+                <p>They look like this.</p>
+                <div class="highlight">
+                    <pre class="prettyprint"><br/>{{ django|title }}</pre>
+                </div>
+                <br>
+                <p><strong>Support for template engines</strong></p>
+                <p><strong>Configuration</strong></p>
+                <p>When we start django project it will create default with empty optoions template configraution to the <code>settings.py</code> file</p>
+                <div class="highlight">
+                    <pre class="prettyprint"><br/>TEMPLATES =  [<br/>    {<br/>        'BACKEND': 'django.template.backends.django.DjangoTemplates',<br/>        'DIRS': ["Here goes the directory path of the templates' directory."],<br/>        'APP_DIRS': True,<br/>        'OPTIONS': {<br/>            ....<br/>        },<br/>    },<br/>]
+                    </pre>
+                </div>
+                <p>Now for our <em>todo_app</em> we need to create a <strong>templates' directory</strong> in base <em>todo</em> folder.</p>
+                    <p>Then add a file named <code>index.html</code> in templates folder and add following code in it:</p>
+                       <div class="highlight">
+                    <pre class="prettyprint">&lt;h4&gt;Awesome Todo list&lt;/h4&gt;<br/>&lt;div&gt;<br/>    &lt;ul&gt;<br/>        {% for category in categories %}<br/>        &lt;li&gt;<br/>            &lt;a href="{{ category.id }}/"&gt;{{ category.name }}&lt;/a&gt;<br/>        &lt;li&gt;<br/>        {% endfor %}<br/>    &lt;/ul&gt;<br/>&lt;/div&gt;
+                    </pre>
+                </div>
+                 <p>Now to tell django to load template we need to specify our templates directory. Like below:</p>
+                  <div class="highlight">
+                    <pre class="prettyprint">TEMPLATES = [<br/>    {<br/>        'BACKEND': 'django.template.backends.django.DjangoTemplates',<br/>        'DIRS': [BASE_DIR.joinpath('templates')],<br/>        'APP_DIRS': True,<br/>        'OPTIONS': {<br/>            'context_processors': [<br>                  'django.template.context_processors.debug',<br>                  'django.template.context_processors.request',<br>                  'django.contrib.auth.context_processors.auth',<br>                  'django.contrib.messages.context_processors.messages',<br>             ],<br/>        },<br/>    },<br/>]
+                    </pre>
+                </div>
+                <br>
+                <p><strong>A shortcut: render()</strong></p>
+                    <p>We often need to render templates from views. Using above method could be boring so django
+                        provide a simple <strong>render()</strong> function for this purpose. We can rewrite the <strong>index()</strong> view like below:
+                    </p>
+                    <div class="highlight">
+                    <pre class="prettyprint">from django.http import HttpResponse<br/>from django.shortcuts import render<br/>from .models import Category<br/><br/>def index(request):<br/>    list_of_category_objects = Category.objects.all()<br/>    context = {<br/>        'categories': list_of_category_objects<br/>    }<br/>    return render(request,'index.html', context)
+                    </pre>
+                </div>
+        </main>
+    </div>
+</body>
+    </html>
