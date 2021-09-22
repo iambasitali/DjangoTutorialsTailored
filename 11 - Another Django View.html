@@ -25,22 +25,41 @@
     <div class="container">
         <main class="col-12 p-3 bd-content" role="main">
              <h4 class="text-muted"><u>Django View:</u></h4>
-                    <p>Now let's write a view that  actually do something to have a clear understanding.</p>
+                    <p>Now let's write a view that  actually do something to have a clear understanding. But before that we need to dig-up some more on View responses. </p>
+                    <p>A view function response can be::</p>
+                    <ul>
+                        <li><code>HTML</code> - an HTML String e.g., &lt;h1&gt;Hello&lt;/h1&gt;</li>
+                        <li><code>Redirect</code> - change funtion execution direction to some other function</li>
+                        <li><code>404 Error</code> - an error page (404) in case of exception</li>
+                        <li><code>XML Document</code> - an XML based document</li>
+                        <li><code>Web Page</code> - most preferred case to render an Web Page and display response</li>
+                    </ul>
                     <p>We'll write a view function that fetch all the <strong>Category</strong> objects from database and renders a
                         template<em>(We'll discuss them later)</em> that lists them.</p>
                     <p>Open <code>todo_app/views.py</code> and replace the <strong>index()</strong> function code with following:</p>
                     <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
-                    <pre class="prettyprint">from django.http import HttpResponse<br/>from django.template import loader<br/>from .models import Category<br/><br/>def index(request):<br/>     list_of_category_objects = Category.objects.all()<br/>     context = {<br/>        'categories': list_of_category_objects<br/>     }<br/>     return HttpResponse(template.render(context, request))       
+                    <pre class="prettyprint">from django.http import HttpResponse<br/>from django.core import serializers<br>import json<br/>from .models import Category<br/><br/>def index(request):<br/>     list_of_category_objects = Category.objects.all()<br/>     output = serializers.serialize('json', list_of_category_objects, fields=('name'))<br>     output = json.dumps(json.loads(output), indent=4)      <br>     return HttpResponse(output, content_type="application/json")       
                     </pre>
                 </div>
                  <p>If you have gone through last lesson you would have understood most of the above code.</p>
-                    <p>Firsts of all, the view selects all the <strong>Category</strong> objects from database and returning a template
-                        render object which further renders a template by passing it a context information. In our case,
-                         the context dictionary is <strong><code>{'categories': list_of_category_objects}</code></strong> which have a
-                        key categories and value is equals to the <strong>Category</strong> object list selected above.
+                    <p>Firsts of all, the view selects all the <strong>Category</strong> objects from database and store it in variable <strong><code>list_of_category_objects</code></strong> in dictionary form. 
+                    After we have data in our hand, our next job is to display the data as response. This is possible with below Django assest:
                     </p>
-        </main>
+                    <ul>
+                        <li><code>Serializer</code> - First need to load <code>from django.core import serializers</code> on top of <em>view.py</em>. The Serializer will convert the Object queryset <strong><code>list_of_category_objects</code></strong> into <strong><em>JSON format</em></strong>.
+                        <li><code>Json</code> - The <code>json.dumps</code> will use to display the json in prettier format with the help of <code>import json</code>.</li>
+                        <li><code>HttpResponse</code> - It is the most-widely used response function in Django for <em>Http Response</em></li>
+                    </ul>
+                    <p>Now we are done with the code. Lets run the server at <code>8000 port</code> and check result on browser at <code>http://127.0.0.1:8000/todo_app/</code>. You will see the <code>categories</code> like below:</p>
+                    <br>
+                    <div class="highlight" style="text-align: center">
+                        <h5>HttpResponse: Categories (JSON)</h5>
+                        <img src="./assets/images/categories.png">
+                    </div>
+        
+
+                </main>
     </div>
 </body>
 </html>

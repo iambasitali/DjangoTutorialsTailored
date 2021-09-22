@@ -52,8 +52,8 @@
                     <pre class="prettyprint">from django.contrib import admin<br/>from django.urls import include, path<br/><br/>urlpatterns = [<br>     path('todo_app/', include('todo_app.urls')),<br/>     path('admin/', include('admin.site.urls)')),<br/>]          
                     </pre>
                 </div>
-                <p>The include() function allows us to refer to other URL configuration.</p>
-                    <p>The reason behind include() function is to make it simple to plug-and-play URLs. Since todo_app contains their
+                <p>The <strong>include()</strong> function allows us to refer to other URL configuration.</p>
+                    <p>The reason behind <strong>include()</strong> function is to make it simple to plug-and-play URLs. Since todo_app contains their
                         own URLconf <code>(todo_app/urls.py)</code>, they can be placed under <em>“/todo_app/”</em>, or any other path root,
                         and the app results the same while execution.</p>
                     <p>We are complete here adding a view now to verify the working run server with following command:
@@ -63,23 +63,26 @@
                 </div>
                     <p>Once the server starts open your browser and goto <code>http://127.0.0.1:8000/todo_app/</code>, and you should see
                         the text <pre>Hello, Django. You’re at the Todo index.</pre><br> The same statement you defined in the index view.</p>
-                    <p>The path() function in our URLconf is passed four argument two of which are mandatory while the remaining two are
+                    <p>The <strong>path()</strong> function in our URLconf is passed four argument two of which are mandatory while the remaining two are
                         optional. All four arguments are explained below:</p>
-                    <p><strong> path() argument: </strong><em>route</em></p>
+
+                    <p><em>Syntax: <code class="hg code-highlight-grey">path(route, view, kwargs=None, name=None)</code></em></p>
+                    <p><strong> path() argument: </strong><em>route | (required)</em></strong>
+                    </p>
                     <p>URL pattern is defined in route string. When user make a request django server start matching the
                         pattern of the request with the patterns defined in our <code>urls.py</code> both <em>project level</em> and <em>app
                             level</em>. Like in our scenario <code>http://127.0.0.1:8000/todo_app/</code> the django server will only look for
                         <em>todo_app/</em>. It will ignore the server name.
                     </p>
-                    <p><strong> path() argument: </strong><em>View</em></p>
+                    <p><strong> path() argument: </strong><em>View | (required)</em></p>
                     <p>As soon django got a matching pattern it will generate call to the specified view function with an <code>HTTPRequest</code>
                         parameter and all the keyword arguments which are captured with the request. These
                         arguments are explained in detail below.
                     </p>
-                    <p><strong> path() argument: </strong><em>kwargs</em></p>
+                    <p><strong> path() argument: </strong><em>kwargs | (Optional)</em></p>
                     <p>In simple words this is the additional information provided to the view. It represent form of python
                         dictionary with <code>key:value</code> pairs.</p>
-                    <p><strong> path() argument: </strong><em>name</em></p>
+                    <p><strong> path() argument: </strong><em>name | (Optional)</em></p>
                     <p>The name argument of the url lets you access the url unambiguously from anywhere in django.
                     We will have a deep look of this in templates section.</p>
         </main>

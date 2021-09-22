@@ -25,70 +25,80 @@
     <div class="container">
         <main class="col-12 p-3 bd-content" role="main">
                 <h4 class="text-muted"><u>Django Templates:</u></h4>
-                    <p>Django provides multiple ways to render our data in templates. It allow us to load <strong>Static templates</strong> and provides us with a way to load
-                        <strong>Dynamic template</strong>. To load Dynamic templates django use default templating engine called <em>Django
-                            Template Language <strong>(DTL)</strong></em>. There are some other templating engines like <code>Jinja2</code> and some third
-                        party packages, but we won't be discussing them here feel free to explore them on your own.
-                        <br>Also, you can define your own templating engine.
+                    <p>In the previous section, we have successfully created a <code>View</code> function and display an <em>Http</em> response on the browser.
+                        This section will guide you, how you can create a <code>HTML</code> page in Django <em><strong>(also called template)</strong></em> and use that <strong>template</strong> to display <strong>Static</strong> as well as <strong>Dynamic</strong> content. 
+                        <br><br>Django default templating engines is <code>Jinja2</code>. There are some other third
+                        party packages, but we will use <code>Jinja2</code> for its smooth and easy-to-use availability. Now for our <em>todo_app</em> we need to create a <strong>templates' directory</strong> in base <em>todo</em> folder. This folder will cantain all <code>HTML</code> files.</p> <br>Let create a new file <code>index.html</code> in <code>todo/templates</code> directory. <em>(The directory structure will look-alike below)</em>
                     </p>
-                    <p><strong>Variables</strong></p>
-                    <p>A context is dictionary object passed to template consisting of key <em>(variable name)</em> and value <em>(variable value)</em>. Variable outputs the value that is passed to the template inside the context. 
-                        Django track any string as variable if it is surrounded by <strong>{{ }}</strong>. Like in example below:</p>
                     <div class="highlight">
-                        <pre class="prettyprint"><br/>My first name is '{{ first_name }}'. My last name is '{{ last_name }}'</pre>
+                        <pre class="prettyprint">todo/</pre><pre class="prettyprint pre-highlight">  -templates/<br>     index.html<br></pre><pre class="prettyprint">  -todo_app/<br>     migrations/<br>         __init__.py<br>     __init__.py<br>     admin.py<br>     apps.py<br>     models.py<br>     tests.py<br>     views.py<br></pre><pre class="prettyprint">  -todo/<br>     __init__.py<br>     settings.py<br>     urls.py<br>     asgi.py<br>     wsgi.py<br>  -manage.py</pre>
                     </div>
-                    <p>With a context of <code>{'first_name': 'John', 'last_name': 'Doe'}</code>, this template renders to:</p>
+    
+                    <p><em>Plain Text: <code class="hg code-highlight-grey">STATIC Content</code></em></p>
+                    <p><strong>Plain Text</strong></p>
+                    <p>Open <code>index.html</code> and fill with below <code>HTML</code> basic code:</p>
                     <div class="highlight">
-                    <pre class="prettyprint"><br/>My first name is John. My last name is Doe.</pre>
-                </div>
-                <br>
-                <p><strong>Tags</strong></p>
-                <p>Tags provide logics in rendering process. <br>Like in rending to use <code>LOOPS, IF-ELSE</code> statements 
-                    we use tags that provide controlled structures, and enable other templates logics with template as well.</p>
-                <div class="highlight">
-                    <pre class="prettyprint"><br/>{% csrf_token %}</pre>
-                </div>
-               <p>Some tags require beginning and ending tags:</p>
-                      <div class="highlight">
-                    <pre class="prettyprint"><br/>{% if user.is_authenticated %}Hello, '{{ User }}'{% endif %}</pre>
-                </div>
-                <p>Here user could be any data passed in context.</p>
-                <br>
-                <p><strong>Filters</strong></p>
-                <p>Filters transform the values of variables and tag arguments.</p>
-                <p>They look like this.</p>
-                <div class="highlight">
-                    <pre class="prettyprint"><br/>{{ django|title }}</pre>
-                </div>
-                <br>
-                <p><strong>Support for template engines</strong></p>
-                <p><strong>Configuration</strong></p>
-                <p>When we start django project it will create default with empty optoions template configraution to the <code>settings.py</code> file</p>
-                <div class="highlight">
-                    <pre class="prettyprint"><br/>TEMPLATES =  [<br/>    {<br/>        'BACKEND': 'django.template.backends.django.DjangoTemplates',<br/>        'DIRS': ["Here goes the directory path of the templates' directory."],<br/>        'APP_DIRS': True,<br/>        'OPTIONS': {<br/>            ....<br/>        },<br/>    },<br/>]
-                    </pre>
-                </div>
-                <p>Now for our <em>todo_app</em> we need to create a <strong>templates' directory</strong> in base <em>todo</em> folder.</p>
-                    <p>Then add a file named <code>index.html</code> in templates folder and add following code in it:</p>
+                        <pre class="prettyprint pre-highlight">todo/templates/index.html</pre>
+                        <pre class="prettyprint"><br>&lt;!DOCTYPE html&gt;<br>&lt;html lang="en"&gt;<br>    &lt;head&gt;<br>    &lt;meta charset="UTF-8"&gt;<br>        &lt;title&gt;Index&lt;/title&gt;<br>    &lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;h4&gt;My first name is John. My last name is Doe.&lt;/h4&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;
+                        </pre>
+                    </div>
+                    <p>As our <code>HTML</code> code is ready so now open <code>views.py</code> and right <code>index()</code> function like below:</p>
+                    <div class="highlight">
+                        <pre class="prettyprint pre-highlight">todo/todo_app/views.py</pre>
+                        <pre class="prettyprint"><br/>def index(request):<br/>    return render(request, 'index.html')       
+                        </pre>
+                    </div>
+
+                    <p>As you can see we passed the newly created template <code>index.html</code> as parameter to <code>render()</code>. Now you will see below results, when open browser at <code>http://127.0.0.1:8000/todo_app/</code></p>
+                    <div class="highlight" style="text-align: center">
+                        <h5>Browser: Static Response (http://127.0.0.1:8000/todo_app/)</h5>
+                        <img src="./assets/images/static.png">
+                    </div>
+                    
+                    <br><p><em>Variable: <code class="hg code-highlight-grey">DYNAMIC Content</code></em></p>
+                    
+                    <p>For <strong>Dynamic</strong> content on webpage we use <code>context</code> and pass it in <code>view</code>. A <strong>context</strong> is dictionary object passed to template consisting of key <em>(variable name)</em> and value <em>(variable value)</em>. To have a clear understanding, update the <code>index.html</code> code like below:</p>
+                    <div class="highlight">
+                        <pre class="prettyprint pre-highlight">todo/templates/index.html</pre>
+                        <pre class="prettyprint"><br>&lt;!DOCTYPE html&gt;<br>&lt;html lang="en"&gt;<br>    &lt;head&gt;<br>    &lt;meta charset="UTF-8"&gt;<br>        &lt;title&gt;Index&lt;/title&gt;<br>    &lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;h4&gt;My first name is {{ first_name }}. My last name is {{ last_name }}.&lt;/h4&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;
+                        </pre>
+                    </div>
+                    <p>In above code we have added two variable <code>first_name</code> and <code>last_name</code>. Now we only need to pass these two variables as <strong>context</strong>> in <code>views.py</code>.</p>
+                        
+                    <p>Now open the <code>views.py</code> and update the code for <code>index()</code> function like below:</p>
+                    <div class="highlight">
+                        <pre class="prettyprint pre-highlight">todo/todo_app/views.py</pre>
+                        <pre class="prettyprint"><br/>def index(request):<br/>    context = {<br>       'first_name' : 'Tom',<br>       'last_name' : 'Henry'<br>    }<br>    return render(request, 'index.html', context)
+                        </pre>
+                    </div>
+
+                    <p>Django track any string as variable if it is surrounded by <strong>{{ }}</strong>. Like in above-example <code>first_name</code> and <code>last_name</code>> and replace them with the value provided in <em><strong>view's function</strong></em>.</p>
+                    <p>As you can see we passed the newly created template <code>index.html</code> as parameter to <code>render()</code>. Now you will see below results, when open browser at <code>http://127.0.0.1:8000/todo_app/</code></p>
+                    <div class="highlight" style="text-align: center">
+                        <h5>Browser: Dynamic Response (http://127.0.0.1:8000/todo_app/)</h5>
+                        <img src="./assets/images/dynamic.png">
+                    </div>
+                    <p>In the above example the content is generated <em><strong>dynamically.</strong></em>Both the names <code>first_name</code> <em>Tom</em> and <code>last_name</code> <em>Henry</em> are passed from <code>views.py</code>.</p>
+                    <br>
+                    <p>Now lets create an example related to our <em><strong>todo_app</strong></em>. We are assuming that we need to show <code>Category</code> list in our page. So first change the <code>index.html</code> code like below:</p>
                        <div class="highlight">
-                    <pre class="prettyprint">&lt;h4&gt;Awesome Todo list&lt;/h4&gt;<br/>&lt;div&gt;<br/>    &lt;ul&gt;<br/>        {% for category in categories %}<br/>        &lt;li&gt;<br/>            &lt;a href="{{ category.id }}/"&gt;{{ category.name }}&lt;/a&gt;<br/>        &lt;li&gt;<br/>        {% endfor %}<br/>    &lt;/ul&gt;<br/>&lt;/div&gt;
-                    </pre>
-                </div>
-                 <p>Now to tell django to load template we need to specify our templates directory. Like below:</p>
-                  <div class="highlight">
-                    <pre class="prettyprint">TEMPLATES = [<br/>    {<br/>        'BACKEND': 'django.template.backends.django.DjangoTemplates',<br/>        'DIRS': [BASE_DIR.joinpath('templates')],<br/>        'APP_DIRS': True,<br/>        'OPTIONS': {<br/>            'context_processors': [<br>                  'django.template.context_processors.debug',<br>                  'django.template.context_processors.request',<br>                  'django.contrib.auth.context_processors.auth',<br>                  'django.contrib.messages.context_processors.messages',<br>             ],<br/>        },<br/>    },<br/>]
+                    <pre class="prettyprint">&lt;h4&gt;Awesome Todo list&lt;/h4&gt;<br/>&lt;div&gt;<br/>    &lt;ul&gt;<br/>        {% for category in categories %}<br/>        &lt;li&gt;<br/>            &lt;a href="{{ category.id }}/"&gt;{{ category.name }}&lt;/a&gt;<br/>        &lt;/li&gt;<br/>        {% endfor %}<br/>    &lt;/ul&gt;<br/>&lt;/div&gt;
                     </pre>
                 </div>
                 <br>
-                <p><strong>A shortcut: render()</strong></p>
-                    <p>We often need to render templates from views. Using above method could be boring so django
-                        provide a simple <strong>render()</strong> function for this purpose. We can rewrite the <strong>index()</strong> view like below:
-                    </p>
-                    <div class="highlight">
-                    <pre class="prettyprint">from django.http import HttpResponse<br/>from django.shortcuts import render<br/>from .models import Category<br/><br/>def index(request):<br/>    list_of_category_objects = Category.objects.all()<br/>    context = {<br/>        'categories': list_of_category_objects<br/>    }<br/>    return render(request,'index.html', context)
+                <p>Now as in template, we are listing the <code>Category.id</code> and <code>Category.name</code>. We need to fetch all <code>Category</code> <strong>objects</strong> then pass them as context like we did in last example.
+                    So our <code>index()</code> function will view like below:
+                </p>
+                <div class="highlight">
+                    <pre class="prettyprint"><br/>from django.shortcuts import render<br/>from .models import Category<br/><br/>def index(request):<br/>    list_of_category_objects = Category.objects.all()<br/>    context = {<br/>        'categories': list_of_category_objects<br/>    }<br/>    return render(request,'index.html', context)
                     </pre>
                 </div>
-        </main>
+                <p>Now move to browser  at <code>http://127.0.0.1:8000/todo_app/</code> see below results.</p>
+                <div class="highlight" style="text-align: center">
+                    <h5>Browser: Category List (http://127.0.0.1:8000/todo_app/)</h5>
+                    <img src="./assets/images/cat_list.png">
+                </div>
+    </main>
     </div>
 </body>
     </html>

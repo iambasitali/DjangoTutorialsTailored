@@ -39,70 +39,76 @@
                         method on it to save that object of a specified class in database.
                     </p>
                     <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> from todo_app.models import Category, Item<br/>>>> from django.utils import timezone<br/>>>> c = Category(name="Bills")<br/>>>> c.save()
+                    <pre class="prettyprint"><br/>>>> from todo_app.models import Category, Item<br/>>>> from django.utils import timezone<br/>>>> c = Category(name="Bills")<br/>>>> c.save()<br/><i>####</i><br/>>>> print(c.name)<br>Bills
                     </pre>
                 </div>
-                 <p>The above code will perform an <strong>INSERT</strong> on database table <code>category</code>. A new category with name <strong>Bills</strong> will be instered.
+                 <p>The above code will perform an <strong>INSERT</strong> on database table <code>category</code>. A new category with name <strong>Bills</strong> will be inserted.
                      Django will hold the newly created object until we explicitly call the <code>.save()</code> method on the object.</p>
                     <p><strong>Changing the Data</strong></p>
                     <p>To change data in the saved object we have to access the model attribute with a <strong>dot(.)</strong> and assign updated
                     value and then again call <code>.save()</code> method.</p>
-                    <div class="highlight">
-                    <pre class="prettyprint">>>> c.name = {New-Name}<br/>>>> c.save()
+                <div class="highlight">
+                    <pre class="prettyprint">>>> c.name = "Extras"<br/>>>> c.save()<br/><i>####</i><br/>>>> print(c.name)<br>Extras
                     </pre>
                 </div>
-                 <p><strong>Adding foreign key</strong></p>
+                <p>The above code will perform an <strong>UPDATE</strong> on database table <code>category</code>. Now the new value of category will be <em><strong>Extras.</strong></em>
+
+                <p><strong>Adding foreign key</strong></p>
                     <p>Adding <em>foreign key</em> reference is similar to adding another field data. Except here we
                         need to pass an object of right type i.e. to assign a foreign key reference in <strong>Item</strong> object we
-                        need to pass an object of Item type.
+                        need to pass an object of <strong>Category</strong> type.
                     </p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> i = Item(name='Electricity Bill')<br/>>>> i.category = c<br/>>>> i.save()
+                    <pre class="prettyprint"><em>### Below c is <strong>'Bills'</strong></em><br/>>>> i = Item(name='Electricity Bill')<br/>>>> i.category = c<br/>>>> i.save()<br/><i>####</i><br/>>>> print(i.name)<br>Electricity Bill<br/>>>> print(i.category)<br>1<br/>>>> print(i.category__name)<br>Bills
                     </pre>
                 </div>
+                <p>The above code will add an <strong>FORIEGN ELEMENT</strong> on database table <code>item</code>. A new item with name <strong>Electricity Bill</strong> will be inserted having a relation with category<em><strong> Bills.</strong></em>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />When accessing a Foriegn relation table value use <strong>"__"</strong> to access the object attributes. Like in previous example, for <em>item</em> object(i) we use <code>i.category__name</code> to display its <em>Category</em> printed as <em><strong>'Bills'.</strong></em></div>
+                <br>
+
                  <p><strong>Retrieving all objects</strong></p>
                     <p>To retrieve all data of an model class from the database django provide <code>.all()</code> method that can be used on any django
                         model through the manager:</p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> all = Category.objects.all()
+                    <pre class="prettyprint"><br/>>>> all = Category.objects.all()<br/><i>####</i><br/>>>> print(all)<br/>&lt;QuerySet [&lt;Category: Test Category&gt;, &lt;Category: Grocery&gt;, &lt;Category: Bills>]&gt;
                     </pre>
-                </div>
+                    </div>
                    <p>The all() method will return all the Category objects exist in the database in the form of QuerySet.</p>
                  <p><strong>Filter Specific Objects</strong></p>
                     <p>To get specific objects django provide <code>.filter()</code> method to which we can pass field and
                         value upon which we want to filter data.</p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> filtered = Category.objects.filter(name='Bills')
+                    <pre class="prettyprint"><br/>>>> filtered = Category.objects.filter(name='Bills')<br/><i>####</i><br/>>>> print(filtered)<br/>&lt;QuerySet [&lt;Category: Bills>]&gt;
                     </pre>
                 </div>
                 <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> filtered_upon_relation = Category.objects.filter(category__name='Grocery')
+                    <pre class="prettyprint"><br/>>>> filtered_upon_relation = Item.objects.filter(category__name='Grocery')<br/><i>####</i><br/>>>> print(filtered_upon_relation)<br/>&lt;QuerySet [&lt;Item: Potatoes>]&gt;
                     </pre>
                 </div>
                    <p><strong>Filter Single Object</strong></p>
                  <p>To filter a single object from database django provide .get() method</p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> single_object = Category.objects.get(name='Bills')
+                    <pre class="prettyprint"><br/>>>> single_object = Category.objects.get(name='Bills')<br><i>####</i><br/>>>> print(all)<br/>Bills
                     </pre>
                 </div>
                   <p><strong>Limiting QuerySets</strong></p>
                  <p>If you want a subset of Query set you can limit the data using python index slicing:</p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> sliced_objects = Category.objects.all()[:5]
+                    <pre class="prettyprint"><br/><i># Add some Categories and print all instances like below:</i><br/>>>> all = Category.objects.all()<br/>>>> print(all)<br/>&lt;QuerySet [&lt;Category: Test Category&gt;, &lt;Category: Grocery&gt;, &lt;Category: Bills&gt;, &lt;Category: Clothes&gt;, &lt;Category: Cosmetics&gt;, &lt;Category: Electronics&gt;, &lt;Category: Automobiles&gt;]><br><br/>>>> sliced_objects = Category.objects.all()[:4]<br/><i>####</i><br/>>>> print(sliced_objects)<br/>&lt;QuerySet [&lt;Category: Test Category&gt;, &lt;Category: Grocery&gt;, &lt;Category: Bills&gt;,&lt;Category: Clothes&gt;]>
                     </pre>
                 </div>
-                 <p>The above query will get starting <strong>5</strong> objects.</p>
+                 <p>The above query will get starting <strong>4</strong> objects.</p>
                  <p><strong>Ordering</strong></p>
                 <p>Sometime you need to access data in specified order. For example if you want Category data in
                         ascending order of pub_date you can use:
                     </p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> sliced_objects = Item.objects.all().order_by('priority')
+                    <pre class="prettyprint"><br/>>>> objects_asc = Item.objects.all().order_by('priority')<br/><i>####</i><br/>>>> print(objects_asc)<br>&lt;QuerySet [&lt;Item: Potatos&gt;, &lt;Item: Carrot&gt;, &lt;Item: Electricity Bill&gt;, &lt;Item: Maintenance&gt;, &lt;Item: Jeans&gt;, &lt;Item: Lipstick&gt;, &lt;Item: Whitening Cream&gt;]><br><br><i># Result Order: Potatos, Carrot, Electricity Bill, Maintenance, Jeans, Lipstick, Whitening Cream</i>
                     </pre>
                 </div>
                  <p>To get data in descending order of pub_date add a hyphen like:</p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> sliced_objects = Item.objects.all().order_by('-priority')
+                    <pre class="prettyprint"><br/>>>> objects_desc = Item.objects.all().order_by('-priority')<br/><i>####</i><br/>>>> print(objects_desc)<br>&lt;QuerySet [&lt;Item: Whitening Cream&gt;, &lt;Item: Lipstick&gt;, &lt;Item: Jeans&gt;, &lt;Item: Maintenance&gt;, &lt;Item: Electricity Bill&gt;, &lt;Item: Carrot&gt;, &lt;Item: Potatos&gt;]><br><br><i># Result Order: Whitening Cream,  Lipstick, Jeans, Maintenance, Electricity Bill, Carrot, Potatos</i>
                     </pre>
                 </div>
     </div>

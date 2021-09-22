@@ -1,13 +1,30 @@
+from django import template
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from .forms import CategoryAddForm, ItemAddForm
 from django.utils import timezone
+from django.core import serializers
 
+import json
 from .models import Category
 
 
 def index(request):
+
+    list_of_category_objects = Category.objects.all()
+    context = {
+        'categories': list_of_category_objects
+    }
+    return render(request,'index.html', context)
+
+def temp(request):
+    list_of_category_objects = Category.objects.all()
+    
+    output = serializers.serialize('json', list_of_category_objects, fields=('name'))
+    output = json.dumps(json.loads(output), indent=4)
+    return HttpResponse(output, content_type="application/json")
+
     list_of_category_objects = Category.objects.filter()
     return render(request, 'index.html', {'categories': list_of_category_objects})
 
