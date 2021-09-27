@@ -27,7 +27,7 @@
                 <h4 class="text-muted"><u>Django Templates:</u></h4>
                     <p>In the previous section, we have successfully created a <code>View</code> function and display an <em>Http</em> response on the browser.
                         This section will guide you, how you can create a <code>HTML</code> page in Django <em><strong>(also called template)</strong></em> and use that <strong>template</strong> to display <strong>Static</strong> as well as <strong>Dynamic</strong> content. 
-                        <br><br>Django default templating engines is <code>Jinja2</code>. There are some other third
+                        <br><br>In the app the templating engine which we are using is <code>Jinja2</code>. There are some other third
                         party packages, but we will use <code>Jinja2</code> for its smooth and easy-to-use availability. Now for our <em>todo_app</em> we need to create a <strong>templates' directory</strong> in base <em>todo</em> folder. This folder will cantain all <code>HTML</code> files.</p> <br>Let create a new file <code>index.html</code> in <code>todo/templates</code> directory. <em>(The directory structure will look-alike below)</em>
                     </p>
                     <div class="highlight">
@@ -42,10 +42,16 @@
                         <pre class="prettyprint"><br>&lt;!DOCTYPE html&gt;<br>&lt;html lang="en"&gt;<br>    &lt;head&gt;<br>    &lt;meta charset="UTF-8"&gt;<br>        &lt;title&gt;Index&lt;/title&gt;<br>    &lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;h4&gt;My first name is John. My last name is Doe.&lt;/h4&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;
                         </pre>
                     </div>
-                    <p>As our <code>HTML</code> code is ready so now open <code>views.py</code> and right <code>index()</code> function like below:</p>
+                    <p>As our <code>HTML</code> code is ready so now open <code>views.py</code> and write <code>index()</code> function like below:</p>
                     <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo/todo_app/views.py</pre>
                         <pre class="prettyprint"><br/>def index(request):<br/>    return render(request, 'index.html')       
+                        </pre>
+                    </div>
+
+                    <p>Make sure you have added the <code>render</code> at the top of the <code>Views.py</code> file, otherwise it will show error.</p>
+                    <div class="highlight">
+                        <pre class="prettyprint pre-highlight">from django.shortcuts import render</pre>
                         </pre>
                     </div>
 

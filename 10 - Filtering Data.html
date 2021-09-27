@@ -73,7 +73,7 @@
                     <pre class="prettyprint"><br/>>>> all = Category.objects.all()<br/><i>####</i><br/>>>> print(all)<br/>&lt;QuerySet [&lt;Category: Test Category&gt;, &lt;Category: Grocery&gt;, &lt;Category: Bills>]&gt;
                     </pre>
                     </div>
-                   <p>The all() method will return all the Category objects exist in the database in the form of QuerySet.</p>
+                   <p>The <code>all()</code> method will return all the Category objects exist in the database in the form of QuerySet.</p>
                  <p><strong>Filter Specific Objects</strong></p>
                     <p>To get specific objects django provide <code>.filter()</code> method to which we can pass field and
                         value upon which we want to filter data.</p>
@@ -86,7 +86,7 @@
                     </pre>
                 </div>
                    <p><strong>Filter Single Object</strong></p>
-                 <p>To filter a single object from database django provide .get() method</p>
+                 <p>To filter a single object from database django provide <code>.get()</code> method</p>
                      <div class="highlight">
                     <pre class="prettyprint"><br/>>>> single_object = Category.objects.get(name='Bills')<br><i>####</i><br/>>>> print(all)<br/>Bills
                     </pre>
@@ -103,12 +103,12 @@
                         ascending order of pub_date you can use:
                     </p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> objects_asc = Item.objects.all().order_by('priority')<br/><i>####</i><br/>>>> print(objects_asc)<br>&lt;QuerySet [&lt;Item: Potatos&gt;, &lt;Item: Carrot&gt;, &lt;Item: Electricity Bill&gt;, &lt;Item: Maintenance&gt;, &lt;Item: Jeans&gt;, &lt;Item: Lipstick&gt;, &lt;Item: Whitening Cream&gt;]><br><br><i># Result Order: Potatos, Carrot, Electricity Bill, Maintenance, Jeans, Lipstick, Whitening Cream</i>
+                    <pre class="prettyprint"><br/>>>> objects_asc = Item.objects.all().order_by('pub_date')<br/><i>####</i><br/>>>> print(objects_asc)<br>&lt;QuerySet [&lt;Item: Potatos&gt;, &lt;Item: Carrot&gt;, &lt;Item: Electricity Bill&gt;, &lt;Item: Maintenance&gt;, &lt;Item: Jeans&gt;, &lt;Item: Lipstick&gt;, &lt;Item: Whitening Cream&gt;]><br><br><i># Result Order: Potatos, Carrot, Electricity Bill, Maintenance, Jeans, Lipstick, Whitening Cream</i>
                     </pre>
                 </div>
                  <p>To get data in descending order of pub_date add a hyphen like:</p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> objects_desc = Item.objects.all().order_by('-priority')<br/><i>####</i><br/>>>> print(objects_desc)<br>&lt;QuerySet [&lt;Item: Whitening Cream&gt;, &lt;Item: Lipstick&gt;, &lt;Item: Jeans&gt;, &lt;Item: Maintenance&gt;, &lt;Item: Electricity Bill&gt;, &lt;Item: Carrot&gt;, &lt;Item: Potatos&gt;]><br><br><i># Result Order: Whitening Cream,  Lipstick, Jeans, Maintenance, Electricity Bill, Carrot, Potatos</i>
+                    <pre class="prettyprint"><br/>>>> objects_desc = Item.objects.all().order_by('pub_datecode is ready')<br/><i>####</i><br/>>>> print(objects_desc)<br>&lt;QuerySet [&lt;Item: Whitening Cream&gt;, &lt;Item: Lipstick&gt;, &lt;Item: Jeans&gt;, &lt;Item: Maintenance&gt;, &lt;Item: Electricity Bill&gt;, &lt;Item: Carrot&gt;, &lt;Item: Potatos&gt;]><br><br><i># Result Order: Whitening Cream,  Lipstick, Jeans, Maintenance, Electricity Bill, Carrot, Potatos</i>
                     </pre>
                 </div>
     </div>
