@@ -28,12 +28,12 @@
                     <p>In the previous section, we have successfully created a <code>View</code> function and display an <em>Http</em> response on the browser.
                         This section will guide you, how you can create a <code>HTML</code> page in Django <em><strong>(also called template)</strong></em> and use that <strong>template</strong> to display <strong>Static</strong> as well as <strong>Dynamic</strong> content. 
                         <br><br>In the app the templating engine which we are using is <b>Django Template Engine</b>. There are some other third
-                        party packages, but we will use Djano Template Engine for its smooth and easy-to-use availability. Now for our <em>todo_app</em> we need to create a <strong>templates' directory</strong> in base <em>todo/todo_app/</em> folder. This folder will cantain all <code>HTML</code> files.</p> <br>Let create a new file <code>index.html</code> in <code>todo/todo_app/templates</code> directory. <em>(The directory structure will look-alike below)</em>
+                        party packages, but we will use Djano Template Engine for its smooth and easy-to-use availability. Now for our <em>todo_app</em> we need to create a <strong>templates' directory</strong> in base <em>todo/todo_app/</em> folder. This folder will cantain all <code>HTML</code> files.</p> <br>Let create a new file <code>index.html</code> in <code>todo/todo_app/templates/todo_app/</code> directory. <em>(The directory structure will look-alike below)</em>
                     </p>
                     <div class="highlight">
                         <pre class="prettyprint">todo/</pre>
                         <pre class="prettyprint">  -todo_app/<br>     migrations/<br>         __init__.py<br>     __init__.py<br>     admin.py<br>     apps.py<br>     models.py<br>     tests.py<br>     views.py<br></pre>
-                        <pre class="prettyprint pre-highlight">     -todo_app/templates/<br>        index.html<br></pre>
+                        <pre class="prettyprint pre-highlight">     -todo_app/templates/todo_app/<br>        index.html<br></pre>
                         <pre class="prettyprint">  -todo/<br>     __init__.py<br>     settings.py<br>     urls.py<br>     asgi.py<br>     wsgi.py<br>  -manage.py</pre>
                     </div>
     
@@ -41,7 +41,7 @@
                     <p><strong>Plain Text</strong></p>
                     <p>Open <code>index.html</code> and fill with below <code>HTML</code> basic code:</p>
                     <div class="highlight">
-                        <pre class="prettyprint pre-highlight">todo/todo_app/templates/index.html</pre>
+                        <pre class="prettyprint pre-highlight">todo/todo_app/templates/todo_app/index.html</pre>
                         <pre class="prettyprint"><br>&lt;!DOCTYPE html&gt;<br>&lt;html lang="en"&gt;<br>    &lt;head&gt;<br>    &lt;meta charset="UTF-8"&gt;<br>        &lt;title&gt;Index&lt;/title&gt;<br>    &lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;h4&gt;My first name is John. My last name is Doe.&lt;/h4&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;
                         </pre>
                     </div>
