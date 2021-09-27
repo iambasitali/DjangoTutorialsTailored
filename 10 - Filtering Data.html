@@ -100,15 +100,15 @@
                  <p>The above query will get starting <strong>4</strong> objects.</p>
                  <p><strong>Ordering</strong></p>
                 <p>Sometime you need to access data in specified order. For example if you want Category data in
-                        ascending order of pub_date you can use:
+                        ascending order of created_at you can use:
                     </p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> objects_asc = Item.objects.all().order_by('pub_date')<br/><i>####</i><br/>>>> print(objects_asc)<br>&lt;QuerySet [&lt;Item: Potatos&gt;, &lt;Item: Carrot&gt;, &lt;Item: Electricity Bill&gt;, &lt;Item: Maintenance&gt;, &lt;Item: Jeans&gt;, &lt;Item: Lipstick&gt;, &lt;Item: Whitening Cream&gt;]><br><br><i># Result Order: Potatos, Carrot, Electricity Bill, Maintenance, Jeans, Lipstick, Whitening Cream</i>
+                    <pre class="prettyprint"><br/>>>> objects_asc = Item.objects.all().order_by('created_at')<br/><i>####</i><br/>>>> print(objects_asc)<br>&lt;QuerySet [&lt;Item: Potatos&gt;, &lt;Item: Carrot&gt;, &lt;Item: Electricity Bill&gt;, &lt;Item: Maintenance&gt;, &lt;Item: Jeans&gt;, &lt;Item: Lipstick&gt;, &lt;Item: Whitening Cream&gt;]><br><br><i># Result Order: Potatos, Carrot, Electricity Bill, Maintenance, Jeans, Lipstick, Whitening Cream</i>
                     </pre>
                 </div>
-                 <p>To get data in descending order of pub_date add a hyphen like:</p>
+                 <p>To get data in descending order of created_at add a hyphen like:</p>
                      <div class="highlight">
-                    <pre class="prettyprint"><br/>>>> objects_desc = Item.objects.all().order_by('pub_datecode is ready')<br/><i>####</i><br/>>>> print(objects_desc)<br>&lt;QuerySet [&lt;Item: Whitening Cream&gt;, &lt;Item: Lipstick&gt;, &lt;Item: Jeans&gt;, &lt;Item: Maintenance&gt;, &lt;Item: Electricity Bill&gt;, &lt;Item: Carrot&gt;, &lt;Item: Potatos&gt;]><br><br><i># Result Order: Whitening Cream,  Lipstick, Jeans, Maintenance, Electricity Bill, Carrot, Potatos</i>
+                    <pre class="prettyprint"><br/>>>> objects_desc = Item.objects.all().order_by('created_at')<br/><i>####</i><br/>>>> print(objects_desc)<br>&lt;QuerySet [&lt;Item: Whitening Cream&gt;, &lt;Item: Lipstick&gt;, &lt;Item: Jeans&gt;, &lt;Item: Maintenance&gt;, &lt;Item: Electricity Bill&gt;, &lt;Item: Carrot&gt;, &lt;Item: Potatos&gt;]><br><br><i># Result Order: Whitening Cream,  Lipstick, Jeans, Maintenance, Electricity Bill, Carrot, Potatos</i>
                     </pre>
                 </div>
     </div>
