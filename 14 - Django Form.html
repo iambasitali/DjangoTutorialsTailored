@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+               <h4 class="text-muted"><u>Django Form:</u></h4>
+                    <p>Forms are used to take input from user in web application. As compare to HTML forms, Django forms are a bit different. HTML forms are enclosed within &lt;form&gt; and &lt;/form&gt;. In between these
+                        tags we define different input tag that are used to take different type of inputs from user like below.
+                    </p>
+                    <div class="highlight">
+                        <pre class="prettyprint">&lt;h4&gt;Category Form&lt;/h4&gt;<br/>&lt;div&gt;<br/>    &lt;form action=""&gt;<br>        &lt;input type="text" id="category_name" name="category_name" value="Electronics"&gt;<br>    &lt;/form&gt;<br/>&lt;/div&gt;     
+                        </pre>
+                    </div>
+                    <p>In strucutre, django forms are quite much similar to the django model where we define different
+                        types of fields and then those fields will be rendered in django template.<br>
+                        To define django form we need to create a class, and it is needed to be inherited from base
+                        <code>Form</code> class. The <code>Form</code> class is present in <em>Django's form</em> module. First create a new file named <code>forms.py</code> in <code>todo/todo_app</code> directory. To define your own form have a look at following code snippet.
+                    </p>
+                    <div class="highlight">
+                    <pre class="prettyprint">from django import forms<br/><br/>class CategoryAddForm(forms.Form):<br/># Form fields are defined here.import forms<br/></pre>
+                </div>
+                    <p><strong>Fields</strong></p>
+                    <p>Form fields that are initiated in form classes are much like django model fields. Some of which
+                        are explained below:
+                    </p>
+                    <ul class="body-ul">
+                        <li><em>CharField:</em> It will define a field that can take text input from user.</li>
+                        <li><em>DateTime:</em> It will define a field that takes datetime input like we saw in django admin user
+                            interface.
+                        </li>
+                        <li><em>EmailField:</em> This will allow us to take email input.</li>
+                    </ul>
+                   <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />These input fields will have pre-applied validations i.e. The
+                        above email field <code>EmailField</code> will only accept a valid email input and the validations will be applied on
+                        <em>HTML</em> level by <strong>Django</strong>.</div>
+                <p></p>
+                    <p><strong>Rendering Form</strong></p>
+                    <p>Django form <code>CategoryAddForm</code> must be initiated in the <code>view.py</code> that will then pass the form instance to template. An example is shown below. Let's say we have defined the above form <code>CategoryAddForm</code>
+                         inside a <code>forms.py</code> inside <em>todo_app</em> directory. Then in <code>todo_app/views.py</code>:
+                    </p>
+                <div class="highlight">
+                    <pre class="prettyprint">from .forms import CategoryAddForm<br/><br/>def FormView:<br/>    form = CategoryAddForm()<br/>    context = {'form': form}<br/>    return render(request, 'add_category.html', context)
+                    </pre>
+                </div>
+                <p><strong>Rendering Form in Template</strong></p>
+                    <p>In template we don't have to add much work. First need to create an <code>HTML</code> file named <code>add_category.html</code> in templates directory then we can simply render form using below code:</p>
+                    <div class="highlight">
+                    <pre class="prettyprint">&lt;form action="" method="post"&gt;<br/>    {% csrf_token %}<br/>    {{ form.as_p }}<br/>    &lt;input type="submit" value="Add Category"&gt;<br/>&lt;/form&gt;
+                    </pre>
+                </div>
+                 <p>The above template will render the form sent to the template in context. Lets create a URLconf for  <code>Add Category</code> form that maps the view to a route path. Open
+                    <code>todo_app/urls.py</code> and append following line of code inside urlpatterns list:
+                </p>
+                 <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo_app/urls.py</pre>
+                    <pre class="prettyprint">path('add-category', views.add_category, name='add_category'),    
+                    </pre>
+                </div>
+                <br>
+                <p>You can check on browser at <code>http://127.0.0.1:8000/todo_app/add-category/</code></p>
+                <div class="highlight" style="text-align: center">
+                    <h5>Browser: Category Item List (http://127.0.0.1:8000/todo_app/add-category/)</h5>
+                    <br><img src="./assets/images/add_cat_form.png">
+                </div>
+                <br>
+                 <p>There are several other
+                        ways to render forms in template which are shown below try them out on your own:
+                    </p>
+                    <ul class="body-ul">
+                        <li> <em>{{ form.as_table }}</em> will render them as table cells wrapped in <strong>&lt;tr&gt;</strong> tags</li>
+                        <li> <em>{{ form.as_p }}</em> will render them wrapped in <strong>&lt;p&gt;</strong> tags</li>
+                        <li> <em>{{ form.as_ul }}</em> will render them wrapped in <strong>&lt;li&gt;</strong> tags</li>
+                    </ul>
+                    <p><strong>Posting a Form to a View</strong></p>
+                    <p>Once you hit the submit button inside a form the form will be submitted to the URL route
+                        specified in action attribute of form. The corresponding view may look like this:</p>
+                         <div class="highlight">
+                    <pre class="prettyprint">def FormPostView(request):<br/>    form = CategoryAddForm(request.POST)<br/>    if form.valid(): # This will check if the fields data provided by user is  valid and according to the fields that we defined in Form definition class.<br/>        category = form.save(commit=False)<br>        category.save()<br>    return redirect('index')
+                    </pre>
+                </div>
+                <p>The above code will create a new Category with name input in the Form field. E.g., if form submitted with input <code>Drinks </code>then a new category named <code>Drinks </code> added in Database. </p>
+
+        </main>
+    </div>
+</body>
+</html>
