@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+               <h4 class="text-muted"><u>Add Data to Database:</u></h4>
+                    <p>In this lesson we will be utilizing all the concepts we learnt in previous lessons. Firstly we
+                        will create two forms first for Adding Category in database and second for adding Items in into
+                        our database with Category reference included.
+                    </p>
+                    <p>First create a python file in todo_app name it as forms.py</p>
+                    <p>Open todo_app/forms.py and add following code:</p>
+                     <div class="highlight">
+                        <pre class="prettyprint pre-highlight">todo_app/forms.py</pre>
+                    <pre class="prettyprint">from .models import Category, Item<br/>from django import forms<br/><br/>class CategoryAddForm(forms.ModelForm):<br/>class Meta:<br/>model = Category<br/>fields = ['name'] # we will be adding the pub_date in the view to show form data is manipulated in view.<br/><br/>class ItemAddForm(forms.ModelForm):<br/>class Meta:<br/>model = Item<br/>fields = '__all__' # __all__ means we need to add all fields of model in form as well.     
+                    </pre>
+                </div>
+                <p>Now that we have created the form classes now we will create view that will handle the forms.
+                       Open todo_app/views.py and add following code:
+                    </p>
+                     <div class="highlight">
+                        <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
+                    <pre class="prettyprint">from .forms import CategoryAddForm, ItemAddForm # Import the form classes we created<br/>from django.utils import timezone # import timezone to add datetime in Category model<br/><br/>def add_category(request):<br/><span>if request.method == 'POST': # Firstly check the type of request if the request is POST it means user has submitted the form.<br/>form = CategoryAddForm(request.POST) # get the POST data from request and pass it to form instance.<br/>if form.is_valid(): # check if data posted by user is valid or not.<br/>category = form.save(commit=False) #.save() method creates an instance of the model specified in Form class<br/># we used commit=False it means it will only create Object of Category but will not save it in database.<br/>category.pub_date = timezone.now() # add current datetime in category object<br/>category.save() #save the category in database<br/>return redirect('index')<br/>else:<br/># if the request type is not POST create an empty instance of form and return it in context.<br/>form = CategoryAddForm()<br/>return render(request, 'add_category.html', {'form': form})<br/><br/>def add_item(request):<br/>if request.method == 'POST':<br/>>form = ItemAddForm(request.POST)<br/>if form.is_valid():<br/>form.save()<br/>return redirect('index')<br/>else:<br/>form = ItemAddForm()<br/>return render(request, 'add_item.html', {'form': form})</pre>
+                </div>
+                <p>The form handling views are also ready. Now create two html files in template named
+                        add_category.html for adding category and add_item.html to add items in database:</p>
+                         <div class="highlight">
+                            <pre class="prettyprint pre-highlight">todo/templates/add_category.html</pre>
+                    <pre class="prettyprint">&lt;form method="post" action=""&gt;<br/>{% csrf_token %}<br/>{{ form.as_p }}<br/>&lt;input type="submit" value="Add Category"&gt;<br/>&lt;/form&gt;</pre>
+                </div>
+                <p>Now open add_item.html and add following:</p>
+                 <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo/templates/add_category.html</pre>
+                    <pre class="prettyprint">&lt;form method="post" action=""&gt;<br/>{% csrf_token %}<br/>{{ form.as_p }}<br/>&lt;input type="submit" value="Add Item"&gt;<br/>&lt;/form&gt;</pre>
+                </div>
+                  <p>Uptil now we have created the form classes, templates and handling view for those forms. Now we
+                        are going to add mapping URLs in todo_app/urls.py and add following urls in urlpatterns list</p>
+                        <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo_app/urls.py</pre>
+                    <pre class="prettyprint">path('add-category/', views.add_category, name='add_category'),<br/>path('add-item/', views.add_item, name='add_item'),</pre>
+                </div>
+                <p>Now run server and hit localhost:8000/todo_app/add-category/ fill the form and click on Add
+                        Category button and the Category will be <added class=""></added></p>
+
+
+        </main>
+    </div>
+</body>
+</html>
