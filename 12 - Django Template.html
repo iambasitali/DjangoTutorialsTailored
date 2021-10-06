@@ -48,7 +48,7 @@
                     <p>As our <code>HTML</code> code is ready so now open <code>views.py</code> and write <code>index()</code> function like below:</p>
                     <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo/todo_app/views.py</pre>
-                        <pre class="prettyprint"><br/>def index(request):<br/>    return render(request, 'index.html')       
+                        <pre class="prettyprint"><br/>def index(request):<br/>    return render(request, 'todo_app/index.html')       
                         </pre>
                     </div>
 
@@ -68,7 +68,7 @@
                     
                     <p>For <strong>Dynamic</strong> content on webpage we use <code>context</code> and pass it in <code>view</code>. A <strong>context</strong> is dictionary object passed to template consisting of key <em>(variable name)</em> and value <em>(variable value)</em>. To have a clear understanding, update the <code>index.html</code> code like below:</p>
                     <div class="highlight">
-                        <pre class="prettyprint pre-highlight">todo/todo_app/templates/index.html</pre>
+                        <pre class="prettyprint pre-highlight">todo/todo_app/templates/todo_app/index.html</pre>
                         <pre class="prettyprint"><br>&lt;!DOCTYPE html&gt;<br>&lt;html lang="en"&gt;<br>    &lt;head&gt;<br>    &lt;meta charset="UTF-8"&gt;<br>        &lt;title&gt;Index&lt;/title&gt;<br>    &lt;/head&gt;<br>    &lt;body&gt;<br>        &lt;h4&gt;My first name is {{ first_name }}. My last name is {{ last_name }}.&lt;/h4&gt;<br>    &lt;/body&gt;<br>&lt;/html&gt;
                         </pre>
                     </div>
@@ -77,7 +77,7 @@
                     <p>Now open the <code>views.py</code> and update the code for <code>index()</code> function like below:</p>
                     <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo/todo_app/views.py</pre>
-                        <pre class="prettyprint"><br/>def index(request):<br/>    context = {<br>       'first_name' : 'Tom',<br>       'last_name' : 'Henry'<br>    }<br>    return render(request, 'index.html', context)
+                        <pre class="prettyprint"><br/>def index(request):<br/>    context = {<br>       'first_name' : 'Tom',<br>       'last_name' : 'Henry'<br>    }<br>    return render(request, 'todo_app/index.html', context)
                         </pre>
                     </div>
 
@@ -99,7 +99,7 @@
                     So our <code>index()</code> function will view like below:
                 </p>
                 <div class="highlight">
-                    <pre class="prettyprint"><br/>from django.shortcuts import render<br/>from .models import Category<br/><br/>def index(request):<br/>    list_of_category_objects = Category.objects.all()<br/>    context = {<br/>        'categories': list_of_category_objects<br/>    }<br/>    return render(request,'index.html', context)
+                    <pre class="prettyprint"><br/>from django.shortcuts import render<br/>from .models import Category<br/><br/>def index(request):<br/>    list_of_category_objects = Category.objects.all()<br/>    context = {<br/>        'categories': list_of_category_objects<br/>    }<br/>    return render(request,'todo_app/index.html', context)
                     </pre>
                 </div>
                 <p>Now move to browser  at <code>http://127.0.0.1:8000/todo_app/</code> see below results.</p>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+             <h4 class="text-muted"><u>Django Model Form:</u></h1>
+                    <p>As we discussed in last lesson django forms are much like django models. As we’re creating a database-driven app, chances are high to have forms that map closely to Django models.<br> In our case, we have a <code>Category</code> model, and you want to create a form that let user submit category. So it is unnecessary to define the field types in <code>Category</code> form, because we’ve already defined the fields in <code>Category</code> model.
+                    </p>
+                <p>So using Django model, we can create a <strong>Form</strong> using built-in helper class <code>ModelForm</code>. It will take Django <strong>Model</strong> as argument and convert it into Django <strong>Form</strong>. Let's define a new model named <strong>Alert</strong> in <code>models.py</code> using the below code:</p>
+                <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo_app/models.py</pre>
+                    <pre class="prettyprint"><br>from django.db import models<br><br>class Alert(models.Model):<br>    title = models.CharField(max_length=200)<br>    description = models.TextField()<br>    is_delete = models.BooleanField(default=False)<br>    created_at = models.DateTimeField(auto_now_add=True,null=True)<br>    modified_at = models.DateTimeField(auto_now_add=True,null=True)<br><br>    def __str__(self):<br>        return self.title
+                </pre>
+                </div>
+                <p>To create a form for <code>Alert</code> model, dive into <code>todo_app/forms.py</code> and enter following code:</p>
+                <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo_app/forms.py</pre>
+                    <pre class="prettyprint"><br>from .models import Alert<br/>from django.forms import ModelForm<br/><br/><br/>class AlertAddForm(ModelForm):<br/>    class Meta:<br/>        model = Alert # This will bind the ModelForm base class with Alert Model.<br/>        fields = '__all__' # This will tell which field to be added in form.<br/>        # Here we are using all fields that are present in model, but you can define a list of field names<br/>        # Like ['Name', 'pub_date']<br/>        # You can also define which fields needed to be excluded from form that is present in model.<br/>        # Todo so we need to add a list of fields name in exclude attribute.<br/>        # exclude = list of fields to be excluded
+                    </pre>
+                </div>
+                <p> In above example, we have imported <strong>ModelForm</strong> from <code>django.forms</code> and create
+                    a class that inherits from <strong>ModelForm</strong>.</p>
+                <p>Finallay, we need to create a view that will save the form directly to the database through rendering the form. In <code>todo_app/views.py</code> add the below code:</p>
+                <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
+                    <pre class="prettyprint">def addAlert(request):<br>    if request.method == 'POST':<br/>        form = AlertAddForm(request.POST)<br/>        if form.valid(): # This will check if the fields data provided by user is  valid and according to the fields that we defined in Form definition class.<br/>            form.save(commit=False)<br>        return redirect('index')<br>    else:<br>        form = AlertAddForm()<br>        return render(request, 'todo_app/add_alert.html', {'form': form})                
+                    </pre>
+                </div>
+                <p>Lets create a URLconf for <code>Alert</code> form that maps the view to a route path. Open
+                    <code>todo_app/urls.py</code> and append following code inside urlpatterns list:
+                </p>
+                 <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo_app/urls.py</pre>
+                    <pre class="prettyprint">path('add-alert', views.addAlert, name='addAlert'),    
+                    </pre>
+                </div>
+        </main>
+    </div>
+</body>
+</html>

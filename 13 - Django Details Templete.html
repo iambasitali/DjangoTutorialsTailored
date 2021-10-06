@@ -27,9 +27,9 @@
              <h4 class="text-muted"><u>Details Templates:</u></h4>
                     <p>Currently we are listing all the categories that are present in our database. Now we are going create a
                         template that show all the item on a specific <strong>Category</strong>.</p>
-                    <p>Create a new html file named <code>details.html</code>> inside <code>todo/todo_app/templates</code> directory. Add following code:</p>
+                    <p>Create a new html file named <code>details.html</code> inside <code>todo/todo_app/templates/todo_app</code> directory. Add following code:</p>
                     <div class="highlight">
-                        <pre class="prettyprint pre-highlight">todo/todo_app/templates/details.html</pre>
+                        <pre class="prettyprint pre-highlight">todo/todo_app/templates/todo_app/details.html</pre>
                     <pre class="prettyprint">&lt;h4&gt;{{category.name}}&lt;/h4&gt;<br/>&lt;div&gt;<br/>    &lt;ul&gt;<br/>    {% for item in category.item_set.all %}<br/>        &lt;li&gt;{{ item.name }}&lt;/li&gt;<br/>    {% endfor %}<br/>    &lt;/ul&gt;<br/>&lt;/div&gt;     
                     </pre>
                 </div>
@@ -40,7 +40,7 @@
                     <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
                         <br>
-                        <pre class="prettyprint">def detail(request, id):<span><br>    category = Category.objects.get(id=id)<br/>    return render(request, 'details.html', {'category': category})     
+                        <pre class="prettyprint">def detail(request, id):<span><br>    category = Category.objects.get(id=id)<br/>    return render(request, 'todo_app/details.html', {'category': category})     
                         </pre>
                     </div>
                     <p>Here the <em>detail()</em> function is accepting two parameters. First one is default <em>request</em> which we explain in our last section. Second is <em>id</em> which represent <strong>id</strong> of <code>Category</code> model. <br><br>The view is selecting a <code>Category</code> object based on the <em>id</em> passed from the URL. Now that we have created our view lets create a URLconf that maps the view to a route path. Open
@@ -77,7 +77,7 @@
                     <p>To implement the above case, open <code>todo_app/views.py</code> and edit the details view like:</p>
                      <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
-                    <pre class="prettyprint"><br>from django.http import Http404<br><br/>def detail(request, id):<br/>    try:<br/>        category = Category.objects.get(id=id)<br/>    except Category.DoesNotExist:<br/>        raise Http404("Category does not exist")<br/>    return render(request, 'details.html', {'category': category})    
+                    <pre class="prettyprint"><br>from django.http import Http404<br><br/>def detail(request, id):<br/>    try:<br/>        category = Category.objects.get(id=id)<br/>    except Category.DoesNotExist:<br/>        raise Http404("Category does not exist")<br/>    return render(request, 'todo_app/details.html', {'category': category})    
                     </pre>
                 </div>
                  <p><strong>A shortcut: get_object_or_404()</strong></p>
@@ -93,7 +93,7 @@
                     <p>To implement that open <code>todo_app/view.py</code> and update the details view with following code:</p>
                      <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
-                    <pre class="prettyprint"><br>from django.shortcuts import get_object_or_404, render<br><br/>def detail(request, id):<br/>   category = get_object_or_404(Category,id=id)<br/>   return render(request, 'details.html', {'category': category})    
+                    <pre class="prettyprint"><br>from django.shortcuts import get_object_or_404, render<br><br/>def detail(request, id):<br/>   category = get_object_or_404(Category,id=id)<br/>   return render(request, 'todo_app/details.html', {'category': category})    
                     </pre>
                 </div>
 

@@ -35,3 +35,17 @@ class Item(models.Model):
             self.created_at = timezone.now()
         self.modified_at = timezone.now()
         return super(Item, self).save(*args, **kwargs)
+
+class Alert(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    is_delete = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+    modified_at = models.DateTimeField(auto_now_add=True,null=True)
+    def __str__(self):
+        return self.title
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created_at = timezone.now()
+        self.modified_at = timezone.now()
+        return super(Alert, self).save(*args, **kwargs)

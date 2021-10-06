@@ -60,7 +60,7 @@
                          inside a <code>forms.py</code> inside <em>todo_app</em> directory. Then in <code>todo_app/views.py</code>:
                     </p>
                 <div class="highlight">
-                    <pre class="prettyprint">from .forms import CategoryAddForm<br/><br/>def FormView:<br/>    form = CategoryAddForm()<br/>    context = {'form': form}<br/>    return render(request, 'add_category.html', context)
+                    <pre class="prettyprint">from .forms import CategoryAddForm<br/><br/>def addCategory:<br/>    form = CategoryAddForm()<br/>    context = {'form': form}<br/>    return render(request, 'todo_app/add_category.html', context)
                     </pre>
                 </div>
                 <p><strong>Rendering Form in Template</strong></p>
@@ -74,7 +74,7 @@
                 </p>
                  <div class="highlight">
                     <pre class="prettyprint pre-highlight">todo_app/urls.py</pre>
-                    <pre class="prettyprint">path('add-category', views.add_category, name='add_category'),    
+                    <pre class="prettyprint">path('add-category', views.addCategory, name='addCategory'),    
                     </pre>
                 </div>
                 <br>
@@ -96,7 +96,15 @@
                     <p>Once you hit the submit button inside a form the form will be submitted to the URL route
                         specified in action attribute of form. The corresponding view may look like this:</p>
                          <div class="highlight">
-                    <pre class="prettyprint">def FormPostView(request):<br/>    form = CategoryAddForm(request.POST)<br/>    if form.valid(): # This will check if the fields data provided by user is  valid and according to the fields that we defined in Form definition class.<br/>        category = form.save(commit=False)<br>        category.save()<br>    return redirect('index')
+                    <pre class="prettyprint">def postAddCategory(request):<br/>    form = CategoryAddForm(request.POST)<br/>    category = form.save(commit=False)<br>    category.save()<br>    return redirect('index')
+                    </pre>
+                </div>
+                <p>Lets create a URLconf for  <code>Post Category</code> form that maps the view to a route path. Open
+                    <code>todo_app/urls.py</code> and append following line of code inside urlpatterns list:
+                </p>
+                 <div class="highlight">
+                    <pre class="prettyprint pre-highlight">todo_app/urls.py</pre>
+                    <pre class="prettyprint">path('post-category', views.postAddCategory, name='postAddCategory'),    
                     </pre>
                 </div>
                 <p>The above code will create a new Category with name input in the Form field. E.g., if form submitted with input <code>Drinks </code>then a new category named <code>Drinks </code> added in Database. </p>
