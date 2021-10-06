@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Django Tailored</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./gcp/prettify.css">
+    <link rel="stylesheet" type="text/css" href="./gcp/skins/sons-of-obsidian.css">
+    <link rel="stylesheet" type="text/css" href="font-styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./gcp/prettify.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({ html: true });
+    });
+    </script>
+</head>
+
+<body onload="PR.prettyPrint()" cz-shortcut-listen="true">
+    <div class="container">
+        <main class="col-12 p-3 bd-content" role="main">
+             <h4 class="text-muted"><u>Details Templates:</u></h4>
+                    <p>Currently we are listing all the categories that are present in our database. Now we are going create a
+                        template that show all the item on a specific <strong>Category</strong>.</p>
+                    <p>Create a new html file named <code>details.html</code>> inside <code>todo/todo_app/templates</code> directory. Add following code:</p>
+                    <div class="highlight">
+                        <pre class="prettyprint pre-highlight">todo/todo_app/templates/details.html</pre>
+                    <pre class="prettyprint">&lt;h4&gt;{{category.name}}&lt;/h4&gt;<br/>&lt;div&gt;<br/>    &lt;ul&gt;<br/>    {% for item in category.item_set.all %}<br/>        &lt;li&gt;{{ item.name }}&lt;/li&gt;<br/>    {% endfor %}<br/>    &lt;/ul&gt;<br/>&lt;/div&gt;     
+                    </pre>
+                </div>
+                <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />In above code, we are using django built-in function <strong>_set.all</strong> in <code>category.item_set.all</code> which will select all the associated <strong>item</strong> to
+                    current <em>Category</em>.</div>
+                    <br>
+                    <p>Now python code for template is written. Let move to the logic side. So, open <code>todo_app/views.py</code> and define a new view called <em>details()</em> by adding following code:</p>
+                    <div class="highlight">
+                        <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
+                        <br>
+                        <pre class="prettyprint">def detail(request, id):<span><br>    category = Category.objects.get(id=id)<br/>    return render(request, 'details.html', {'category': category})     
+                        </pre>
+                    </div>
+                    <p>Here the <em>detail()</em> function is accepting two parameters. First one is default <em>request</em> which we explain in our last section. Second is <em>id</em> which represent <strong>id</strong> of <code>Category</code> model. <br><br>The view is selecting a <code>Category</code> object based on the <em>id</em> passed from the URL. Now that we have created our view lets create a URLconf that maps the view to a route path. Open
+                        <code>todo_app</code> and append following line of code inside urlpatterns list:
+                    </p>
+                     <div class="highlight">
+                        <pre class="prettyprint pre-highlight">todo_app/urls.py</pre>
+                    <pre class="prettyprint">path('&lt;int:id&gt;/', views.detail, name='detail'),    
+                    </pre>
+                </div>
+                    <p>This url pattern will accept an id and pass it to the mapped view automatically.</p>
+                    <p>Now goto <code>localhost:8000/todo_app/</code> and click on any <em>Category</em> name. You will be redirected to a
+                        page that contains the <em>Items</em> associated with that <em>Category</em>. Your will see below results.</p>
+                    <div class="highlight" style="text-align: center">
+                        <h5>Browser: Category Item List (http://127.0.0.1:8000/todo_app/2)</h5>
+                        <br><img src="./assets/images/item_list.png">
+                    </div>
+                    <br>
+                    <p>Now to cover the <code>Result not Found</code> case, we have options to implement <em>Raising 404</em> or use <em>get_object_or_404()</em>. Sometimes the specified <em>id</em> in the url may not exist in database in that so Both mentioned techniques are used to overcome this issue showed in below screenshot.</p>
+                    <div class="highlight" style="text-align: center">
+                        <h5>Browser: Category Item List (http://127.0.0.1:8000/todo_app/100)</h5>
+                        <br><img src="./assets/images/error.png">
+                    </div>
+                    <br>
+                <p><strong>Raising 404</strong></p>
+                    <p>In case we need to raise <code>404 error</code> which represent <code>NOT FOUND</code> error. You can try that by hitting <code>localhost:8000/todo_app/100/
+                        </code>in your browser. In that case instead of showing programmatic it is good to show <code>404 error</code>.</p>
+                    <div class="highlight" style="text-align: center">
+                        <h5>Browser: Category Item List (http://127.0.0.1:8000/todo_app/100)</h5>
+                        <br><img src="./assets/images/raising_404.png">
+                    </div>
+                    <br>
+
+                    <p>To implement the above case, open <code>todo_app/views.py</code> and edit the details view like:</p>
+                     <div class="highlight">
+                        <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
+                    <pre class="prettyprint"><br>from django.http import Http404<br><br/>def detail(request, id):<br/>    try:<br/>        category = Category.objects.get(id=id)<br/>    except Category.DoesNotExist:<br/>        raise Http404("Category does not exist")<br/>    return render(request, 'details.html', {'category': category})    
+                    </pre>
+                </div>
+                 <p><strong>A shortcut: get_object_or_404()</strong></p>
+                    <p>The above method of raising <code>404</code> is good. But instead of implementing a try except block django
+                        provides us with a build in function that will automatically raise <code>404</code> if the specified object
+                        is not found.</p>
+
+                        <div class="highlight" style="text-align: center">
+                        <h5>Browser: Category Item List (http://127.0.0.1:8000/todo_app/100)</h5>
+                        <br><img src="./assets/images/object_or_404.png">
+                    </div>
+                    <br>
+                    <p>To implement that open <code>todo_app/view.py</code> and update the details view with following code:</p>
+                     <div class="highlight">
+                        <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
+                    <pre class="prettyprint"><br>from django.shortcuts import get_object_or_404, render<br><br/>def detail(request, id):<br/>   category = get_object_or_404(Category,id=id)<br/>   return render(request, 'details.html', {'category': category})    
+                    </pre>
+                </div>
+
+            
+</main>
+</div>
+</body>
+</html>

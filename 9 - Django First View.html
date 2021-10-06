@@ -40,7 +40,7 @@
                 <p>After that put following code init:</p>
                 <div class="highlight">
                     <pre class="prettyprint pre-highlight">todo_app/urls.py</pre>
-                    <pre class="prettyprint">from django.urls import path<br/><br/>from . import views<br/><br/>urlpatterns = [<br/>path('', views.index, name='index'),<br/>]
+                    <pre class="prettyprint">from django.urls import path<br/><br/>from . import views<br/><br/>urlpatterns = [<br/>     path('', views.index, name='index'),<br/>]
                     </pre>
                 </div>
                  <p>This <code>urls.py</code> file is App level URLconf. We need to include these url routes into our project level <code>urls.py</code> file.
