@@ -24,12 +24,17 @@
 <body onload="PR.prettyPrint()" cz-shortcut-listen="true">
     <div class="container">
         <main class="col-12 p-3 bd-content" role="main">
-               <h4 class="text-muted"><u>Add Data to Database:</u></h4>
-                    <p>In this lesson we will be convering all previous lesson concepts in practice. Firstly we
-                        will create two forms first for inserting <em>Category</em> in database and second for adding <em>Items</em> in into
+                <h4 class="text-muted"><u>Add Data to Database:</u></h4>
+                <p>In this lesson, we will be covering all previous lesson concepts in practice. Firstly navigate to <code>http://127.0.0.1:8000/todo_app/add-category/</code> in browser.
+                    </p>
+                    <div class="highlight" style="text-align: center">
+                        <h5>Browser: Category Item List (http://127.0.0.1:8000/todo_app/add-category/)</h5>
+                        <br><img src="./assets/images/add_cat_form.png">
+                    </div>
+                  <p>Now we will create two forms first for inserting <em>Category</em> in database and second for adding <em>Items</em> in into
                         our database with <code>Category</code> reference included.
                     </p>
-                    <p>First create a python file named <code>forms.py</code> in todo_app directory. Open todo_app/forms.py and add following code:</p>
+                    <p>Create a python file named <code>forms.py</code> in todo_app directory. Open todo_app/forms.py and add following code:</p>
                      <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo_app/forms.py</pre>
                         <pre class="prettyprint"><br>from .models import Category, Item<br/>from django import forms<br/><br/>class CategoryAddForm(forms.ModelForm):<br/>    class Meta:<br/>        model = Category<br/>        fields = ['name'] # we will be adding the pub_date in the view to show form data is manipulated in view.<br/><br/>class ItemAddForm(forms.ModelForm):<br/>    class Meta:<br/>        model = Item<br/>        fields = '__all__' # __all__ means we need to add all fields of model in form as well.     
@@ -53,7 +58,7 @@
                     <pre class="prettyprint pre-highlight">todo_app/templates/todo_app/add_category.html</pre>
                     <pre class="prettyprint">&lt;form method="post" action=""&gt;<br/>    {% csrf_token %}<br/>    {{ form.as_p }}<br/>    &lt;input type="submit" value="Add Item"&gt;<br/>&lt;/form&gt;</pre>
                 </div>
-                  <p>Uptil now we have created the form <code> classes, templates and handling views</code> for those forms. Now we
+                  <p>Until now we have created the form <code> classes, templates and handling views</code> for those forms. Now we
                         are going to add mapping URLs in <code>todo_app/urls.py</code> and add following urls in urlpatterns list</p>
                     <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo_app/urls.py</pre>

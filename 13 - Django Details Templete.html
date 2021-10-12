@@ -52,14 +52,17 @@
                     </pre>
                 </div>
                     <p>This url pattern will accept an id and pass it to the mapped view automatically.</p>
+                    <div class="alert-primary p-2"><span class="note_icon"><i class="icon icon-note-1"></i></span> <strong>Note</strong><br />The URL Pattern mapping already discussed in recent Section <em><strong>'Django View'.</strong></em> Same in our case, for above-mentioned url where we are passing the <em>Category</em> as <code>&lt;int:id&gt;/</int:id></code></div>
+                    <br>
                     <p>Now goto <code>localhost:8000/todo_app/</code> and click on any <em>Category</em> name. You will be redirected to a
-                        page that contains the <em>Items</em> associated with that <em>Category</em>. Your will see below results.</p>
+                        page that contains the <em>Items</em> associated with that <em>Category</em>. Your will see below results. <em>(Here digit 2 in URL end represent the clicked <code>Category</code> id)</em></p>
                     <div class="highlight" style="text-align: center">
                         <h5>Browser: Category Item List (http://127.0.0.1:8000/todo_app/2)</h5>
                         <br><img src="./assets/images/item_list.png">
                     </div>
                     <br>
-                    <p>Now to cover the <code>Result not Found</code> case, we have options to implement <em>Raising 404</em> or use <em>get_object_or_404()</em>. Sometimes the specified <em>id</em> in the url may not exist in database in that so Both mentioned techniques are used to overcome this issue showed in below screenshot.</p>
+                    <p>Now to cover the <code>Result not Found</code> case, we have options to implement <em>Raising 404</em> or use <em>get_object_or_404()</em>. Sometimes the specified <em>id</em> in the url may not exist in database. Both mentioned techniques are used to overcome this issue showed in below screenshot.</p>
+                    <p>First, let's navigate to <code>http://127.0.0.1:8000/todo_app/100</code> on browser to see the default behaviour for <code>Result NOT Found</code>. 
                     <div class="highlight" style="text-align: center">
                         <h5>Browser: Category Item List (http://127.0.0.1:8000/todo_app/100)</h5>
                         <br><img src="./assets/images/error.png">

@@ -41,10 +41,10 @@
                 </div>
                 <p> In above example, we have imported <strong>ModelForm</strong> from <code>django.forms</code> and create
                     a class that inherits from <strong>ModelForm</strong>.</p>
-                <p>Finallay, we need to create a view that will save the form directly to the database through rendering the form. In <code>todo_app/views.py</code> add the below code:</p>
+                <p>Finallay, we need to create functions in <code>views.py</code> that will add and save the form directly to the database through form rendering. In <code>todo_app/views.py</code> add the below code:</p>
                 <div class="highlight">
                     <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
-                    <pre class="prettyprint">def addCategory(request):<br>    if request.method == 'POST':<br/>        form = CategoryAddForm(request.POST)<br/>        if form.valid(): # This will check if the fields data provided by user is  valid and according to the fields that we defined in Form definition class.<br/>            form.save(commit=False)<br>        return redirect('index')<br>    else:<br>        form = CategoryAddForm()<br>        return render(request, 'todo_app/add_categoryy.html', {'form': form})                
+                    <pre class="prettyprint"><br>def addCategory(request):<br>    form = CategoryAddForm()<br>    return render(request, 'todo_app/add_categoryy.html', {'form': form})                <br><br>def postAddCategory(request):<br/>    form = CategoryAddForm(request.POST)<br/>    category = form.save(commit=False)<br>    category.save()<br>    return redirect('index')
                     </pre>
                 </div>
                 <p>Lets create a URLconf for <code>Category</code> form that maps the view to a route path. Open
@@ -52,8 +52,7 @@
                 </p>
                  <div class="highlight">
                     <pre class="prettyprint pre-highlight">todo_app/urls.py</pre>
-                    <pre class="prettyprint">path('add-category', views.addCategory, name='addCategory'),    
-                    </pre>
+                    <pre class="prettyprint">path('add-category', views.addCategory, name='addCategory'),<br>path('post-category', views.postAddCategory, name='postAddCategory'),    </pre>
                 </div>
         </main>
     </div>
