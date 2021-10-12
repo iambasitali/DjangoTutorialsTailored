@@ -39,7 +39,7 @@
                     </p>
                     <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo_app/forms.py</pre>
-                        <pre class="prettyprint">from django import forms<br/><br/>class CategoryAddForm(forms.Form):<br/># Form fields are defined here.import forms<br/></pre>
+                        <pre class="prettyprint">from django import forms<br/><br/>class CategoryAddForm(forms.Form):<br/># Form fields are defined here.import forms<br>    name = forms.CharField(label='Category Name', max_length=200)<br>    is_delete = forms.BooleanField(required=False)<br>    created_at = forms.DateTime(auto_now_add=True,null=True)</pre>
                 </div>
                     <p><strong>Fields</strong></p>
                     <p>Form fields that are initiated in form classes are much like django model fields. Some of which
@@ -57,18 +57,18 @@
                         <em>HTML</em> level by <strong>Django</strong>.</div>
                 <p></p>
                     <p><strong>Rendering Form</strong></p>
-                    <p>Django form <code>CategoryAddForm</code> must be initiated in the <code>view.py</code> that will then pass the form instance to template. An example is shown below. Let's say we have defined the above form <code>CategoryAddForm</code>
+                    <p>Django form <code>CategoryAddForm</code> must be initiated in the <code>views.py</code> that will then pass the form instance to template. An example is shown below. Let's say we have defined the above form <code>CategoryAddForm</code>
                          inside a <code>forms.py</code> inside <em>todo_app</em> directory. Then in <code>todo_app/views.py</code>:
                     </p>
                 <div class="highlight">
-                    <pre class="prettyprint pre-highlight">todo_app/forms.py</pre>
+                    <pre class="prettyprint pre-highlight">todo_app/views.py</pre>
                     <pre class="prettyprint">from .forms import CategoryAddForm<br/><br/>def addCategory:<br/>    form = CategoryAddForm()<br/>    context = {'form': form}<br/>    return render(request, 'todo_app/add_category.html', context)
                     </pre>
                 </div>
                 <p><strong>Rendering Form in Template</strong></p>
                     <p>In template we don't have to add much work. First need to create an <code>HTML</code> file named <code>add_category.html</code> in templates directory then we can simply render form using below code:</p>
                     <div class="highlight">
-                    <pre class="prettyprint pre-highlight">todo_app/add_category.py</pre>
+                    <pre class="prettyprint pre-highlight">todo_app/add_category.html</pre>
                     <pre class="prettyprint"><br>&lt;form action="" method="post"&gt;<br/>    {% csrf_token %}<br/>    {{ form.as_p }}<br/>    &lt;input type="submit" value="Add Category"&gt;<br/>&lt;/form&gt;
                     </pre>
                 </div>
