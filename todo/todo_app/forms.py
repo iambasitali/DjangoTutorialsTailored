@@ -3,6 +3,9 @@ from django import forms
 
 
 class CategoryAddForm(forms.ModelForm):
+    name = forms.CharField(label='Category Name', max_length=200)
+    is_delete = forms.BooleanField(required=False)
+
     class Meta:
         model = Category
         fields = ['name']
