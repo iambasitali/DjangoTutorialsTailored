@@ -39,7 +39,7 @@
                     </p>
                     <div class="highlight">
                         <pre class="prettyprint pre-highlight">todo_app/forms.py</pre>
-                        <pre class="prettyprint">from django import forms<br/><br/>class CategoryAddForm(forms.Form):<br/># Form fields are defined here.import forms<br>    name = forms.CharField(label='Category Name', max_length=200)<br>    is_delete = forms.BooleanField(required=False)<br>    created_at = forms.DateTime(auto_now_add=True,null=True)</pre>
+                        <pre class="prettyprint">from django import forms<br/><br/>class CategoryAddForm(forms.Form):<br/># Form fields are defined here.import forms<br>    name = forms.CharField(label='Category Name', max_length=200)<br>    is_delete = forms.BooleanField(required=False)<br>    created_at = forms.DateTimeField(auto_now_add=True,null=True)</pre>
                 </div>
                     <p><strong>Fields</strong></p>
                     <p>Form fields that are initiated in form classes are much like django model fields. Some of which
