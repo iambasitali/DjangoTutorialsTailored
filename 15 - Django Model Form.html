@@ -31,7 +31,7 @@
                 <div class="highlight">
                     <pre class="prettyprint pre-highlight">todo_app/models.py</pre>
                     <pre class="prettyprint">from django.db import models<br><br>class Category(models.Model):<br>    name = models.CharField(max_length=200)<br>    is_delete = models.BooleanField(default=False)<br>    created_at = models.DateTimeField(auto_now_add=True,null=True)<br>    modified_at = models.DateTimeField(auto_now_add=True,null=True)<br></pre>
-                </pre>
+                    </pre>
                 </div>
                 <p>To create a form for <code>Category</code> model, dive into <code>todo_app/forms.py</code> and enter following code:</p>
                 <div class="highlight">
